@@ -69,6 +69,38 @@ Antes da modelagem, foi realizada uma EDA detalhada nos dados de entrada (`estoq
 * O modelo treinado foi utilizado para realizar a **Batch prediction** (previsão em lote) em um novo arquivo de dados futuros.
 * O resultado da previsão foi exportado para **`predictions/predictions_results.csv`**.
 
+---
+
+​📊 **Análise de Estatísticas Descritivas** datasets/raw/Estatisticas_Descritivas.csv
+
+​O arquivo contém o resumo estatístico para todas as colunas numéricas do seu dataset de 1095 linhas (3 anos de dados).
+
+
+🔍 **Insights Chave para o Modelo ML**
+​Esta análise estatística confirma a qualidade e a complexidade do  dataset:
+
+**​1. Confirmação da Variação de Demanda (Sinal para o ML)**
+
+**​Média de Vendas:** A média diária de vendas históricas é de 169.46 unidades.
+​Desvio Padrão (Vendas): O desvio padrão de 46.18 é alto em relação à média, indicando que as vendas não são estáveis e possuem picos e vales significativos. Isso valida a inclusão da sazonalidade no dataset, dando ao modelo de Machine Learning um bom sinal para aprender.
+
+**​2. Variável Alvo com Boa Distribuição**
+
+**​Variável Alvo (Previsao_Demanda_30D):** A variável alvo (o que o Canvas irá prever) tem um desvio padrão de 51.75, ainda maior que o das vendas históricas. Isso significa que a previsão tem uma faixa de variação ampla (de 50 a 340 unidades), tornando o problema de Regressão desafiador, mas recompensador.
+
+​**3. Estabilidade e Fatores de Custo**
+
+**​Preço Unitário:** O preço é relativamente estável (Média de R$ 19.97, Desvio de R$ 1.14), sugerindo que a sazonalidade e as promoções (variável booleana não vista aqui) são os maiores motores da demanda, e não a flutuação do preço base.
+
+**​Lead Time:** O tempo de entrega do fornecedor é previsível (Média de 7 dias, faixa de 5 a 9 dias), o que simplifica o cálculo do estoque de segurança após a previsão de demanda.
+
+
+
+
+
+---
+
+
 ## 💡 Conclusões de Negócio
 
 O modelo provou ser uma ferramenta eficaz, permitindo que a empresa passe de uma gestão de estoque reativa para uma **preditiva**. A análise demonstrou que a sazonalidade e a estratégia de preços são fatores-chave para otimizar o estoque.
