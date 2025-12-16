@@ -1,0 +1,41 @@
+# Arquivos de Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python / Ambientes Virtuais
+# Ignora ambientes virtuais, pastas de pacotes e caches
+venv/
+env/
+.env
+__pycache__/
+*.pyc
+*.pyd
+*.so
+
+# Jupyter / IPython Notebooks
+# Checkpoints e arquivos temporários de Notebooks
+.ipynb_checkpoints
+*~
+# Logs
+*.log
+
+# Dados
+# Seus datasets originais (datasets/raw/) podem ser grandes.
+# Você pode optar por ignorar todos os arquivos grandes ou temporários.
+# Manter o estoque_historico_sazonal.csv (se pequeno) é bom para reprodutibilidade.
+# Excluir quaisquer resultados de predição em lote que possam ser grandes.
+
+# datasets/raw/*.csv # Descomente se quiser ignorar todos os CSVs de dados
+predictions_results.csv
+*.tmp
+
+# Amazon SageMaker / AWS
+# Ignora caches ou credenciais de sessão AWS
+.aws/
+.sagemaker/
+
+# IDEs e Editores
+.idea/             # JetBrains/PyCharm
+.vscode/           # VSCode
+*.swp
