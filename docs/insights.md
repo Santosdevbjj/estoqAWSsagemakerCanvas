@@ -1,9 +1,10 @@
-📚 Descrição Didática dos Datasets
+📚 **Descrição dos Datasets**
 | Arquivo | Função Principal no Projeto | Descrição e Uso |
 |---|---|---|
 | estoque_historico_sazonal.csv | Dataset Final de Treinamento | Este é o arquivo principal (o dataset injetado no SageMaker Canvas). Ele contém 3 anos de dados diários (1.095 linhas) e todas as colunas necessárias para o modelo de Regressão. Inclui a coluna Data (para sazonalidade), features como Promocao_Ativa e, crucialmente, a Variável Alvo (Previsao_Demanda_30D). |
 | estoque_historico.csv | Dataset Histórico Bruto (Raw) | Representa a versão mais fundamental dos dados. Contém as séries temporais históricas (Vendas, Estoque, Preço) antes que qualquer transformação avançada ou a criação da variável alvo (Previsao_Demanda_30D) fosse aplicada. É a base de onde o pipeline de feature engineering começa. |
 | estoque_filtrado.csv | Dataset de Preparação (Cleaned) | Uma versão intermediária do dataset. Geralmente, este arquivo é gerado após as etapas iniciais de limpeza, padronização e possível filtro de dados para um único produto (PROD_A), garantindo que o conjunto de dados esteja perfeitamente pronto para a modelagem no Canvas. |
 | Estatisticas_Descritivas.csv | Artefato de Análise Exploratória (EDA) | Este não é um dataset de treinamento, mas sim um relatório gerado a partir dos dados. Contém o resumo estatístico (Média, Desvio Padrão, Mínimo, Máximo, etc.) de todas as variáveis numéricas. Sua função é validar a qualidade e a complexidade dos dados (ex: confirmar o alto desvio padrão nas vendas) antes de iniciar o treinamento do modelo. |
-Essa descrição agora pode ser incorporada ao seu README.md (ou em uma documentação auxiliar) para explicar o fluxo de dados no seu projeto de maneira profissional e didática.
+
+
 
