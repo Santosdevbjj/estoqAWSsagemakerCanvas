@@ -1,4 +1,4 @@
-📚 **Descrição dos Datasets**
+📚 **Descrição dos Datasets** 
 | Arquivo | Função Principal no Projeto | Descrição e Uso |
 |---|---|---|
 | estoque_historico_sazonal.csv | Dataset Final de Treinamento | Este é o arquivo principal (o dataset injetado no SageMaker Canvas). Ele contém 3 anos de dados diários (1.095 linhas) e todas as colunas necessárias para o modelo de Regressão. Inclui a coluna Data (para sazonalidade), features como Promocao_Ativa e, crucialmente, a Variável Alvo (Previsao_Demanda_30D). |
