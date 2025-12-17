@@ -205,14 +205,14 @@ Gerar previsões confiáveis de estoque
 Apoiar decisões estratégicas de negócio
 
 
-> 🚀 A Previsão de Estoque Inteligente permite sair do reativo para o preditivo, trazendo vantagem competitiva, redução de custos e maior eficiência operacional.
+>  A Previsão de Estoque Inteligente permite sair do reativo para o preditivo, trazendo vantagem competitiva, redução de custos e maior eficiência operacional.
 
 
 
 
 ---
 
-👨‍💻 **Autor**
+• **Autor**
 
 Sérgio Santos
 Especialista em Tecnologia, Dados e Cloud Computing
