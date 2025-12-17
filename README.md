@@ -7,8 +7,6 @@
 
 ---
 
-# 📦 Previsão de Estoque Inteligente na AWS com SageMaker Canvas
-
 [![AWS Certified](https://img.shields.io/badge/AWS-SageMaker_Canvas-orange?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/sagemaker/canvas/)
 [![Machine Learning](https://img.shields.io/badge/Machine_Learning-Regressão-blue?style=for-the-badge)](https://en.wikipedia.org/wiki/Regression_analysis)
 [![Status](https://img.shields.io/badge/Status-Pronto_para_Deploy-green?style=for-the-badge)]()
