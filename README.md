@@ -13,6 +13,16 @@
 [![Machine Learning](https://img.shields.io/badge/Machine_Learning-Regressão-blue?style=for-the-badge)](https://en.wikipedia.org/wiki/Regression_analysis)
 [![Status](https://img.shields.io/badge/Status-Pronto_para_Deploy-green?style=for-the-badge)]()
 
+
+
+
+---
+
+
+
+
+
+
 ## 🎯 Visão Geral do Projeto 
 
 Este projeto demonstra a aplicação de Machine Learning (ML) **No-Code** para resolver um problema de negócio crítico: **Previsão de Estoque e Demanda**. Utilizando o **Amazon SageMaker Canvas**, desenvolvemos um modelo de Regressão capaz de prever a demanda futura (`Previsao_Demanda_30D`) com base em dados históricos com sazonalidade, otimizando a gestão da cadeia de suprimentos.
