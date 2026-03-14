@@ -1,0 +1,3283 @@
+
+Por favor, reescreva o readme.md do repositório do meu projeto no Github:
+
+https://github.com/Santosdevbjj/estoqAWSsagemakerCanvas
+
+
+
+
+Seguindo as regras de Meigarom Lopes e Luiz Café.
+
+
+
+O readme.md está com esse conteúdo: 
+
+
+### Previsão de Estoque Inteligente na AWS com Sagemaker Canvas
+
+![NexaIAG](https://github.com/user-attachments/assets/c556e8a2-8292-49c3-aba4-892086424724)
+
+
+**Bootcamp Nexa - Machine Learning e GenAI na Prática.**
+
+---
+
+[![AWS Certified](https://img.shields.io/badge/AWS-SageMaker_Canvas-orange?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/sagemaker/canvas/)
+[![Machine Learning](https://img.shields.io/badge/Machine_Learning-Regressão-blue?style=for-the-badge)](https://en.wikipedia.org/wiki/Regression_analysis)
+[![Status](https://img.shields.io/badge/Status-Pronto_para_Deploy-green?style=for-the-badge)]()
+
+
+
+
+---
+
+
+📦 **Previsão de Estoque Inteligente na AWS — De Reativo a Preditivo**
+
+TL;DR
+
+> Projeto de Machine Learning na AWS que antecipa a demanda de estoque com base em sazonalidade, histórico de vendas e promoções, gerando previsões confiáveis e alertas de reabastecimento para apoiar decisões estratégicas de compras, reduzir rupturas e otimizar capital de giro.
+
+
+
+
+---
+
+💡 **1. Visão Geral do Projeto**
+
+Este projeto aborda um problema clássico de logística e supply chain: como manter níveis de estoque adequados em um cenário de demanda volátil.
+
+Em abordagens tradicionais, empresas utilizam médias históricas estáticas, que desconsideram fatores críticos como sazonalidade, promoções e variações temporais do consumo. 
+
+Aqui, adotamos uma abordagem preditiva, utilizando o Amazon SageMaker Canvas, para antecipar a demanda futura e apoiar decisões de reabastecimento de forma orientada por dados.
+
+O foco não é apenas gerar previsões, mas transformar Machine Learning em ação de negócio.
+
+
+---
+
+🎯 **2. Objetivos do Projeto**
+
+Previsão de Demanda: antecipar o comportamento do consumo para os próximos 30 dias com base em mais de 2 anos de histórico diário.
+
+Identificação de Sazonalidade: capturar padrões semanais e anuais de vendas.
+
+Apoio à Decisão: fornecer subsídios para definição de pontos de reposição e planejamento de compras.
+
+
+
+---
+
+⚙️ **3. Decisões Técnicas & Stack**
+
+Este projeto foi concebido sob a ótica de um cientista de dados aplicado ao negócio, equilibrando agilidade, governança e interpretabilidade.
+
+🧠 **Ferramentas e Tecnologias**
+
+**Amazon SageMaker Canvas**
+Utilizado como plataforma principal por permitir a criação de modelos de ML de forma low-code, mantendo governança, rastreabilidade e rapidez no ciclo de experimentação.
+
+**AutoML (Canvas)**
+O Canvas avaliou múltiplos algoritmos e selecionou automaticamente o modelo com melhor desempenho para os dados tabulares.
+
+**Random Forest**
+Algoritmo selecionado pelo Canvas por apresentar:
+
+Robustez a dados ruidosos
+
+Bom desempenho em problemas de regressão
+
+Excelente interpretabilidade via Feature Importance
+
+
+
+
+---
+
+📊 **4. Análise das Variáveis (Feature Importance)**
+
+Feature	Impacto no Modelo	Justificativa de Negócio
+
+vendas_dia	Forte (~45%)	O consumo recente é altamente correlacionado com a demanda futura.
+data (sazonalidade)	Médio (~20%)	Captura padrões sazonais e variações ao longo do ano.
+promocao	Médio (~15%)	Promoções geram picos significativos de vendas e exigem estoque adicional.
+
+
+Esses resultados reforçam a coerência entre estatística, Machine Learning e lógica de negócio.
+
+
+---
+
+🛠️ **5. Estrutura do Repositório**
+
+
+<img width="915" height="630" alt="Screenshot_20251217-061155" src="https://github.com/user-attachments/assets/c4e20f22-0b21-4dff-a660-41bb2c0b88b3" />
+
+
+
+> 📌 Para detalhes sobre cada dataset, consulte: docs/descricao_datasets.md
+
+
+
+
+---
+
+🚀 **6. Como Reproduzir o Projeto**
+
+1️⃣ **Preparação dos Dados**
+
+Execute o notebook:
+
+notebooks/01_data_generation.ipynb
+
+O arquivo principal gerado será:
+
+datasets/raw/estoque_historico_sazonal.csv
+
+
+2️⃣ **Upload para AWS**
+
+Envie o CSV para um bucket no Amazon S3.
+
+
+3️⃣ **Treinamento no SageMaker Canvas**
+
+Crie um novo modelo no Canvas
+
+Importe o dataset a partir do S3
+
+Defina a variável estoque_final como Target
+
+Execute o Standard Build para maior precisão
+
+
+4️⃣ **Previsões Futuras**
+
+Utilize o arquivo:
+
+datasets/predict/estoque_previsao_futura.csv
+
+Execute o Predict e exporte os resultados
+
+
+
+---
+
+📈 **7. Resultados & Insights de Negócio**
+
+**Performance do Modelo**
+
+O modelo atingiu um R² ≈ 0,69 no conjunto de teste, o que significa que aproximadamente 70% da variabilidade da demanda foi explicada pelo modelo — um resultado consistente para dados reais de varejo, naturalmente ruidosos.
+
+**Valor para o Negócio**
+
+Antecipação de riscos de ruptura de estoque
+
+Melhoria no planejamento de compras
+
+Redução de capital parado
+
+Apoio à tomada de decisão baseada em dados
+
+
+> 📄 A análise completa encontra-se em: docs/insights.md
+
+
+
+
+---
+
+🔮 **8. Próximos Passos**
+
+Forecast Multissérie: previsão simultânea de múltiplos SKUs
+
+Lead Time Variável: incorporação do tempo de entrega do fornecedor
+
+Monitoramento de Drift: uso do SageMaker Model Monitor
+
+Automação: integração com sistemas de ERP ou BI
+
+
+
+---
+
+👨‍💻 **Autor**
+
+Sérgio Santos
+Projeto para demonstração de competências em AWS Cloud, Machine Learning e Análise de Negócio.
+
+
+---
+
+⭐ Este projeto foi desenvolvido com foco em clareza técnica, impacto de negócio e boas práticas de Data Science aplicada.
+
+
+
+
+
+
+
+
+---
+
+**Contato:**
+
+
+[![Portfólio Sérgio Santos](https://img.shields.io/badge/Portfólio-Sérgio_Santos-111827?style=for-the-badge&logo=githubpages&logoColor=00eaff)](https://portfoliosantossergio.vercel.app)
+
+[![LinkedIn Sérgio Santos](https://img.shields.io/badge/LinkedIn-Sérgio_Santos-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/santossergioluiz)
+
+--- 
+
+
+
+
+Faça um esquema visual das pastas e arquivos do projeto. E explique as funcionalidades e funções de cada pasta e arquivo do projeto. E os requisitos de hardware e software.
+
+
+
+OS ARQUIVOS QUE COMPÕEM O PROJETO E DEVEM SER USADOS PARA REESCREVER O README.MD 
+
+
+analysis/Alertas_de_Reabastecimento.pdf
+
+analysis/Analise_de_Estoque_Demanda.pdf
+
+
+analysis/Analise_de_Sazonalidade.pdf
+
+
+analysis/Dashboard_Analise_Estoque.pdf
+
+
+analysis/Previsao_Demanda_Machine_Learning.pdf
+
+
+analysis/Simulador_de_Cenarios.pdf
+
+
+analysis/Vendas_Historicas_Longo_do_Tempo.pdf
+
+
+analysis/relatorio_estoque.pdf
+
+
+
+
+datasets/predict/estoque_previsao_futura.csv
+
+TEM ESSE CONTEÚDO 
+
+
+data,produto_id,categoria,estoque_inicial,vendas_dia,preco_unitario,promocao
+2025-01-01,P001,Eletrônicos,180,9,2550,0
+2025-01-02,P001,Eletrônicos,171,14,2550,1
+2025-01-03,P001,Eletrônicos,157,8,2550,0
+2025-01-04,P001,Eletrônicos,149,7,2550,0
+2025-01-05,P001,Eletrônicos,142,12,2550,1
+2025-01-06,P001,Eletrônicos,130,10,2550,0
+2025-01-07,P001,Eletrônicos,120,6,2550,0
+2025-01-08,P001,Eletrônicos,114,11,2550,1
+2025-01-09,P001,Eletrônicos,103,8,2550,0
+2025-01-10,P001,Eletrônicos,95,9,2550,0
+2025-01-01,P002,Alimentos,420,18,16,0
+2025-01-02,P002,Alimentos,402,24,16,1
+2025-01-03,P002,Alimentos,378,20,16,0
+2025-01-04,P002,Alimentos,358,22,16,0
+2025-01-05,P002,Alimentos,336,27,16,1
+2025-01-06,P002,Alimentos,309,21,16,0
+2025-01-07,P002,Alimentos,288,19,16,0
+2025-01-08,P002,Alimentos,269,25,16,1
+2025-01-09,P002,Alimentos,244,23,16,0
+2025-01-10,P002,Alimentos,221,26,16,1
+2025-01-01,P003,Vestuário,260,7,130,0
+2025-01-02,P003,Vestuário,253,12,130,1
+2025-01-03,P003,Vestuário,241,8,130,0
+2025-01-04,P003,Vestuário,233,9,130,0
+2025-01-05,P003,Vestuário,224,14,130,1
+2025-01-06,P003,Vestuário,210,10,130,0
+2025-01-07,P003,Vestuário,200,6,130,0
+2025-01-08,P003,Vestuário,194,11,130,1
+2025-01-09,P003,Vestuário,183,8,130,0
+2025-01-10,P003,Vestuário,175,9,130,0 
+
+
+
+
+
+
+
+
+
+
+
+
+
+datasets/processed/estoque_tratado.csv
+
+TEM ESSE CONTEÚDO 
+
+data,produto_id,categoria,estoque_inicial,vendas_dia,estoque_final,promocao
+2024-01-01,P001,Eletrônicos,120,8,112,0
+2024-01-02,P001,Eletrônicos,112,10,102,1
+2024-01-03,P001,Eletrônicos,102,7,95,0
+2024-01-04,P001,Eletrônicos,95,12,83,1
+2024-01-05,P001,Eletrônicos,83,9,74,0
+2024-01-06,P001,Eletrônicos,74,6,68,0
+2024-01-07,P001,Eletrônicos,68,11,57,1
+2024-01-08,P001,Eletrônicos,57,5,52,0
+2024-01-09,P001,Eletrônicos,52,8,44,0
+2024-01-10,P001,Eletrônicos,44,10,34,1
+2024-01-01,P002,Alimentos,300,25,275,0
+2024-01-02,P002,Alimentos,275,30,245,1
+2024-01-03,P002,Alimentos,245,28,217,0
+2024-01-04,P002,Alimentos,217,35,182,1
+2024-01-05,P002,Alimentos,182,22,160,0
+2024-01-06,P002,Alimentos,160,20,140,0
+2024-01-07,P002,Alimentos,140,27,113,1
+2024-01-08,P002,Alimentos,113,24,89,0
+2024-01-09,P002,Alimentos,89,26,63,0
+2024-01-10,P002,Alimentos,63,30,33,1 
+
+
+
+
+
+
+
+
+
+
+datasets/raw/Estatisticas_Descritivas.csv
+
+TEM ESSE CONTEÚDO 
+
+
+,Contagem,Média,Desvio Padrão,Mínimo,25%,50%,75%,Máximo
+Vendas_Historicas_Unidades,1095,169.46392694063928,46.18388178827164,36,136,174,204,299
+Estoque_Atual,1095,2423.904109589041,604.1311065526135,515,1999,2391,2773.5,5496
+Preco_Unitario,1095,19.975123287671234,1.147180853547529,18,18.985,19.95,20.96,22
+Lead_Time_Dias,1095,6.963470319634703,1.4208356878633803,5,6,7,8,9
+Previsao_Demanda_30D,1095,185.7634703196347,51.75538141404556,50,148,190,225,340 
+
+
+
+
+
+
+
+
+
+
+datasets/raw/estoque_filtrado.csv 
+
+
+TEM ESSE CONTEÚDO 
+
+Data,ID_Produto,Nome_Produto,Preco_Unitario,Promocao_Ativa,Lead_Time_Dias,Vendas_Historicas_Unidades,Estoque_Atual,Previsao_Demanda_30D
+2023-01-01,PROD_A,Produto A,18.94,True,8,171,1129,187
+2023-01-02,PROD_A,Produto A,20.82,False,8,148,1404,156
+2023-01-03,PROD_A,Produto A,21.27,False,5,164,1479,175
+2023-01-04,PROD_A,Produto A,20.19,False,9,183,1793,209
+2023-01-05,PROD_A,Produto A,21.87,True,6,148,5253,179
+2023-01-06,PROD_A,Produto A,18.21,False,8,149,5495,155
+2023-01-07,PROD_A,Produto A,20.02,False,6,194,5240,224
+2023-01-08,PROD_A,Produto A,20.87,False,5,195,5267,192
+2023-01-09,PROD_A,Produto A,21.45,False,9,147,810,149
+2023-01-10,PROD_A,Produto A,18.72,False,5,168,5496,175
+2023-01-11,PROD_A,Produto A,21.2,False,6,149,4913,150
+2023-01-12,PROD_A,Produto A,20.21,True,9,150,4589,149
+2023-01-13,PROD_A,Produto A,19.59,False,9,165,4649,185
+2023-01-14,PROD_A,Produto A,18.53,False,5,143,4619,155
+2023-01-15,PROD_A,Produto A,21.46,False,8,146,4189,164
+2023-01-16,PROD_A,Produto A,18.63,True,6,151,4176,173
+2023-01-17,PROD_A,Produto A,19.24,False,7,143,3567,159
+2023-01-18,PROD_A,Produto A,19.16,True,7,170,3776,193
+2023-01-19,PROD_A,Produto A,21.49,False,5,147,3892,161
+2023-01-20,PROD_A,Produto A,20.69,False,6,137,3827,138
+2023-01-21,PROD_A,Produto A,21.19,False,6,213,3364,244
+2023-01-22,PROD_A,Produto A,19.0,False,5,181,3918,193
+2023-01-23,PROD_A,Produto A,20.5,False,6,169,2355,176
+2023-01-24,PROD_A,Produto A,20.29,True,8,140,3231,152
+2023-01-25,PROD_A,Produto A,21.33,False,5,159,3198,165
+2023-01-26,PROD_A,Produto A,21.62,False,8,173,2587,186
+2023-01-27,PROD_A,Produto A,18.05,False,6,148,3009,166
+2023-01-28,PROD_A,Produto A,20.7,False,5,188,2738,210
+2023-01-29,PROD_A,Produto A,18.21,False,6,175,1589,183
+2023-01-30,PROD_A,Produto A,20.2,False,5,168,2521,179
+2023-01-31,PROD_A,Produto A,19.15,False,6,162,1085,188
+2023-02-01,PROD_A,Produto A,19.23,False,8,212,1339,238
+2023-02-02,PROD_A,Produto A,19.41,False,8,175,1868,213
+2023-02-03,PROD_A,Produto A,20.49,False,6,155,971,182
+2023-02-04,PROD_A,Produto A,19.34,False,5,216,1096,249
+2023-02-05,PROD_A,Produto A,20.93,True,7,171,1233,174
+2023-02-06,PROD_A,Produto A,19.62,False,8,183,1135,208
+2023-02-07,PROD_A,Produto A,18.27,False,8,140,1049,153
+2023-02-08,PROD_A,Produto A,21.14,False,7,153,4628,162
+2023-02-09,PROD_A,Produto A,19.14,True,6,185,5149,205
+2023-02-10,PROD_A,Produto A,19.73,False,5,196,532,225
+2023-02-11,PROD_A,Produto A,20.74,False,6,204,4639,229
+2023-02-12,PROD_A,Produto A,19.33,False,9,193,4010,203
+2023-02-13,PROD_A,Produto A,18.23,True,8,177,4753,202
+2023-02-14,PROD_A,Produto A,19.5,False,9,154,4657,163
+2023-02-15,PROD_A,Produto A,21.78,False,8,170,4651,189
+2023-02-16,PROD_A,Produto A,20.57,False,8,176,3373,190
+2023-02-17,PROD_A,Produto A,20.69,False,9,207,3930,225
+2023-02-18,PROD_A,Produto A,20.53,False,9,213,3199,241
+2023-02-19,PROD_A,Produto A,18.8,False,6,175,2680,182
+2023-02-20,PROD_A,Produto A,19.67,False,9,194,2429,232
+2023-02-21,PROD_A,Produto A,21.0,False,6,180,3396,179
+2023-02-22,PROD_A,Produto A,18.41,False,6,175,3348,186
+2023-02-23,PROD_A,Produto A,19.11,True,6,201,2825,224
+2023-02-24,PROD_A,Produto A,19.11,True,8,210,2635,236
+2023-02-25,PROD_A,Produto A,19.73,False,8,226,1794,247
+2023-02-26,PROD_A,Produto A,21.92,False,9,189,2168,207
+2023-02-27,PROD_A,Produto A,18.27,False,8,185,1024,207
+2023-02-28,PROD_A,Produto A,20.07,False,9,198,1921,215
+2023-03-01,PROD_A,Produto A,18.72,False,8,212,1095,247
+2023-03-02,PROD_A,Produto A,21.88,False,5,183,966,209
+2023-03-03,PROD_A,Produto A,18.45,True,5,189,515,216
+2023-03-04,PROD_A,Produto A,19.61,False,9,179,795,187
+2023-03-05,PROD_A,Produto A,20.95,False,8,185,5441,202
+2023-03-06,PROD_A,Produto A,20.82,True,8,210,5027,227
+2023-03-07,PROD_A,Produto A,19.69,False,6,222,5455,234
+2023-03-08,PROD_A,Produto A,19.39,False,7,193,4692,215
+2023-03-09,PROD_A,Produto A,19.59,False,9,215,4097,231
+2023-03-10,PROD_A,Produto A,19.06,False,7,203,3943,229
+2023-03-11,PROD_A,Produto A,18.82,False,7,196,4966,204
+2023-03-12,PROD_A,Produto A,19.93,False,9,215,3718,253
+2023-03-13,PROD_A,Produto A,19.07,False,8,227,3694,240
+2023-03-14,PROD_A,Produto A,19.15,False,9,196,3452,217
+2023-03-15,PROD_A,Produto A,20.63,False,7,228,4006,258
+2023-03-16,PROD_A,Produto A,21.87,True,8,145,3577,153
+2023-03-17,PROD_A,Produto A,20.41,False,5,214,3625,243
+2023-03-18,PROD_A,Produto A,18.31,False,9,222,3519,231
+2023-03-19,PROD_A,Produto A,18.3,False,9,214,1987,249
+2023-03-20,PROD_A,Produto A,21.81,False,8,200,2223,220
+2023-03-21,PROD_A,Produto A,19.19,False,5,159,2713,168
+2023-03-22,PROD_A,Produto A,18.37,True,5,194,1746,210
+2023-03-23,PROD_A,Produto A,20.4,False,8,206,1975,234
+2023-03-24,PROD_A,Produto A,20.49,False,6,228,2792,244
+2023-03-25,PROD_A,Produto A,20.59,True,9,198,2508,210
+2023-03-26,PROD_A,Produto A,19.07,True,9,191,2910,207
+2023-03-27,PROD_A,Produto A,18.06,False,7,189,2041,196
+2023-03-28,PROD_A,Produto A,21.86,False,8,218,2091,258
+2023-03-29,PROD_A,Produto A,19.0,False,7,206,2512,220
+2023-03-30,PROD_A,Produto A,20.7,False,7,189,2166,216
+2023-03-31,PROD_A,Produto A,20.83,False,5,210,2250,233
+2023-04-01,PROD_A,Produto A,20.44,False,9,219,2657,231
+2023-04-02,PROD_A,Produto A,19.25,False,7,236,2397,259
+2023-04-03,PROD_A,Produto A,19.08,False,5,185,1983,211
+2023-04-04,PROD_A,Produto A,20.39,False,8,193,1738,210
+2023-04-05,PROD_A,Produto A,21.46,True,7,192,2881,223
+2023-04-06,PROD_A,Produto A,21.79,False,9,170,2165,197
+2023-04-07,PROD_A,Produto A,18.42,False,7,205,2812,234
+2023-04-08,PROD_A,Produto A,18.62,False,8,228,2141,246
+2023-04-09,PROD_A,Produto A,21.78,True,7,214,2253,224
+2023-04-10,PROD_A,Produto A,20.95,True,9,194,2582,207
+2023-04-11,PROD_A,Produto A,21.53,False,5,171,2577,190
+2023-04-12,PROD_A,Produto A,18.81,False,9,190,2502,214
+2023-04-13,PROD_A,Produto A,20.35,False,5,192,2399,189
+2023-04-14,PROD_A,Produto A,20.8,False,6,182,2490,200
+2023-04-15,PROD_A,Produto A,20.72,False,9,217,2135,240
+2023-04-16,PROD_A,Produto A,19.63,True,9,221,2557,240
+2023-04-17,PROD_A,Produto A,18.06,False,8,236,3040,272
+2023-04-18,PROD_A,Produto A,20.33,True,7,201,2485,225
+2023-04-19,PROD_A,Produto A,19.01,False,5,203,1725,236
+2023-04-20,PROD_A,Produto A,19.8,False,5,196,2728,213
+2023-04-21,PROD_A,Produto A,21.83,False,8,159,1833,184
+2023-04-22,PROD_A,Produto A,19.6,True,8,220,2764,258
+2023-04-23,PROD_A,Produto A,21.36,True,7,217,2775,251
+2023-04-24,PROD_A,Produto A,18.75,False,7,245,2469,258
+2023-04-25,PROD_A,Produto A,20.69,False,9,192,1816,208
+2023-04-26,PROD_A,Produto A,21.91,False,6,201,1638,217
+2023-04-27,PROD_A,Produto A,18.41,False,7,194,2261,218
+2023-04-28,PROD_A,Produto A,18.03,False,8,171,2655,194
+2023-04-29,PROD_A,Produto A,19.73,False,7,232,2724,246
+2023-04-30,PROD_A,Produto A,18.37,False,5,230,1949,253
+2023-05-01,PROD_A,Produto A,20.99,False,6,209,2485,209
+2023-05-02,PROD_A,Produto A,21.66,False,9,175,2393,206
+2023-05-03,PROD_A,Produto A,19.74,True,5,221,2011,237
+2023-05-04,PROD_A,Produto A,19.03,False,5,164,2256,180
+2023-05-05,PROD_A,Produto A,19.74,True,6,203,1926,220
+2023-05-06,PROD_A,Produto A,20.89,True,9,246,2910,282
+2023-05-07,PROD_A,Produto A,18.04,False,8,179,3090,168
+2023-05-08,PROD_A,Produto A,20.36,True,9,179,3084,196
+2023-05-09,PROD_A,Produto A,20.45,False,7,192,2514,210
+2023-05-10,PROD_A,Produto A,20.55,False,5,179,2271,192
+2023-05-11,PROD_A,Produto A,18.97,False,7,158,2460,191
+2023-05-12,PROD_A,Produto A,20.86,False,8,190,2645,200
+2023-05-13,PROD_A,Produto A,18.37,True,7,174,2139,199
+2023-05-14,PROD_A,Produto A,18.8,False,9,220,2255,245
+2023-05-15,PROD_A,Produto A,21.51,False,7,168,2952,197
+2023-05-16,PROD_A,Produto A,20.95,False,8,217,2359,232
+2023-05-17,PROD_A,Produto A,18.05,False,8,170,2088,179
+2023-05-18,PROD_A,Produto A,18.99,True,8,178,1831,206
+2023-05-19,PROD_A,Produto A,18.86,False,9,200,2755,224
+2023-05-20,PROD_A,Produto A,19.08,False,8,180,2651,182
+2023-05-21,PROD_A,Produto A,18.99,False,5,210,2423,225
+2023-05-22,PROD_A,Produto A,18.25,False,8,208,2096,232
+2023-05-23,PROD_A,Produto A,19.84,False,7,149,2493,172
+2023-05-24,PROD_A,Produto A,20.93,False,7,185,2079,196
+2023-05-25,PROD_A,Produto A,20.43,True,7,185,1872,174
+2023-05-26,PROD_A,Produto A,20.69,False,9,195,2371,219
+2023-05-27,PROD_A,Produto A,18.32,False,7,166,3081,170
+2023-05-28,PROD_A,Produto A,21.81,False,9,168,2600,164
+2023-05-29,PROD_A,Produto A,21.35,False,9,188,2473,178
+2023-05-30,PROD_A,Produto A,21.22,False,8,183,1855,209
+2023-05-31,PROD_A,Produto A,21.29,True,5,181,2949,200
+2023-06-01,PROD_A,Produto A,21.73,True,8,232,2097,252
+2023-06-02,PROD_A,Produto A,20.18,False,8,213,2298,248
+2023-06-03,PROD_A,Produto A,18.8,False,9,217,2663,245
+2023-06-04,PROD_A,Produto A,20.47,False,9,220,1835,258
+2023-06-05,PROD_A,Produto A,20.97,False,7,223,2474,231
+2023-06-06,PROD_A,Produto A,20.95,False,7,258,1754,283
+2023-06-07,PROD_A,Produto A,20.09,True,8,252,2524,261
+2023-06-08,PROD_A,Produto A,18.27,False,6,183,2772,199
+2023-06-09,PROD_A,Produto A,19.48,False,6,215,2029,234
+2023-06-10,PROD_A,Produto A,21.68,True,7,246,3065,276
+2023-06-11,PROD_A,Produto A,20.34,False,6,254,2937,279
+2023-06-12,PROD_A,Produto A,20.15,False,7,225,2889,253
+2023-06-13,PROD_A,Produto A,19.08,True,9,177,1705,201
+2023-06-14,PROD_A,Produto A,19.47,False,8,242,2175,287
+2023-06-15,PROD_A,Produto A,21.58,False,5,234,3018,254
+2023-06-16,PROD_A,Produto A,20.67,True,8,250,3089,265
+2023-06-17,PROD_A,Produto A,21.15,False,7,241,1997,267
+2023-06-18,PROD_A,Produto A,19.82,False,7,213,3033,226
+2023-06-19,PROD_A,Produto A,20.52,False,8,204,2694,239
+2023-06-20,PROD_A,Produto A,18.99,False,7,184,1861,199
+2023-06-21,PROD_A,Produto A,20.82,False,6,180,2937,192
+2023-06-22,PROD_A,Produto A,19.71,False,6,222,2539,239
+2023-06-23,PROD_A,Produto A,19.77,False,7,211,1885,239
+2023-06-24,PROD_A,Produto A,20.6,True,7,225,2763,245
+2023-06-25,PROD_A,Produto A,21.75,False,6,215,2331,230
+2023-06-26,PROD_A,Produto A,18.26,False,7,203,2891,239
+2023-06-27,PROD_A,Produto A,21.3,False,7,261,1689,278
+2023-06-28,PROD_A,Produto A,19.17,True,8,179,1676,197
+2023-06-29,PROD_A,Produto A,19.78,False,5,256,3025,288
+2023-06-30,PROD_A,Produto A,18.09,False,6,209,1658,213
+2023-07-01,PROD_A,Produto A,19.2,False,8,156,2420,176
+2023-07-02,PROD_A,Produto A,20.01,True,5,136,3086,139
+2023-07-03,PROD_A,Produto A,18.22,False,7,159,2661,183
+2023-07-04,PROD_A,Produto A,19.96,False,7,144,2351,148
+2023-07-05,PROD_A,Produto A,21.71,False,8,161,2444,184
+2023-07-06,PROD_A,Produto A,18.42,False,7,156,2375,182
+2023-07-07,PROD_A,Produto A,21.06,False,9,144,1971,167
+2023-07-08,PROD_A,Produto A,19.64,False,8,147,2941,164
+2023-07-09,PROD_A,Produto A,20.62,False,5,127,1902,137
+2023-07-10,PROD_A,Produto A,19.04,False,8,134,1729,141
+2023-07-11,PROD_A,Produto A,18.64,False,6,159,2636,189
+2023-07-12,PROD_A,Produto A,18.64,False,8,145,2823,152
+2023-07-13,PROD_A,Produto A,18.28,False,7,115,2163,116
+2023-07-14,PROD_A,Produto A,18.74,True,7,143,1644,163
+2023-07-15,PROD_A,Produto A,20.66,True,9,168,2462,176
+2023-07-16,PROD_A,Produto A,21.53,False,9,128,2410,131
+2023-07-17,PROD_A,Produto A,21.26,False,9,140,2357,139
+2023-07-18,PROD_A,Produto A,20.74,False,5,137,1676,145
+2023-07-19,PROD_A,Produto A,18.44,False,9,112,1799,122
+2023-07-20,PROD_A,Produto A,19.16,True,5,142,1851,158
+2023-07-21,PROD_A,Produto A,19.24,False,9,145,1962,169
+2023-07-22,PROD_A,Produto A,19.0,False,5,179,2096,202
+2023-07-23,PROD_A,Produto A,20.06,False,8,177,2195,192
+2023-07-24,PROD_A,Produto A,20.14,False,8,104,2074,112
+2023-07-25,PROD_A,Produto A,19.43,False,7,112,2875,128
+2023-07-26,PROD_A,Produto A,19.42,False,5,140,1908,166
+2023-07-27,PROD_A,Produto A,21.31,False,6,139,2856,154
+2023-07-28,PROD_A,Produto A,21.16,False,7,138,1877,147
+2023-07-29,PROD_A,Produto A,19.23,False,8,214,2149,225
+2023-07-30,PROD_A,Produto A,21.66,False,5,157,2306,158
+2023-07-31,PROD_A,Produto A,21.81,False,9,149,2548,170
+2023-08-01,PROD_A,Produto A,19.31,False,6,144,1848,164
+2023-08-02,PROD_A,Produto A,19.42,False,8,137,2869,156
+2023-08-03,PROD_A,Produto A,20.02,False,7,117,2215,127
+2023-08-04,PROD_A,Produto A,21.76,False,5,138,2054,165
+2023-08-05,PROD_A,Produto A,21.51,True,6,120,2501,127
+2023-08-06,PROD_A,Produto A,18.41,False,5,135,2640,158
+2023-08-07,PROD_A,Produto A,19.57,False,9,111,2021,121
+2023-08-08,PROD_A,Produto A,20.21,False,7,122,2241,128
+2023-08-09,PROD_A,Produto A,20.01,False,5,166,1707,188
+2023-08-10,PROD_A,Produto A,18.78,False,8,81,2203,93
+2023-08-11,PROD_A,Produto A,21.44,False,7,132,1928,148
+2023-08-12,PROD_A,Produto A,20.71,False,8,95,2525,105
+2023-08-13,PROD_A,Produto A,21.35,True,5,122,1962,133
+2023-08-14,PROD_A,Produto A,21.44,False,7,138,2055,175
+2023-08-15,PROD_A,Produto A,20.99,True,8,117,1796,140
+2023-08-16,PROD_A,Produto A,19.76,False,9,93,1758,109
+2023-08-17,PROD_A,Produto A,20.44,False,9,100,1813,111
+2023-08-18,PROD_A,Produto A,18.64,True,5,127,2829,149
+2023-08-19,PROD_A,Produto A,20.69,False,7,119,2861,136
+2023-08-20,PROD_A,Produto A,18.72,False,6,138,2807,152
+2023-08-21,PROD_A,Produto A,20.78,True,7,113,2804,121
+2023-08-22,PROD_A,Produto A,18.92,False,9,98,2562,106
+2023-08-23,PROD_A,Produto A,18.47,False,8,154,2144,137
+2023-08-24,PROD_A,Produto A,18.66,False,6,123,2685,137
+2023-08-25,PROD_A,Produto A,18.01,False,5,69,2534,71
+2023-08-26,PROD_A,Produto A,20.87,False,6,130,1829,158
+2023-08-27,PROD_A,Produto A,20.93,False,5,104,2360,114
+2023-08-28,PROD_A,Produto A,20.06,False,6,125,2481,125
+2023-08-29,PROD_A,Produto A,18.65,False,5,92,2918,100
+2023-08-30,PROD_A,Produto A,18.33,True,5,105,2573,105
+2023-08-31,PROD_A,Produto A,18.08,False,6,117,2922,133
+2023-09-01,PROD_A,Produto A,18.66,False,6,124,2894,139
+2023-09-02,PROD_A,Produto A,21.56,True,5,103,2953,122
+2023-09-03,PROD_A,Produto A,18.97,True,9,115,2452,118
+2023-09-04,PROD_A,Produto A,19.42,False,6,96,1759,105
+2023-09-05,PROD_A,Produto A,18.42,False,7,92,2411,87
+2023-09-06,PROD_A,Produto A,18.89,False,8,140,2165,161
+2023-09-07,PROD_A,Produto A,20.08,False,5,112,2636,128
+2023-09-08,PROD_A,Produto A,20.43,True,5,78,1676,90
+2023-09-09,PROD_A,Produto A,18.98,False,8,132,1731,145
+2023-09-10,PROD_A,Produto A,18.23,True,9,160,1624,180
+2023-09-11,PROD_A,Produto A,19.56,False,8,123,3053,151
+2023-09-12,PROD_A,Produto A,18.94,False,6,72,3057,76
+2023-09-13,PROD_A,Produto A,18.88,False,8,92,2825,102
+2023-09-14,PROD_A,Produto A,21.84,False,5,127,2656,128
+2023-09-15,PROD_A,Produto A,20.47,False,8,87,2982,87
+2023-09-16,PROD_A,Produto A,20.23,False,7,133,2902,147
+2023-09-17,PROD_A,Produto A,19.66,False,6,126,1709,149
+2023-09-18,PROD_A,Produto A,19.72,False,8,82,2235,87
+2023-09-19,PROD_A,Produto A,20.16,False,5,99,2510,106
+2023-09-20,PROD_A,Produto A,20.79,False,6,36,2317,50
+2023-09-21,PROD_A,Produto A,20.81,False,5,80,2893,82
+2023-09-22,PROD_A,Produto A,18.69,False,9,95,2898,107
+2023-09-23,PROD_A,Produto A,20.0,True,7,88,2517,81
+2023-09-24,PROD_A,Produto A,19.65,False,9,152,2590,180
+2023-09-25,PROD_A,Produto A,21.48,False,7,71,2751,71
+2023-09-26,PROD_A,Produto A,20.53,True,8,91,2287,107
+2023-09-27,PROD_A,Produto A,20.13,False,6,102,2213,99
+2023-09-28,PROD_A,Produto A,18.46,True,8,128,2208,147
+2023-09-29,PROD_A,Produto A,20.42,False,7,71,2104,84
+2023-09-30,PROD_A,Produto A,18.47,False,7,135,2601,152
+2023-10-01,PROD_A,Produto A,19.35,False,7,109,2591,109
+2023-10-02,PROD_A,Produto A,18.57,False,5,80,2901,90
+2023-10-03,PROD_A,Produto A,20.77,False,6,109,2258,108
+2023-10-04,PROD_A,Produto A,18.83,False,8,104,2616,111
+2023-10-05,PROD_A,Produto A,19.57,False,8,88,1901,107
+2023-10-06,PROD_A,Produto A,21.58,False,9,101,2605,119
+2023-10-07,PROD_A,Produto A,18.82,False,7,115,2731,126
+2023-10-08,PROD_A,Produto A,20.03,False,7,114,2847,115
+2023-10-09,PROD_A,Produto A,19.68,True,7,113,1635,130
+2023-10-10,PROD_A,Produto A,18.07,False,8,132,2794,145
+2023-10-11,PROD_A,Produto A,21.17,False,9,75,2555,59
+2023-10-12,PROD_A,Produto A,18.28,False,5,143,1873,165
+2023-10-13,PROD_A,Produto A,19.9,True,6,61,2831,66
+2023-10-14,PROD_A,Produto A,20.24,True,5,120,1948,144
+2023-10-15,PROD_A,Produto A,20.51,False,8,132,2163,134
+2023-10-16,PROD_A,Produto A,20.75,False,7,107,2402,85
+2023-10-17,PROD_A,Produto A,19.01,False,6,89,2616,100
+2023-10-18,PROD_A,Produto A,18.04,False,8,97,3040,109
+2023-10-19,PROD_A,Produto A,20.89,False,8,92,3102,84
+2023-10-20,PROD_A,Produto A,20.14,False,8,90,2973,89
+2023-10-21,PROD_A,Produto A,21.34,False,6,130,2464,170
+2023-10-22,PROD_A,Produto A,21.29,False,6,132,2812,142
+2023-10-23,PROD_A,Produto A,21.37,False,9,89,1985,105
+2023-10-24,PROD_A,Produto A,19.94,True,9,121,2821,126
+2023-10-25,PROD_A,Produto A,19.33,False,5,110,2274,100
+2023-10-26,PROD_A,Produto A,21.17,False,6,120,3005,130
+2023-10-27,PROD_A,Produto A,19.81,False,6,117,2379,126
+2023-10-28,PROD_A,Produto A,18.73,False,6,106,2258,112
+2023-10-29,PROD_A,Produto A,21.42,False,9,117,2683,127
+2023-10-30,PROD_A,Produto A,21.53,False,8,120,2543,134
+2023-10-31,PROD_A,Produto A,19.87,False,7,118,2035,128
+2023-11-01,PROD_A,Produto A,18.3,False,9,153,2998,155
+2023-11-02,PROD_A,Produto A,19.55,False,6,139,1874,157
+2023-11-03,PROD_A,Produto A,21.21,False,9,203,2786,203
+2023-11-04,PROD_A,Produto A,21.61,False,5,189,2329,187
+2023-11-05,PROD_A,Produto A,18.81,True,6,206,2196,233
+2023-11-06,PROD_A,Produto A,18.27,False,5,150,2519,170
+2023-11-07,PROD_A,Produto A,21.51,False,6,152,1630,166
+2023-11-08,PROD_A,Produto A,19.56,False,9,199,1645,204
+2023-11-09,PROD_A,Produto A,20.17,False,8,206,2576,219
+2023-11-10,PROD_A,Produto A,21.87,False,7,167,2040,181
+2023-11-11,PROD_A,Produto A,18.27,False,5,230,2864,237
+2023-11-12,PROD_A,Produto A,20.59,True,9,172,2115,181
+2023-11-13,PROD_A,Produto A,18.3,False,8,161,2880,183
+2023-11-14,PROD_A,Produto A,19.5,True,9,182,1856,214
+2023-11-15,PROD_A,Produto A,21.22,False,5,159,2628,170
+2023-11-16,PROD_A,Produto A,19.73,False,7,139,1838,160
+2023-11-17,PROD_A,Produto A,21.99,False,9,162,2080,159
+2023-11-18,PROD_A,Produto A,20.24,False,6,173,2282,196
+2023-11-19,PROD_A,Produto A,19.28,False,8,149,2254,155
+2023-11-20,PROD_A,Produto A,18.88,False,9,230,2787,256
+2023-11-21,PROD_A,Produto A,19.4,False,8,174,2609,188
+2023-11-22,PROD_A,Produto A,19.49,False,6,170,1808,200
+2023-11-23,PROD_A,Produto A,18.27,True,7,212,1874,224
+2023-11-24,PROD_A,Produto A,19.48,False,7,186,1687,210
+2023-11-25,PROD_A,Produto A,19.86,False,6,207,2235,224
+2023-11-26,PROD_A,Produto A,20.89,False,8,195,1955,212
+2023-11-27,PROD_A,Produto A,20.63,False,9,153,2290,166
+2023-11-28,PROD_A,Produto A,20.84,False,6,144,2440,149
+2023-11-29,PROD_A,Produto A,18.03,False,5,190,2493,208
+2023-11-30,PROD_A,Produto A,18.87,True,8,170,3052,186
+2023-12-01,PROD_A,Produto A,20.65,False,7,213,1919,236
+2023-12-02,PROD_A,Produto A,19.94,False,6,188,1976,207
+2023-12-03,PROD_A,Produto A,18.02,True,7,217,1875,246
+2023-12-04,PROD_A,Produto A,21.22,False,8,163,2627,188
+2023-12-05,PROD_A,Produto A,21.09,True,7,250,1972,264
+2023-12-06,PROD_A,Produto A,20.19,False,6,163,2143,187
+2023-12-07,PROD_A,Produto A,18.27,False,8,225,2569,235
+2023-12-08,PROD_A,Produto A,21.07,False,5,213,2375,240
+2023-12-09,PROD_A,Produto A,20.33,False,6,201,1903,227
+2023-12-10,PROD_A,Produto A,21.13,False,9,247,2955,252
+2023-12-11,PROD_A,Produto A,21.01,False,6,204,1718,225
+2023-12-12,PROD_A,Produto A,21.21,True,8,238,1816,257
+2023-12-13,PROD_A,Produto A,20.07,False,6,186,2101,197
+2023-12-14,PROD_A,Produto A,18.56,False,5,201,2497,234
+2023-12-15,PROD_A,Produto A,20.68,False,5,196,2869,209
+2023-12-16,PROD_A,Produto A,20.48,False,9,253,2234,270
+2023-12-17,PROD_A,Produto A,20.97,False,7,244,2237,269
+2023-12-18,PROD_A,Produto A,18.68,True,8,250,3008,281
+2023-12-19,PROD_A,Produto A,18.78,True,8,240,1987,262
+2023-12-20,PROD_A,Produto A,21.56,False,7,222,2189,255
+2023-12-21,PROD_A,Produto A,21.0,False,5,192,2209,216
+2023-12-22,PROD_A,Produto A,21.63,True,5,182,2718,178
+2023-12-23,PROD_A,Produto A,21.03,False,6,218,2685,234
+2023-12-24,PROD_A,Produto A,20.39,False,9,218,2041,234
+2023-12-25,PROD_A,Produto A,20.62,False,9,204,2455,229
+2023-12-26,PROD_A,Produto A,21.56,False,9,177,2824,168
+2023-12-27,PROD_A,Produto A,20.32,True,6,237,2164,286
+2023-12-28,PROD_A,Produto A,20.53,False,9,288,1690,322
+2023-12-29,PROD_A,Produto A,18.63,False,7,208,2748,230
+2023-12-30,PROD_A,Produto A,19.9,True,6,299,2843,340
+2023-12-31,PROD_A,Produto A,20.87,True,7,240,2744,287
+2024-01-01,PROD_A,Produto A,19.08,False,6,142,2387,164
+2024-01-02,PROD_A,Produto A,18.81,False,9,155,1926,179
+2024-01-03,PROD_A,Produto A,19.26,False,7,152,1996,168
+2024-01-04,PROD_A,Produto A,18.97,False,7,154,2274,167
+2024-01-05,PROD_A,Produto A,18.86,False,7,138,2297,147
+2024-01-06,PROD_A,Produto A,19.7,False,6,166,2018,174
+2024-01-07,PROD_A,Produto A,21.63,False,8,176,1840,186
+2024-01-08,PROD_A,Produto A,20.03,False,9,185,1801,189
+2024-01-09,PROD_A,Produto A,18.75,False,7,176,1926,192
+2024-01-10,PROD_A,Produto A,18.31,False,8,201,2141,204
+2024-01-11,PROD_A,Produto A,20.78,False,9,143,3039,159
+2024-01-12,PROD_A,Produto A,19.53,False,9,177,2633,194
+2024-01-13,PROD_A,Produto A,21.29,False,7,178,1623,197
+2024-01-14,PROD_A,Produto A,20.64,False,7,222,2482,238
+2024-01-15,PROD_A,Produto A,21.18,False,6,146,2467,191
+2024-01-16,PROD_A,Produto A,19.09,False,8,146,2423,174
+2024-01-17,PROD_A,Produto A,20.77,False,8,151,2924,153
+2024-01-18,PROD_A,Produto A,19.06,False,7,122,1834,136
+2024-01-19,PROD_A,Produto A,21.76,False,9,155,2591,164
+2024-01-20,PROD_A,Produto A,20.55,True,7,162,3063,168
+2024-01-21,PROD_A,Produto A,19.3,False,9,187,1720,192
+2024-01-22,PROD_A,Produto A,19.08,False,9,174,2582,195
+2024-01-23,PROD_A,Produto A,18.76,False,7,206,2192,219
+2024-01-24,PROD_A,Produto A,20.78,False,5,188,2952,216
+2024-01-25,PROD_A,Produto A,18.87,False,8,158,2277,183
+2024-01-26,PROD_A,Produto A,20.38,False,9,153,2558,182
+2024-01-27,PROD_A,Produto A,19.06,False,9,189,2706,199
+2024-01-28,PROD_A,Produto A,20.65,False,5,158,1845,178
+2024-01-29,PROD_A,Produto A,21.26,True,6,210,1724,237
+2024-01-30,PROD_A,Produto A,21.11,False,5,197,2391,211
+2024-01-31,PROD_A,Produto A,21.04,False,5,165,3068,173
+2024-02-01,PROD_A,Produto A,18.75,False,9,141,2898,171
+2024-02-02,PROD_A,Produto A,18.35,True,8,203,2048,225
+2024-02-03,PROD_A,Produto A,20.8,True,5,196,2053,221
+2024-02-04,PROD_A,Produto A,19.47,False,6,226,2850,240
+2024-02-05,PROD_A,Produto A,19.73,False,7,146,2671,148
+2024-02-06,PROD_A,Produto A,18.12,False,5,167,2301,178
+2024-02-07,PROD_A,Produto A,19.04,False,5,180,2979,196
+2024-02-08,PROD_A,Produto A,18.13,True,6,181,2207,188
+2024-02-09,PROD_A,Produto A,21.52,False,8,172,2712,189
+2024-02-10,PROD_A,Produto A,18.97,False,5,204,2485,207
+2024-02-11,PROD_A,Produto A,20.23,False,5,180,2365,186
+2024-02-12,PROD_A,Produto A,18.16,False,8,180,2810,204
+2024-02-13,PROD_A,Produto A,20.67,True,6,186,2483,210
+2024-02-14,PROD_A,Produto A,19.29,True,5,194,1987,209
+2024-02-15,PROD_A,Produto A,21.59,False,8,199,1870,208
+2024-02-16,PROD_A,Produto A,21.55,True,5,163,2478,169
+2024-02-17,PROD_A,Produto A,19.3,True,7,164,2475,176
+2024-02-18,PROD_A,Produto A,21.6,False,9,220,2813,248
+2024-02-19,PROD_A,Produto A,21.98,False,7,194,2733,222
+2024-02-20,PROD_A,Produto A,21.3,False,5,173,2180,185
+2024-02-21,PROD_A,Produto A,21.38,False,6,219,3089,229
+2024-02-22,PROD_A,Produto A,19.0,False,9,191,1913,212
+2024-02-23,PROD_A,Produto A,20.31,False,7,213,2538,226
+2024-02-24,PROD_A,Produto A,18.27,False,8,215,2793,231
+2024-02-25,PROD_A,Produto A,18.38,True,6,254,2775,292
+2024-02-26,PROD_A,Produto A,22.0,False,7,226,2052,256
+2024-02-27,PROD_A,Produto A,19.31,True,8,186,1678,206
+2024-02-28,PROD_A,Produto A,20.99,False,5,211,2588,219
+2024-02-29,PROD_A,Produto A,21.23,False,8,205,2455,227
+2024-03-01,PROD_A,Produto A,21.43,False,7,220,1818,252
+2024-03-02,PROD_A,Produto A,21.99,False,7,186,1834,200
+2024-03-03,PROD_A,Produto A,18.97,False,5,229,2517,265
+2024-03-04,PROD_A,Produto A,18.16,False,8,215,2091,249
+2024-03-05,PROD_A,Produto A,19.64,True,8,159,1866,191
+2024-03-06,PROD_A,Produto A,18.52,False,5,171,2001,191
+2024-03-07,PROD_A,Produto A,18.09,False,8,154,2610,175
+2024-03-08,PROD_A,Produto A,19.44,False,5,190,2882,223
+2024-03-09,PROD_A,Produto A,21.13,False,6,220,2546,246
+2024-03-10,PROD_A,Produto A,20.26,False,7,240,3010,258
+2024-03-11,PROD_A,Produto A,19.25,False,6,198,2811,213
+2024-03-12,PROD_A,Produto A,20.62,False,9,229,2179,254
+2024-03-13,PROD_A,Produto A,18.93,False,9,169,2694,172
+2024-03-14,PROD_A,Produto A,18.06,False,9,163,2308,177
+2024-03-15,PROD_A,Produto A,21.06,False,5,196,1999,226
+2024-03-16,PROD_A,Produto A,20.49,False,8,223,2093,223
+2024-03-17,PROD_A,Produto A,21.05,True,6,214,2723,250
+2024-03-18,PROD_A,Produto A,18.16,False,6,157,2316,183
+2024-03-19,PROD_A,Produto A,21.35,True,6,197,3010,212
+2024-03-20,PROD_A,Produto A,20.48,False,6,172,3104,194
+2024-03-21,PROD_A,Produto A,20.25,True,9,212,2530,233
+2024-03-22,PROD_A,Produto A,20.5,False,6,206,3095,238
+2024-03-23,PROD_A,Produto A,21.46,False,8,196,3107,225
+2024-03-24,PROD_A,Produto A,20.35,True,9,210,2579,216
+2024-03-25,PROD_A,Produto A,20.32,False,6,178,2097,201
+2024-03-26,PROD_A,Produto A,21.96,False,5,198,2623,215
+2024-03-27,PROD_A,Produto A,21.03,False,7,218,2545,240
+2024-03-28,PROD_A,Produto A,19.77,True,7,180,3063,190
+2024-03-29,PROD_A,Produto A,20.83,False,7,210,2326,248
+2024-03-30,PROD_A,Produto A,19.56,False,9,209,2857,240
+2024-03-31,PROD_A,Produto A,18.92,True,6,193,3012,204
+2024-04-01,PROD_A,Produto A,20.39,True,9,197,2473,203
+2024-04-02,PROD_A,Produto A,21.71,False,8,179,2757,193
+2024-04-03,PROD_A,Produto A,21.72,False,5,188,2636,211
+2024-04-04,PROD_A,Produto A,19.37,False,5,175,2373,194
+2024-04-05,PROD_A,Produto A,20.11,False,7,239,2122,275
+2024-04-06,PROD_A,Produto A,18.85,False,7,210,2436,238
+2024-04-07,PROD_A,Produto A,21.98,False,7,199,2207,228
+2024-04-08,PROD_A,Produto A,21.92,True,6,203,2954,226
+2024-04-09,PROD_A,Produto A,20.6,False,8,197,3112,202
+2024-04-10,PROD_A,Produto A,21.22,False,8,194,2327,211
+2024-04-11,PROD_A,Produto A,20.86,False,8,211,2687,242
+2024-04-12,PROD_A,Produto A,20.37,False,8,214,3058,234
+2024-04-13,PROD_A,Produto A,18.21,False,7,198,2889,222
+2024-04-14,PROD_A,Produto A,19.82,True,5,204,2727,221
+2024-04-15,PROD_A,Produto A,20.7,False,7,193,1826,202
+2024-04-16,PROD_A,Produto A,20.71,True,8,152,1770,165
+2024-04-17,PROD_A,Produto A,19.49,False,7,167,2287,186
+2024-04-18,PROD_A,Produto A,21.77,True,8,225,2147,240
+2024-04-19,PROD_A,Produto A,18.67,True,9,230,1784,250
+2024-04-20,PROD_A,Produto A,20.0,False,5,206,2536,217
+2024-04-21,PROD_A,Produto A,20.76,False,9,224,2788,257
+2024-04-22,PROD_A,Produto A,20.79,False,6,202,2629,219
+2024-04-23,PROD_A,Produto A,20.59,False,7,257,1656,297
+2024-04-24,PROD_A,Produto A,19.1,True,6,218,1952,255
+2024-04-25,PROD_A,Produto A,18.62,True,7,193,2022,211
+2024-04-26,PROD_A,Produto A,20.54,False,9,176,2033,183
+2024-04-27,PROD_A,Produto A,20.4,False,8,186,1664,183
+2024-04-28,PROD_A,Produto A,18.72,False,8,216,3045,222
+2024-04-29,PROD_A,Produto A,20.82,False,7,179,1825,183
+2024-04-30,PROD_A,Produto A,19.82,False,8,165,1681,195
+2024-05-01,PROD_A,Produto A,20.67,False,9,180,2039,199
+2024-05-02,PROD_A,Produto A,21.35,False,8,171,2487,191
+2024-05-03,PROD_A,Produto A,18.68,False,9,226,3111,226
+2024-05-04,PROD_A,Produto A,18.08,False,6,223,2439,233
+2024-05-05,PROD_A,Produto A,21.12,False,9,212,1638,242
+2024-05-06,PROD_A,Produto A,20.44,False,5,220,1984,244
+2024-05-07,PROD_A,Produto A,20.8,False,5,192,2943,209
+2024-05-08,PROD_A,Produto A,21.35,False,5,172,2650,194
+2024-05-09,PROD_A,Produto A,21.21,False,7,220,2047,258
+2024-05-10,PROD_A,Produto A,21.84,False,7,199,2760,216
+2024-05-11,PROD_A,Produto A,20.14,False,7,178,2199,196
+2024-05-12,PROD_A,Produto A,19.95,False,9,197,2165,218
+2024-05-13,PROD_A,Produto A,19.61,False,7,169,1944,209
+2024-05-14,PROD_A,Produto A,18.61,False,6,159,1674,153
+2024-05-15,PROD_A,Produto A,20.29,False,5,204,2397,231
+2024-05-16,PROD_A,Produto A,19.11,False,9,223,2611,244
+2024-05-17,PROD_A,Produto A,21.69,False,5,157,1661,178
+2024-05-18,PROD_A,Produto A,20.33,False,7,212,2940,226
+2024-05-19,PROD_A,Produto A,20.37,False,9,184,1850,201
+2024-05-20,PROD_A,Produto A,19.42,True,8,173,2072,197
+2024-05-21,PROD_A,Produto A,18.21,False,6,170,2013,218
+2024-05-22,PROD_A,Produto A,18.13,True,7,164,3001,188
+2024-05-23,PROD_A,Produto A,19.69,False,7,182,3087,191
+2024-05-24,PROD_A,Produto A,18.34,False,6,163,2771,175
+2024-05-25,PROD_A,Produto A,20.43,True,6,205,2310,220
+2024-05-26,PROD_A,Produto A,21.52,True,8,199,3048,200
+2024-05-27,PROD_A,Produto A,21.53,False,7,173,2011,186
+2024-05-28,PROD_A,Produto A,20.64,False,7,159,2836,182
+2024-05-29,PROD_A,Produto A,18.84,False,5,165,2223,168
+2024-05-30,PROD_A,Produto A,21.45,True,9,191,2500,220
+2024-05-31,PROD_A,Produto A,21.54,False,9,185,2721,208
+2024-06-01,PROD_A,Produto A,18.79,False,5,230,1704,245
+2024-06-02,PROD_A,Produto A,20.95,False,9,244,2673,266
+2024-06-03,PROD_A,Produto A,19.15,False,6,248,1668,288
+2024-06-04,PROD_A,Produto A,21.21,False,9,166,2788,189
+2024-06-05,PROD_A,Produto A,21.99,False,9,215,1688,236
+2024-06-06,PROD_A,Produto A,18.12,False,5,189,2701,205
+2024-06-07,PROD_A,Produto A,21.59,False,8,238,2316,262
+2024-06-08,PROD_A,Produto A,20.49,False,9,200,2098,214
+2024-06-09,PROD_A,Produto A,21.89,True,9,206,2439,205
+2024-06-10,PROD_A,Produto A,19.86,False,8,172,3088,209
+2024-06-11,PROD_A,Produto A,21.39,True,5,240,2939,265
+2024-06-12,PROD_A,Produto A,18.25,False,8,197,2814,220
+2024-06-13,PROD_A,Produto A,19.34,False,5,176,1766,193
+2024-06-14,PROD_A,Produto A,18.27,False,6,245,2949,262
+2024-06-15,PROD_A,Produto A,21.9,True,5,196,2635,213
+2024-06-16,PROD_A,Produto A,21.27,True,6,238,2228,245
+2024-06-17,PROD_A,Produto A,21.41,False,6,211,2065,254
+2024-06-18,PROD_A,Produto A,21.75,True,5,175,1840,180
+2024-06-19,PROD_A,Produto A,18.34,True,7,239,3021,252
+2024-06-20,PROD_A,Produto A,19.54,False,5,210,2909,226
+2024-06-21,PROD_A,Produto A,18.28,False,9,177,1714,207
+2024-06-22,PROD_A,Produto A,18.84,False,9,236,1881,259
+2024-06-23,PROD_A,Produto A,18.92,False,7,190,2516,196
+2024-06-24,PROD_A,Produto A,19.88,True,6,198,2714,230
+2024-06-25,PROD_A,Produto A,19.07,False,7,194,1838,220
+2024-06-26,PROD_A,Produto A,18.4,False,9,205,1711,230
+2024-06-27,PROD_A,Produto A,18.67,False,7,241,1746,272
+2024-06-28,PROD_A,Produto A,18.59,False,5,161,1699,201
+2024-06-29,PROD_A,Produto A,21.89,False,7,197,2881,238
+2024-06-30,PROD_A,Produto A,21.04,False,6,227,2602,242
+2024-07-01,PROD_A,Produto A,21.87,False,5,145,3015,175
+2024-07-02,PROD_A,Produto A,19.76,False,8,156,2535,175
+2024-07-03,PROD_A,Produto A,19.11,False,9,136,2105,154
+2024-07-04,PROD_A,Produto A,21.19,False,9,149,2313,146
+2024-07-05,PROD_A,Produto A,19.31,False,7,143,1644,155
+2024-07-06,PROD_A,Produto A,19.2,False,5,180,1775,189
+2024-07-07,PROD_A,Produto A,18.93,True,8,161,2251,185
+2024-07-08,PROD_A,Produto A,18.52,False,5,150,2700,175
+2024-07-09,PROD_A,Produto A,19.03,False,9,134,1638,126
+2024-07-10,PROD_A,Produto A,19.42,False,5,132,3027,144
+2024-07-11,PROD_A,Produto A,20.7,False,8,132,2836,156
+2024-07-12,PROD_A,Produto A,18.25,False,7,148,1856,160
+2024-07-13,PROD_A,Produto A,18.84,False,6,151,3030,173
+2024-07-14,PROD_A,Produto A,21.24,False,5,166,3069,186
+2024-07-15,PROD_A,Produto A,18.59,True,6,179,1896,200
+2024-07-16,PROD_A,Produto A,19.37,True,9,154,2870,166
+2024-07-17,PROD_A,Produto A,21.46,False,7,129,2364,129
+2024-07-18,PROD_A,Produto A,18.62,False,7,159,2171,163
+2024-07-19,PROD_A,Produto A,18.33,False,5,126,2966,145
+2024-07-20,PROD_A,Produto A,19.94,False,7,116,2796,127
+2024-07-21,PROD_A,Produto A,19.21,False,5,129,2258,140
+2024-07-22,PROD_A,Produto A,20.25,False,5,94,1856,99
+2024-07-23,PROD_A,Produto A,21.22,True,6,124,2617,133
+2024-07-24,PROD_A,Produto A,18.55,False,7,131,1674,154
+2024-07-25,PROD_A,Produto A,20.32,False,5,163,3079,175
+2024-07-26,PROD_A,Produto A,20.02,False,6,135,2303,135
+2024-07-27,PROD_A,Produto A,18.58,False,8,146,1728,168
+2024-07-28,PROD_A,Produto A,20.5,False,6,163,2827,177
+2024-07-29,PROD_A,Produto A,19.09,False,6,82,3011,90
+2024-07-30,PROD_A,Produto A,19.95,False,5,130,2841,159
+2024-07-31,PROD_A,Produto A,18.33,False,9,140,3014,153
+2024-08-01,PROD_A,Produto A,19.84,False,9,94,1992,106
+2024-08-02,PROD_A,Produto A,19.23,False,9,146,2592,148
+2024-08-03,PROD_A,Produto A,21.29,False,6,153,1820,166
+2024-08-04,PROD_A,Produto A,18.23,True,5,137,2468,156
+2024-08-05,PROD_A,Produto A,19.67,False,7,134,2128,131
+2024-08-06,PROD_A,Produto A,19.83,False,6,166,2965,184
+2024-08-07,PROD_A,Produto A,20.9,False,6,123,1894,136
+2024-08-08,PROD_A,Produto A,20.3,False,5,124,1830,136
+2024-08-09,PROD_A,Produto A,20.67,False,8,109,2123,130
+2024-08-10,PROD_A,Produto A,21.11,False,6,120,2761,135
+2024-08-11,PROD_A,Produto A,21.45,False,8,149,2322,178
+2024-08-12,PROD_A,Produto A,19.26,False,8,99,1661,98
+2024-08-13,PROD_A,Produto A,20.15,True,9,117,1934,130
+2024-08-14,PROD_A,Produto A,21.36,False,5,106,2407,117
+2024-08-15,PROD_A,Produto A,21.96,True,8,124,1948,125
+2024-08-16,PROD_A,Produto A,21.56,False,5,121,2660,142
+2024-08-17,PROD_A,Produto A,19.49,False,9,144,1902,181
+2024-08-18,PROD_A,Produto A,18.78,False,5,126,2562,138
+2024-08-19,PROD_A,Produto A,19.96,False,6,107,1877,122
+2024-08-20,PROD_A,Produto A,20.97,True,8,92,2194,102
+2024-08-21,PROD_A,Produto A,19.97,False,5,102,2193,105
+2024-08-22,PROD_A,Produto A,19.93,False,7,118,2231,111
+2024-08-23,PROD_A,Produto A,21.35,False,5,125,2662,130
+2024-08-24,PROD_A,Produto A,19.45,False,8,111,2456,108
+2024-08-25,PROD_A,Produto A,21.44,False,9,141,2042,172
+2024-08-26,PROD_A,Produto A,19.63,False,9,136,3109,148
+2024-08-27,PROD_A,Produto A,19.31,False,8,116,3016,124
+2024-08-28,PROD_A,Produto A,19.82,False,6,145,2377,168
+2024-08-29,PROD_A,Produto A,21.05,False,6,92,2382,89
+2024-08-30,PROD_A,Produto A,18.5,False,9,82,2724,82
+2024-08-31,PROD_A,Produto A,18.79,False,9,83,2043,91
+2024-09-01,PROD_A,Produto A,21.81,False,8,151,2048,176
+2024-09-02,PROD_A,Produto A,18.7,False,6,118,3031,134
+2024-09-03,PROD_A,Produto A,20.27,False,9,104,1823,116
+2024-09-04,PROD_A,Produto A,20.32,False,6,110,1815,121
+2024-09-05,PROD_A,Produto A,19.96,False,9,82,2347,94
+2024-09-06,PROD_A,Produto A,20.58,False,5,153,1904,170
+2024-09-07,PROD_A,Produto A,18.92,False,7,125,1815,127
+2024-09-08,PROD_A,Produto A,20.21,False,5,113,1926,124
+2024-09-09,PROD_A,Produto A,19.49,False,9,117,1633,117
+2024-09-10,PROD_A,Produto A,20.65,False,7,112,2789,124
+2024-09-11,PROD_A,Produto A,18.56,True,7,107,2700,112
+2024-09-12,PROD_A,Produto A,20.28,False,9,86,2342,119
+2024-09-13,PROD_A,Produto A,18.74,False,9,111,2399,121
+2024-09-14,PROD_A,Produto A,19.11,False,6,152,2853,153
+2024-09-15,PROD_A,Produto A,18.87,False,9,143,2148,155
+2024-09-16,PROD_A,Produto A,18.73,True,8,133,2417,151
+2024-09-17,PROD_A,Produto A,21.3,False,9,91,1963,116
+2024-09-18,PROD_A,Produto A,19.14,False,8,81,2922,83
+2024-09-19,PROD_A,Produto A,21.71,False,9,98,1828,91
+2024-09-20,PROD_A,Produto A,21.88,False,6,101,2260,119
+2024-09-21,PROD_A,Produto A,20.29,False,8,136,2978,135
+2024-09-22,PROD_A,Produto A,18.57,True,5,74,2931,77
+2024-09-23,PROD_A,Produto A,19.5,False,8,130,1871,140
+2024-09-24,PROD_A,Produto A,21.19,False,6,97,2908,106
+2024-09-25,PROD_A,Produto A,19.47,False,8,91,1890,106
+2024-09-26,PROD_A,Produto A,18.35,False,9,79,2539,80
+2024-09-27,PROD_A,Produto A,20.23,True,9,66,2038,69
+2024-09-28,PROD_A,Produto A,21.38,False,6,139,2414,152
+2024-09-29,PROD_A,Produto A,21.18,False,7,120,2854,133
+2024-09-30,PROD_A,Produto A,18.7,False,9,74,3008,82
+2024-10-01,PROD_A,Produto A,20.69,False,5,74,2719,85
+2024-10-02,PROD_A,Produto A,18.88,False,6,93,2964,110
+2024-10-03,PROD_A,Produto A,18.87,False,8,133,2344,150
+2024-10-04,PROD_A,Produto A,21.5,True,8,94,2052,107
+2024-10-05,PROD_A,Produto A,19.0,False,5,83,1728,75
+2024-10-06,PROD_A,Produto A,19.05,False,9,104,2260,114
+2024-10-07,PROD_A,Produto A,18.0,False,6,94,2690,108
+2024-10-08,PROD_A,Produto A,21.48,False,5,46,1998,57
+2024-10-09,PROD_A,Produto A,21.17,True,9,99,2739,101
+2024-10-10,PROD_A,Produto A,20.51,False,6,96,2577,99
+2024-10-11,PROD_A,Produto A,21.0,False,8,114,1722,119
+2024-10-12,PROD_A,Produto A,18.61,False,6,159,2511,180
+2024-10-13,PROD_A,Produto A,19.83,True,7,134,2473,157
+2024-10-14,PROD_A,Produto A,19.4,False,6,96,2789,101
+2024-10-15,PROD_A,Produto A,18.38,False,7,79,2670,95
+2024-10-16,PROD_A,Produto A,19.94,False,6,153,2149,169
+2024-10-17,PROD_A,Produto A,21.68,False,7,103,2298,112
+2024-10-18,PROD_A,Produto A,18.16,False,8,102,2608,110
+2024-10-19,PROD_A,Produto A,19.17,False,9,110,2725,128
+2024-10-20,PROD_A,Produto A,18.83,True,7,126,2047,141
+2024-10-21,PROD_A,Produto A,18.95,False,7,100,2441,132
+2024-10-22,PROD_A,Produto A,21.63,True,8,92,2805,92
+2024-10-23,PROD_A,Produto A,19.87,False,7,92,2551,106
+2024-10-24,PROD_A,Produto A,19.87,False,5,103,3045,108
+2024-10-25,PROD_A,Produto A,21.04,True,8,93,2681,93
+2024-10-26,PROD_A,Produto A,18.62,False,5,99,2130,108
+2024-10-27,PROD_A,Produto A,19.95,True,8,123,2012,136
+2024-10-28,PROD_A,Produto A,19.72,False,7,100,2332,139
+2024-10-29,PROD_A,Produto A,20.39,False,5,136,2113,147
+2024-10-30,PROD_A,Produto A,22.0,True,7,53,2843,50
+2024-10-31,PROD_A,Produto A,21.08,False,8,128,2898,143
+2024-11-01,PROD_A,Produto A,19.59,False,7,177,2822,173
+2024-11-02,PROD_A,Produto A,21.31,False,5,108,2166,117
+2024-11-03,PROD_A,Produto A,18.68,True,5,144,2213,158
+2024-11-04,PROD_A,Produto A,18.12,False,7,128,2008,148
+2024-11-05,PROD_A,Produto A,18.82,False,6,157,3041,182
+2024-11-06,PROD_A,Produto A,19.36,False,8,141,1777,150
+2024-11-07,PROD_A,Produto A,20.04,True,8,138,2647,150
+2024-11-08,PROD_A,Produto A,20.46,True,7,173,1786,182
+2024-11-09,PROD_A,Produto A,21.64,False,6,185,3111,192
+2024-11-10,PROD_A,Produto A,20.04,False,5,214,2579,238
+2024-11-11,PROD_A,Produto A,20.01,False,9,165,2028,168
+2024-11-12,PROD_A,Produto A,18.2,False,9,136,3055,145
+2024-11-13,PROD_A,Produto A,18.14,False,7,164,2847,170
+2024-11-14,PROD_A,Produto A,20.2,False,6,199,1813,224
+2024-11-15,PROD_A,Produto A,19.75,False,6,156,1854,189
+2024-11-16,PROD_A,Produto A,21.36,False,8,187,2337,192
+2024-11-17,PROD_A,Produto A,18.64,False,5,201,2793,202
+2024-11-18,PROD_A,Produto A,18.1,False,6,171,2802,186
+2024-11-19,PROD_A,Produto A,19.8,False,9,173,2922,190
+2024-11-20,PROD_A,Produto A,18.95,False,5,195,2435,216
+2024-11-21,PROD_A,Produto A,18.2,False,5,170,2023,182
+2024-11-22,PROD_A,Produto A,20.9,False,7,196,2512,213
+2024-11-23,PROD_A,Produto A,18.45,False,6,163,2297,182
+2024-11-24,PROD_A,Produto A,20.43,False,7,208,2954,239
+2024-11-25,PROD_A,Produto A,19.12,True,6,163,1687,159
+2024-11-26,PROD_A,Produto A,18.69,False,8,142,3106,152
+2024-11-27,PROD_A,Produto A,19.52,False,7,169,1707,188
+2024-11-28,PROD_A,Produto A,21.21,False,7,129,1836,132
+2024-11-29,PROD_A,Produto A,19.57,False,9,218,1620,257
+2024-11-30,PROD_A,Produto A,21.0,False,7,175,2778,186
+2024-12-01,PROD_A,Produto A,18.5,True,6,179,2994,196
+2024-12-02,PROD_A,Produto A,21.09,False,9,252,1759,282
+2024-12-03,PROD_A,Produto A,18.95,False,7,154,2237,163
+2024-12-04,PROD_A,Produto A,20.71,False,7,173,1752,171
+2024-12-05,PROD_A,Produto A,20.26,False,8,214,1797,231
+2024-12-06,PROD_A,Produto A,21.72,False,7,200,2429,230
+2024-12-07,PROD_A,Produto A,19.55,False,5,162,3001,174
+2024-12-08,PROD_A,Produto A,18.26,False,9,238,1999,253
+2024-12-09,PROD_A,Produto A,18.08,True,5,165,2527,190
+2024-12-10,PROD_A,Produto A,21.31,False,9,219,2277,237
+2024-12-11,PROD_A,Produto A,20.1,False,8,241,2069,259
+2024-12-12,PROD_A,Produto A,21.1,False,7,251,2205,277
+2024-12-13,PROD_A,Produto A,18.94,False,7,217,2082,246
+2024-12-14,PROD_A,Produto A,19.38,True,7,245,2609,293
+2024-12-15,PROD_A,Produto A,18.12,False,9,229,2751,260
+2024-12-16,PROD_A,Produto A,21.85,True,7,223,1741,256
+2024-12-17,PROD_A,Produto A,20.67,False,5,192,1636,206
+2024-12-18,PROD_A,Produto A,21.73,False,7,189,2839,197
+2024-12-19,PROD_A,Produto A,19.06,True,8,193,1946,212
+2024-12-20,PROD_A,Produto A,20.45,False,5,247,1937,272
+2024-12-21,PROD_A,Produto A,20.71,True,7,234,2428,246
+2024-12-22,PROD_A,Produto A,19.27,False,7,235,2895,256
+2024-12-23,PROD_A,Produto A,21.39,False,6,215,2122,240
+2024-12-24,PROD_A,Produto A,21.79,True,9,210,1738,234
+2024-12-25,PROD_A,Produto A,21.54,False,5,219,2329,245
+2024-12-26,PROD_A,Produto A,20.96,True,6,194,1664,216
+2024-12-27,PROD_A,Produto A,19.11,False,8,217,1933,233
+2024-12-28,PROD_A,Produto A,19.13,False,9,284,2822,307
+2024-12-29,PROD_A,Produto A,21.85,False,5,227,2037,237
+2024-12-30,PROD_A,Produto A,18.04,True,7,175,2175,210
+2024-12-31,PROD_A,Produto A,20.86,False,5,253,2721,278
+2025-01-01,PROD_A,Produto A,20.82,False,7,131,1945,141
+2025-01-02,PROD_A,Produto A,20.49,False,9,160,3000,166
+2025-01-03,PROD_A,Produto A,21.96,False,7,119,3059,160
+2025-01-04,PROD_A,Produto A,19.25,False,8,186,2134,193
+2025-01-05,PROD_A,Produto A,19.36,False,7,173,1833,186
+2025-01-06,PROD_A,Produto A,18.32,False,8,160,1693,180
+2025-01-07,PROD_A,Produto A,19.77,False,9,176,2128,199
+2025-01-08,PROD_A,Produto A,19.04,False,9,190,1951,218
+2025-01-09,PROD_A,Produto A,19.37,False,5,178,2736,213
+2025-01-10,PROD_A,Produto A,21.34,True,8,122,2307,139
+2025-01-11,PROD_A,Produto A,21.74,False,8,151,2276,155
+2025-01-12,PROD_A,Produto A,18.74,False,6,157,2912,170
+2025-01-13,PROD_A,Produto A,19.49,False,6,162,3019,181
+2025-01-14,PROD_A,Produto A,21.71,False,6,172,2647,209
+2025-01-15,PROD_A,Produto A,18.25,False,7,148,2781,148
+2025-01-16,PROD_A,Produto A,18.37,True,6,167,2874,195
+2025-01-17,PROD_A,Produto A,18.65,True,8,149,2219,165
+2025-01-18,PROD_A,Produto A,20.38,False,7,171,2695,196
+2025-01-19,PROD_A,Produto A,18.6,False,9,160,1944,174
+2025-01-20,PROD_A,Produto A,21.87,False,5,148,2611,154
+2025-01-21,PROD_A,Produto A,19.79,False,6,141,2336,162
+2025-01-22,PROD_A,Produto A,20.01,False,9,149,2342,170
+2025-01-23,PROD_A,Produto A,18.99,False,8,190,1896,218
+2025-01-24,PROD_A,Produto A,19.88,False,5,151,2155,165
+2025-01-25,PROD_A,Produto A,20.65,True,9,240,1771,258
+2025-01-26,PROD_A,Produto A,21.0,False,5,198,2574,202
+2025-01-27,PROD_A,Produto A,21.02,False,6,176,1878,201
+2025-01-28,PROD_A,Produto A,20.31,True,8,156,1943,175
+2025-01-29,PROD_A,Produto A,21.62,False,5,188,2636,197
+2025-01-30,PROD_A,Produto A,21.27,False,9,163,2488,173
+2025-01-31,PROD_A,Produto A,21.03,False,6,178,2811,191
+2025-02-01,PROD_A,Produto A,18.22,False,6,237,2307,245
+2025-02-02,PROD_A,Produto A,18.03,False,9,191,1929,201
+2025-02-03,PROD_A,Produto A,18.85,False,9,201,2422,209
+2025-02-04,PROD_A,Produto A,20.65,False,5,164,2699,176
+2025-02-05,PROD_A,Produto A,19.64,False,7,178,2239,188
+2025-02-06,PROD_A,Produto A,19.61,True,6,215,2092,220
+2025-02-07,PROD_A,Produto A,21.54,False,5,168,2939,205
+2025-02-08,PROD_A,Produto A,21.58,False,9,238,2080,274
+2025-02-09,PROD_A,Produto A,21.64,False,5,210,2967,223
+2025-02-10,PROD_A,Produto A,19.26,False,9,171,2433,190
+2025-02-11,PROD_A,Produto A,20.76,False,8,196,2465,219
+2025-02-12,PROD_A,Produto A,19.09,False,9,203,2784,235
+2025-02-13,PROD_A,Produto A,18.76,False,9,197,2286,208
+2025-02-14,PROD_A,Produto A,18.74,False,9,154,1881,180
+2025-02-15,PROD_A,Produto A,19.37,False,7,194,3063,207
+2025-02-16,PROD_A,Produto A,19.72,False,9,204,2884,211
+2025-02-17,PROD_A,Produto A,21.32,False,6,185,1974,210
+2025-02-18,PROD_A,Produto A,18.48,False,6,200,2389,232
+2025-02-19,PROD_A,Produto A,20.94,True,5,191,1799,235
+2025-02-20,PROD_A,Produto A,20.13,False,7,162,1685,166
+2025-02-21,PROD_A,Produto A,19.15,False,5,197,2439,223
+2025-02-22,PROD_A,Produto A,19.97,False,6,210,2991,226
+2025-02-23,PROD_A,Produto A,19.2,False,6,212,1790,241
+2025-02-24,PROD_A,Produto A,20.38,False,8,212,2093,218
+2025-02-25,PROD_A,Produto A,19.74,False,9,208,2153,216
+2025-02-26,PROD_A,Produto A,18.66,True,6,201,3010,213
+2025-02-27,PROD_A,Produto A,18.47,False,5,190,2750,209
+2025-02-28,PROD_A,Produto A,20.19,False,5,159,2058,168
+2025-03-01,PROD_A,Produto A,21.61,False,9,212,2454,239
+2025-03-02,PROD_A,Produto A,19.38,True,9,211,1846,242
+2025-03-03,PROD_A,Produto A,20.93,True,8,199,3087,224
+2025-03-04,PROD_A,Produto A,20.63,False,7,168,2061,200
+2025-03-05,PROD_A,Produto A,21.73,False,5,173,2015,194
+2025-03-06,PROD_A,Produto A,21.28,False,9,216,2347,225
+2025-03-07,PROD_A,Produto A,20.27,True,5,194,1703,227
+2025-03-08,PROD_A,Produto A,20.63,False,9,224,2656,240
+2025-03-09,PROD_A,Produto A,21.59,False,6,220,2312,251
+2025-03-10,PROD_A,Produto A,19.6,True,5,197,2112,232
+2025-03-11,PROD_A,Produto A,19.31,True,6,215,2911,241
+2025-03-12,PROD_A,Produto A,18.04,False,5,186,2763,189
+2025-03-13,PROD_A,Produto A,21.31,False,7,199,2589,209
+2025-03-14,PROD_A,Produto A,21.2,False,8,188,1972,220
+2025-03-15,PROD_A,Produto A,18.42,False,6,201,2700,219
+2025-03-16,PROD_A,Produto A,20.31,False,9,206,1659,227
+2025-03-17,PROD_A,Produto A,19.86,True,7,202,2979,229
+2025-03-18,PROD_A,Produto A,18.47,False,5,189,2259,214
+2025-03-19,PROD_A,Produto A,21.92,False,6,223,1792,248
+2025-03-20,PROD_A,Produto A,18.86,False,5,181,1878,197
+2025-03-21,PROD_A,Produto A,18.27,False,5,195,2136,211
+2025-03-22,PROD_A,Produto A,20.38,False,5,201,2349,229
+2025-03-23,PROD_A,Produto A,20.96,False,8,241,2142,270
+2025-03-24,PROD_A,Produto A,18.13,False,8,203,2458,220
+2025-03-25,PROD_A,Produto A,20.63,False,9,220,1736,252
+2025-03-26,PROD_A,Produto A,20.13,False,6,170,1803,185
+2025-03-27,PROD_A,Produto A,18.41,True,7,205,2759,216
+2025-03-28,PROD_A,Produto A,18.69,True,7,217,1781,231
+2025-03-29,PROD_A,Produto A,20.27,False,7,215,2162,226
+2025-03-30,PROD_A,Produto A,19.19,False,5,233,2880,253
+2025-03-31,PROD_A,Produto A,21.75,True,8,189,2458,220
+2025-04-01,PROD_A,Produto A,21.27,False,6,228,2709,242
+2025-04-02,PROD_A,Produto A,21.93,True,5,245,2713,271
+2025-04-03,PROD_A,Produto A,19.04,False,8,192,2066,204
+2025-04-04,PROD_A,Produto A,21.88,False,8,190,2035,206
+2025-04-05,PROD_A,Produto A,19.72,False,6,238,2151,246
+2025-04-06,PROD_A,Produto A,19.39,False,6,245,2060,267
+2025-04-07,PROD_A,Produto A,18.2,False,6,189,2357,205
+2025-04-08,PROD_A,Produto A,18.21,True,5,191,2083,215
+2025-04-09,PROD_A,Produto A,20.77,False,9,193,2015,214
+2025-04-10,PROD_A,Produto A,19.83,False,6,172,2330,177
+2025-04-11,PROD_A,Produto A,18.91,False,9,180,2014,208
+2025-04-12,PROD_A,Produto A,20.46,False,5,199,1945,221
+2025-04-13,PROD_A,Produto A,19.01,True,9,197,2734,218
+2025-04-14,PROD_A,Produto A,20.31,False,7,197,2369,216
+2025-04-15,PROD_A,Produto A,19.44,False,9,203,2713,218
+2025-04-16,PROD_A,Produto A,21.29,False,6,229,2809,254
+2025-04-17,PROD_A,Produto A,21.28,False,5,178,2261,200
+2025-04-18,PROD_A,Produto A,19.91,False,6,217,1833,221
+2025-04-19,PROD_A,Produto A,19.4,False,7,205,2978,220
+2025-04-20,PROD_A,Produto A,19.45,True,6,208,1988,226
+2025-04-21,PROD_A,Produto A,21.22,False,6,210,1668,233
+2025-04-22,PROD_A,Produto A,19.31,False,6,174,2695,203
+2025-04-23,PROD_A,Produto A,18.84,False,8,203,2932,215
+2025-04-24,PROD_A,Produto A,18.34,False,7,199,2882,213
+2025-04-25,PROD_A,Produto A,19.87,False,6,205,1752,220
+2025-04-26,PROD_A,Produto A,19.93,True,6,210,2618,222
+2025-04-27,PROD_A,Produto A,21.36,False,6,256,2405,278
+2025-04-28,PROD_A,Produto A,18.88,False,5,181,2809,206
+2025-04-29,PROD_A,Produto A,19.52,False,8,183,3017,190
+2025-04-30,PROD_A,Produto A,21.23,False,5,181,1992,203
+2025-05-01,PROD_A,Produto A,21.29,False,8,182,2098,183
+2025-05-02,PROD_A,Produto A,19.54,False,6,180,2451,192
+2025-05-03,PROD_A,Produto A,19.84,True,7,238,2269,258
+2025-05-04,PROD_A,Produto A,19.21,False,9,237,2301,277
+2025-05-05,PROD_A,Produto A,21.73,False,9,180,2307,195
+2025-05-06,PROD_A,Produto A,18.47,True,6,174,2943,169
+2025-05-07,PROD_A,Produto A,21.73,True,5,199,1701,198
+2025-05-08,PROD_A,Produto A,20.74,False,7,178,1706,196
+2025-05-09,PROD_A,Produto A,20.13,False,8,202,1844,228
+2025-05-10,PROD_A,Produto A,18.13,False,6,206,1635,230
+2025-05-11,PROD_A,Produto A,19.9,True,7,169,2441,187
+2025-05-12,PROD_A,Produto A,19.63,False,7,218,3001,251
+2025-05-13,PROD_A,Produto A,18.64,False,8,223,1782,239
+2025-05-14,PROD_A,Produto A,20.63,False,7,174,2133,200
+2025-05-15,PROD_A,Produto A,21.88,False,5,178,1969,179
+2025-05-16,PROD_A,Produto A,20.25,False,5,191,2300,201
+2025-05-17,PROD_A,Produto A,20.86,False,5,199,3107,200
+2025-05-18,PROD_A,Produto A,18.27,False,7,217,3018,235
+2025-05-19,PROD_A,Produto A,19.67,False,5,223,2735,244
+2025-05-20,PROD_A,Produto A,18.47,False,8,179,1800,198
+2025-05-21,PROD_A,Produto A,20.45,False,7,166,2362,183
+2025-05-22,PROD_A,Produto A,21.75,False,9,153,2944,159
+2025-05-23,PROD_A,Produto A,20.65,True,7,166,2279,180
+2025-05-24,PROD_A,Produto A,18.31,True,8,199,2832,203
+2025-05-25,PROD_A,Produto A,19.42,True,9,227,2957,263
+2025-05-26,PROD_A,Produto A,20.2,False,7,168,2112,181
+2025-05-27,PROD_A,Produto A,19.61,False,5,182,2542,195
+2025-05-28,PROD_A,Produto A,21.33,True,6,177,1747,210
+2025-05-29,PROD_A,Produto A,21.26,False,6,200,3069,207
+2025-05-30,PROD_A,Produto A,20.45,False,5,226,2184,237
+2025-05-31,PROD_A,Produto A,19.49,False,6,184,2830,191
+2025-06-01,PROD_A,Produto A,19.02,False,6,231,2169,253
+2025-06-02,PROD_A,Produto A,18.42,False,5,235,2072,262
+2025-06-03,PROD_A,Produto A,19.42,True,5,245,2090,276
+2025-06-04,PROD_A,Produto A,19.65,False,7,282,2607,335
+2025-06-05,PROD_A,Produto A,20.7,False,7,218,2357,217
+2025-06-06,PROD_A,Produto A,20.63,False,5,208,1843,234
+2025-06-07,PROD_A,Produto A,18.28,False,8,268,1773,289
+2025-06-08,PROD_A,Produto A,19.58,False,6,272,2179,293
+2025-06-09,PROD_A,Produto A,18.73,True,7,226,1970,242
+2025-06-10,PROD_A,Produto A,18.63,True,6,241,2790,256
+2025-06-11,PROD_A,Produto A,21.31,False,9,246,1968,287
+2025-06-12,PROD_A,Produto A,18.17,False,5,254,1801,287
+2025-06-13,PROD_A,Produto A,19.68,True,8,245,2256,269
+2025-06-14,PROD_A,Produto A,18.67,False,9,266,2637,306
+2025-06-15,PROD_A,Produto A,21.52,False,9,242,1798,251
+2025-06-16,PROD_A,Produto A,20.23,False,9,202,2682,208
+2025-06-17,PROD_A,Produto A,18.93,False,5,258,2391,262
+2025-06-18,PROD_A,Produto A,20.01,False,7,209,2513,222
+2025-06-19,PROD_A,Produto A,20.93,False,5,208,2646,230
+2025-06-20,PROD_A,Produto A,21.83,True,7,184,2635,203
+2025-06-21,PROD_A,Produto A,18.88,False,9,231,1683,255
+2025-06-22,PROD_A,Produto A,21.54,False,9,232,1648,241
+2025-06-23,PROD_A,Produto A,21.74,False,8,213,1991,242
+2025-06-24,PROD_A,Produto A,21.67,False,7,213,1716,236
+2025-06-25,PROD_A,Produto A,20.54,False,9,161,3085,184
+2025-06-26,PROD_A,Produto A,20.52,False,6,242,2846,247
+2025-06-27,PROD_A,Produto A,19.61,False,8,230,3054,256
+2025-06-28,PROD_A,Produto A,21.01,False,5,258,2612,271
+2025-06-29,PROD_A,Produto A,20.13,True,8,233,1640,252
+2025-06-30,PROD_A,Produto A,20.71,False,6,186,2354,209
+2025-07-01,PROD_A,Produto A,19.71,False,7,154,2745,170
+2025-07-02,PROD_A,Produto A,20.93,True,5,180,2689,189
+2025-07-03,PROD_A,Produto A,21.3,False,5,146,1685,160
+2025-07-04,PROD_A,Produto A,18.59,False,7,152,2222,151
+2025-07-05,PROD_A,Produto A,21.33,False,8,173,2807,201
+2025-07-06,PROD_A,Produto A,20.16,False,9,173,2754,188
+2025-07-07,PROD_A,Produto A,21.38,False,8,135,1957,159
+2025-07-08,PROD_A,Produto A,19.73,False,6,147,1742,156
+2025-07-09,PROD_A,Produto A,19.52,False,9,164,2066,175
+2025-07-10,PROD_A,Produto A,21.66,True,8,121,2230,125
+2025-07-11,PROD_A,Produto A,19.0,False,7,143,2934,166
+2025-07-12,PROD_A,Produto A,21.38,False,6,148,2290,155
+2025-07-13,PROD_A,Produto A,19.94,False,6,187,3055,212
+2025-07-14,PROD_A,Produto A,20.06,False,6,108,2234,114
+2025-07-15,PROD_A,Produto A,19.23,False,9,126,2516,118
+2025-07-16,PROD_A,Produto A,20.29,True,5,144,1900,152
+2025-07-17,PROD_A,Produto A,19.3,False,9,167,2686,171
+2025-07-18,PROD_A,Produto A,18.16,False,8,133,2215,146
+2025-07-19,PROD_A,Produto A,19.09,False,5,143,2322,145
+2025-07-20,PROD_A,Produto A,18.03,True,8,183,2694,210
+2025-07-21,PROD_A,Produto A,21.91,True,5,103,1829,112
+2025-07-22,PROD_A,Produto A,21.86,False,9,88,1745,95
+2025-07-23,PROD_A,Produto A,19.58,False,6,140,2111,160
+2025-07-24,PROD_A,Produto A,20.91,False,7,120,2579,141
+2025-07-25,PROD_A,Produto A,19.38,False,6,109,2589,119
+2025-07-26,PROD_A,Produto A,20.68,False,9,162,2200,170
+2025-07-27,PROD_A,Produto A,21.22,False,5,140,2396,136
+2025-07-28,PROD_A,Produto A,21.79,False,6,116,1877,120
+2025-07-29,PROD_A,Produto A,19.6,False,9,100,2831,103
+2025-07-30,PROD_A,Produto A,21.13,True,8,143,1849,158
+2025-07-31,PROD_A,Produto A,19.06,False,7,138,1808,148
+2025-08-01,PROD_A,Produto A,21.96,True,6,122,3058,141
+2025-08-02,PROD_A,Produto A,18.1,False,5,172,1629,183
+2025-08-03,PROD_A,Produto A,20.41,False,8,116,2757,127
+2025-08-04,PROD_A,Produto A,20.64,True,9,91,2719,111
+2025-08-05,PROD_A,Produto A,20.75,False,7,107,2295,121
+2025-08-06,PROD_A,Produto A,18.48,False,5,119,2121,130
+2025-08-07,PROD_A,Produto A,21.75,False,9,124,1704,130
+2025-08-08,PROD_A,Produto A,18.72,False,9,114,1668,119
+2025-08-09,PROD_A,Produto A,20.49,True,6,145,2457,150
+2025-08-10,PROD_A,Produto A,18.89,False,6,107,2627,112
+2025-08-11,PROD_A,Produto A,19.23,False,5,146,2308,168
+2025-08-12,PROD_A,Produto A,20.19,False,9,115,2006,124
+2025-08-13,PROD_A,Produto A,19.67,False,6,138,2589,138
+2025-08-14,PROD_A,Produto A,18.64,False,7,122,3032,151
+2025-08-15,PROD_A,Produto A,18.68,False,7,123,2625,138
+2025-08-16,PROD_A,Produto A,19.67,False,9,143,1837,143
+2025-08-17,PROD_A,Produto A,21.03,False,6,130,2624,138
+2025-08-18,PROD_A,Produto A,21.59,False,5,125,2989,138
+2025-08-19,PROD_A,Produto A,18.34,False,5,139,2873,169
+2025-08-20,PROD_A,Produto A,19.57,False,5,115,1874,115
+2025-08-21,PROD_A,Produto A,18.4,False,7,125,1855,147
+2025-08-22,PROD_A,Produto A,18.07,False,6,108,2669,132
+2025-08-23,PROD_A,Produto A,20.65,False,6,159,2904,168
+2025-08-24,PROD_A,Produto A,20.41,True,7,106,1890,113
+2025-08-25,PROD_A,Produto A,18.65,False,5,145,1742,149
+2025-08-26,PROD_A,Produto A,18.94,True,5,107,2275,115
+2025-08-27,PROD_A,Produto A,18.09,False,9,79,2900,86
+2025-08-28,PROD_A,Produto A,21.34,False,8,110,3064,127
+2025-08-29,PROD_A,Produto A,21.9,True,6,93,1878,113
+2025-08-30,PROD_A,Produto A,18.54,True,6,147,2567,154
+2025-08-31,PROD_A,Produto A,18.93,True,6,105,1666,95
+2025-09-01,PROD_A,Produto A,21.47,False,8,97,2482,106
+2025-09-02,PROD_A,Produto A,21.71,False,9,67,2144,76
+2025-09-03,PROD_A,Produto A,19.68,False,8,96,2507,108
+2025-09-04,PROD_A,Produto A,18.2,False,5,56,1827,58
+2025-09-05,PROD_A,Produto A,18.16,False,5,72,2954,80
+2025-09-06,PROD_A,Produto A,20.3,False,6,134,2366,162
+2025-09-07,PROD_A,Produto A,19.57,False,7,140,1768,157
+2025-09-08,PROD_A,Produto A,18.11,False,6,112,2057,119
+2025-09-09,PROD_A,Produto A,20.33,False,7,83,1774,86
+2025-09-10,PROD_A,Produto A,18.05,False,8,101,2733,109
+2025-09-11,PROD_A,Produto A,21.15,False,5,102,1977,128
+2025-09-12,PROD_A,Produto A,19.23,False,7,79,2817,85
+2025-09-13,PROD_A,Produto A,18.16,False,8,143,2860,157
+2025-09-14,PROD_A,Produto A,20.35,False,5,137,2075,145
+2025-09-15,PROD_A,Produto A,19.59,False,7,97,2395,117
+2025-09-16,PROD_A,Produto A,21.9,False,6,101,2248,130
+2025-09-17,PROD_A,Produto A,20.18,False,6,105,2842,120
+2025-09-18,PROD_A,Produto A,19.1,False,6,60,2451,66
+2025-09-19,PROD_A,Produto A,20.84,False,8,95,2105,104
+2025-09-20,PROD_A,Produto A,19.09,True,6,109,2152,96
+2025-09-21,PROD_A,Produto A,21.62,False,9,94,1819,110
+2025-09-22,PROD_A,Produto A,19.5,False,5,94,1990,104
+2025-09-23,PROD_A,Produto A,20.2,False,8,136,2633,153
+2025-09-24,PROD_A,Produto A,18.2,True,6,113,2472,117
+2025-09-25,PROD_A,Produto A,19.7,True,5,88,3091,92
+2025-09-26,PROD_A,Produto A,21.33,False,7,111,1867,117
+2025-09-27,PROD_A,Produto A,21.22,False,6,146,2407,170
+2025-09-28,PROD_A,Produto A,18.9,False,5,130,1883,139
+2025-09-29,PROD_A,Produto A,18.9,False,9,101,2701,131
+2025-09-30,PROD_A,Produto A,21.27,False,7,87,2945,100
+2025-10-01,PROD_A,Produto A,21.72,False,9,113,1650,111
+2025-10-02,PROD_A,Produto A,18.38,False,5,107,2892,116
+2025-10-03,PROD_A,Produto A,19.8,False,9,117,2224,122
+2025-10-04,PROD_A,Produto A,19.35,False,5,124,2914,114
+2025-10-05,PROD_A,Produto A,21.48,True,5,136,3037,165
+2025-10-06,PROD_A,Produto A,18.33,False,9,89,2121,104
+2025-10-07,PROD_A,Produto A,18.84,False,5,126,2727,143
+2025-10-08,PROD_A,Produto A,21.01,False,6,104,3008,116
+2025-10-09,PROD_A,Produto A,18.21,False,5,142,2505,142
+2025-10-10,PROD_A,Produto A,19.97,True,8,86,2168,89
+2025-10-11,PROD_A,Produto A,19.77,True,5,152,2985,175
+2025-10-12,PROD_A,Produto A,19.34,False,8,118,2458,119
+2025-10-13,PROD_A,Produto A,19.58,True,5,88,3050,71
+2025-10-14,PROD_A,Produto A,20.12,False,5,91,3068,97
+2025-10-15,PROD_A,Produto A,18.65,False,9,95,2736,103
+2025-10-16,PROD_A,Produto A,20.29,True,6,110,2467,122
+2025-10-17,PROD_A,Produto A,21.22,False,6,112,2233,130
+2025-10-18,PROD_A,Produto A,21.04,False,7,112,2031,129
+2025-10-19,PROD_A,Produto A,18.62,False,9,125,2051,140
+2025-10-20,PROD_A,Produto A,18.6,False,9,145,2297,171
+2025-10-21,PROD_A,Produto A,19.07,False,6,137,1778,135
+2025-10-22,PROD_A,Produto A,19.44,True,9,112,1633,128
+2025-10-23,PROD_A,Produto A,19.63,False,6,104,1992,120
+2025-10-24,PROD_A,Produto A,20.72,False,9,106,1844,104
+2025-10-25,PROD_A,Produto A,18.23,False,5,140,2716,138
+2025-10-26,PROD_A,Produto A,18.14,False,6,99,2892,101
+2025-10-27,PROD_A,Produto A,19.57,False,6,100,2130,103
+2025-10-28,PROD_A,Produto A,20.79,False,8,72,2222,86
+2025-10-29,PROD_A,Produto A,18.77,False,9,114,1835,119
+2025-10-30,PROD_A,Produto A,20.57,False,9,119,2607,122
+2025-10-31,PROD_A,Produto A,19.04,False,6,97,2863,100
+2025-11-01,PROD_A,Produto A,21.54,False,5,218,2459,250
+2025-11-02,PROD_A,Produto A,21.58,False,5,131,2346,144
+2025-11-03,PROD_A,Produto A,19.19,True,5,153,2864,166
+2025-11-04,PROD_A,Produto A,18.92,False,9,140,3032,152
+2025-11-05,PROD_A,Produto A,19.65,False,8,203,2173,236
+2025-11-06,PROD_A,Produto A,18.96,False,6,203,2685,215
+2025-11-07,PROD_A,Produto A,20.69,False,7,129,2295,155
+2025-11-08,PROD_A,Produto A,21.3,False,8,186,2492,206
+2025-11-09,PROD_A,Produto A,20.69,False,7,192,1902,209
+2025-11-10,PROD_A,Produto A,21.3,False,8,153,2701,193
+2025-11-11,PROD_A,Produto A,19.59,False,5,190,2453,198
+2025-11-12,PROD_A,Produto A,18.63,True,9,162,2156,174
+2025-11-13,PROD_A,Produto A,20.95,False,7,133,2716,133
+2025-11-14,PROD_A,Produto A,19.44,False,8,207,2542,237
+2025-11-15,PROD_A,Produto A,20.69,True,9,188,2772,223
+2025-11-16,PROD_A,Produto A,19.08,False,7,203,2461,239
+2025-11-17,PROD_A,Produto A,18.32,False,6,180,3069,210
+2025-11-18,PROD_A,Produto A,21.97,False,8,182,2567,198
+2025-11-19,PROD_A,Produto A,18.62,True,6,180,2284,194
+2025-11-20,PROD_A,Produto A,21.95,False,5,142,2768,139
+2025-11-21,PROD_A,Produto A,21.91,False,6,139,1686,173
+2025-11-22,PROD_A,Produto A,21.18,False,6,182,1625,204
+2025-11-23,PROD_A,Produto A,20.64,False,8,223,2256,240
+2025-11-24,PROD_A,Produto A,20.31,False,5,180,1933,211
+2025-11-25,PROD_A,Produto A,21.46,True,6,178,2969,186
+2025-11-26,PROD_A,Produto A,19.16,False,9,175,2184,196
+2025-11-27,PROD_A,Produto A,19.87,False,7,115,2445,124
+2025-11-28,PROD_A,Produto A,20.48,False,6,220,2125,248
+2025-11-29,PROD_A,Produto A,19.64,False,5,154,2725,168
+2025-11-30,PROD_A,Produto A,19.71,False,6,195,2645,199
+2025-12-01,PROD_A,Produto A,19.32,False,7,163,1823,180
+2025-12-02,PROD_A,Produto A,20.26,False,5,171,2281,198
+2025-12-03,PROD_A,Produto A,21.4,False,8,228,2424,250
+2025-12-04,PROD_A,Produto A,18.81,False,5,169,2023,193
+2025-12-05,PROD_A,Produto A,21.74,False,8,222,2746,233
+2025-12-06,PROD_A,Produto A,20.76,False,5,205,2155,225
+2025-12-07,PROD_A,Produto A,21.29,False,7,215,3011,230
+2025-12-08,PROD_A,Produto A,20.22,False,7,218,2855,247
+2025-12-09,PROD_A,Produto A,21.12,False,5,152,2196,167
+2025-12-10,PROD_A,Produto A,18.06,True,6,215,2852,243
+2025-12-11,PROD_A,Produto A,21.27,False,7,238,2382,272
+2025-12-12,PROD_A,Produto A,18.16,False,8,164,1736,187
+2025-12-13,PROD_A,Produto A,21.56,False,8,208,2247,231
+2025-12-14,PROD_A,Produto A,21.97,False,9,229,2368,241
+2025-12-15,PROD_A,Produto A,19.18,False,8,245,1724,269
+2025-12-16,PROD_A,Produto A,18.84,False,9,197,2114,211
+2025-12-17,PROD_A,Produto A,21.06,False,5,220,1665,238
+2025-12-18,PROD_A,Produto A,19.01,False,5,251,2442,272
+2025-12-19,PROD_A,Produto A,21.46,False,5,244,2974,258
+2025-12-20,PROD_A,Produto A,18.41,False,6,252,2859,257
+2025-12-21,PROD_A,Produto A,18.5,True,6,229,2601,245
+2025-12-22,PROD_A,Produto A,21.92,False,9,239,2579,264
+2025-12-23,PROD_A,Produto A,20.7,False,8,248,2464,259
+2025-12-24,PROD_A,Produto A,21.39,False,8,234,2068,257
+2025-12-25,PROD_A,Produto A,19.3,True,5,183,2155,220
+2025-12-26,PROD_A,Produto A,20.71,False,7,247,2130,281
+2025-12-27,PROD_A,Produto A,20.38,True,6,218,3101,256
+2025-12-28,PROD_A,Produto A,20.41,False,6,238,2159,265
+2025-12-29,PROD_A,Produto A,20.73,False,5,197,1635,228
+2025-12-30,PROD_A,Produto A,20.3,False,6,261,1862,279 
+
+
+
+
+
+
+
+
+
+
+datasets/raw/estoque_historico.csv 
+
+
+TEM ESSE CONTEÚDO 
+
+
+data,produto_id,categoria,estoque_inicial,vendas_dia,preco_unitario,promocao
+2024-01-01,P001,Eletrônicos,120,8,2500,0
+2024-01-02,P001,Eletrônicos,112,10,2500,1
+2024-01-03,P001,Eletrônicos,102,7,2500,0
+2024-01-04,P001,Eletrônicos,95,12,2400,1
+2024-01-05,P001,Eletrônicos,83,9,2500,0
+2024-01-06,P001,Eletrônicos,74,6,2500,0
+2024-01-07,P001,Eletrônicos,68,11,2450,1
+2024-01-08,P001,Eletrônicos,57,5,2500,0
+2024-01-09,P001,Eletrônicos,52,8,2500,0
+2024-01-10,P001,Eletrônicos,44,10,2500,1
+2024-01-01,P002,Alimentos,300,25,15,0
+2024-01-02,P002,Alimentos,275,30,15,1
+2024-01-03,P002,Alimentos,245,28,15,0
+2024-01-04,P002,Alimentos,217,35,14,1
+2024-01-05,P002,Alimentos,182,22,15,0
+2024-01-06,P002,Alimentos,160,20,15,0
+2024-01-07,P002,Alimentos,140,27,14,1
+2024-01-08,P002,Alimentos,113,24,15,0
+2024-01-09,P002,Alimentos,89,26,15,0
+2024-01-10,P002,Alimentos,63,30,14,1 
+
+
+
+
+
+
+
+
+datasets/raw/estoque_historico_sazonal.csv
+
+
+TEM ESSE CONTEÚDO 
+
+
+,Data,ID_Produto,Preco_Unitario,Promocao_Ativa,Lead_Time_Dias,Vendas_Historicas_Unidades,Estoque_Atual,Previsao_Demanda_30D
+0,2023-01-01T00:00:00.000,PROD_A,21.27,false,9,204,1739,222
+1,2023-01-02T00:00:00.000,PROD_A,20.34,false,9,155,1980,183
+2,2023-01-03T00:00:00.000,PROD_A,18.73,true,8,166,1888,197
+3,2023-01-04T00:00:00.000,PROD_A,19.72,false,9,161,511,167
+4,2023-01-05T00:00:00.000,PROD_A,19.36,true,7,146,1016,170
+5,2023-01-06T00:00:00.000,PROD_A,19.25,true,7,136,1137,136
+6,2023-01-07T00:00:00.000,PROD_A,18.32,true,8,131,1256,151
+7,2023-01-08T00:00:00.000,PROD_A,20.86,true,5,187,901,206
+8,2023-01-09T00:00:00.000,PROD_A,21.99,false,8,173,5257,198
+9,2023-01-10T00:00:00.000,PROD_A,18.02,false,8,166,4732,195
+10,2023-01-11T00:00:00.000,PROD_A,21.01,false,5,180,4844,202
+11,2023-01-12T00:00:00.000,PROD_A,20.43,false,6,164,4507,182
+12,2023-01-13T00:00:00.000,PROD_A,21.87,false,8,116,3980,110
+13,2023-01-14T00:00:00.000,PROD_A,21.5,false,9,153,4598,151
+14,2023-01-15T00:00:00.000,PROD_A,21.29,false,5,206,4004,219
+15,2023-01-16T00:00:00.000,PROD_A,20.3,false,9,186,3704,202
+16,2023-01-17T00:00:00.000,PROD_A,19.4,false,9,156,3714,180
+17,2023-01-18T00:00:00.000,PROD_A,20.17,false,6,140,3643,146
+18,2023-01-19T00:00:00.000,PROD_A,19.74,false,5,137,3800,140
+19,2023-01-20T00:00:00.000,PROD_A,21.95,true,9,173,3891,183
+20,2023-01-21T00:00:00.000,PROD_A,21.56,false,5,203,3953,221
+21,2023-01-22T00:00:00.000,PROD_A,19.97,false,8,197,2605,209
+22,2023-01-23T00:00:00.000,PROD_A,20.37,false,7,178,3586,189
+23,2023-01-24T00:00:00.000,PROD_A,18.96,false,8,173,3098,189
+24,2023-01-25T00:00:00.000,PROD_A,18.11,false,7,141,2979,158
+25,2023-01-26T00:00:00.000,PROD_A,21.37,false,8,168,2788,177
+26,2023-01-27T00:00:00.000,PROD_A,21.79,true,5,189,1689,223
+27,2023-01-28T00:00:00.000,PROD_A,21,false,9,202,2187,227
+28,2023-01-29T00:00:00.000,PROD_A,19.99,false,5,203,2459,209
+29,2023-01-30T00:00:00.000,PROD_A,20.8,true,6,174,1831,186
+30,2023-01-31T00:00:00.000,PROD_A,20,false,5,167,2003,173
+31,2023-02-01T00:00:00.000,PROD_A,18.44,false,5,184,872,205
+32,2023-02-02T00:00:00.000,PROD_A,18.84,false,9,201,1541,242
+33,2023-02-03T00:00:00.000,PROD_A,18.2,false,6,187,793,202
+34,2023-02-04T00:00:00.000,PROD_A,20.62,false,8,179,953,192
+35,2023-02-05T00:00:00.000,PROD_A,20.81,true,6,156,5085,178
+36,2023-02-06T00:00:00.000,PROD_A,18.88,false,7,177,538,184
+37,2023-02-07T00:00:00.000,PROD_A,19.38,false,8,180,4965,201
+38,2023-02-08T00:00:00.000,PROD_A,18.31,true,5,193,5374,217
+39,2023-02-09T00:00:00.000,PROD_A,18.71,false,9,225,4867,247
+40,2023-02-10T00:00:00.000,PROD_A,20.73,false,7,193,5055,210
+41,2023-02-11T00:00:00.000,PROD_A,20.36,false,5,192,4190,215
+42,2023-02-12T00:00:00.000,PROD_A,19.03,false,8,200,4623,208
+43,2023-02-13T00:00:00.000,PROD_A,20.42,true,5,157,4079,176
+44,2023-02-14T00:00:00.000,PROD_A,19.22,true,9,205,4466,213
+45,2023-02-15T00:00:00.000,PROD_A,20.77,false,9,182,3255,193
+46,2023-02-16T00:00:00.000,PROD_A,18.63,false,9,228,3262,250
+47,2023-02-17T00:00:00.000,PROD_A,20.47,false,6,206,2878,239
+48,2023-02-18T00:00:00.000,PROD_A,20.45,false,5,200,2362,200
+49,2023-02-19T00:00:00.000,PROD_A,18.79,false,9,180,3606,199
+50,2023-02-20T00:00:00.000,PROD_A,20.82,false,7,182,2736,212
+51,2023-02-21T00:00:00.000,PROD_A,18.22,false,5,193,2830,221
+52,2023-02-22T00:00:00.000,PROD_A,18.17,true,5,158,2507,187
+53,2023-02-23T00:00:00.000,PROD_A,19.17,false,6,213,2640,214
+54,2023-02-24T00:00:00.000,PROD_A,21.05,false,6,179,2458,198
+55,2023-02-25T00:00:00.000,PROD_A,19.2,true,5,190,1599,216
+56,2023-02-26T00:00:00.000,PROD_A,21.05,false,8,193,1252,208
+57,2023-02-27T00:00:00.000,PROD_A,20.43,false,5,214,852,225
+58,2023-02-28T00:00:00.000,PROD_A,19.39,false,9,192,1725,199
+59,2023-03-01T00:00:00.000,PROD_A,21.42,true,9,205,1224,208
+60,2023-03-02T00:00:00.000,PROD_A,18.41,true,5,228,5220,235
+61,2023-03-03T00:00:00.000,PROD_A,21.94,false,7,231,567,248
+62,2023-03-04T00:00:00.000,PROD_A,19.47,false,5,205,5333,203
+63,2023-03-05T00:00:00.000,PROD_A,20.53,false,7,195,5487,217
+64,2023-03-06T00:00:00.000,PROD_A,20.04,false,5,211,570,246
+65,2023-03-07T00:00:00.000,PROD_A,18.54,true,9,199,5271,218
+66,2023-03-08T00:00:00.000,PROD_A,21.08,false,5,141,4885,161
+67,2023-03-09T00:00:00.000,PROD_A,21.72,false,8,170,4941,190
+68,2023-03-10T00:00:00.000,PROD_A,18.88,true,8,218,3820,261
+69,2023-03-11T00:00:00.000,PROD_A,20.99,true,7,222,4323,256
+70,2023-03-12T00:00:00.000,PROD_A,21.73,false,8,243,3543,272
+71,2023-03-13T00:00:00.000,PROD_A,18.76,false,6,203,3667,229
+72,2023-03-14T00:00:00.000,PROD_A,18.91,false,9,226,2629,244
+73,2023-03-15T00:00:00.000,PROD_A,19.59,true,7,190,3590,224
+74,2023-03-16T00:00:00.000,PROD_A,19.14,true,7,217,2637,241
+75,2023-03-17T00:00:00.000,PROD_A,18.23,false,6,200,2197,243
+76,2023-03-18T00:00:00.000,PROD_A,21.5,true,9,222,2464,239
+77,2023-03-19T00:00:00.000,PROD_A,19.47,false,9,205,2560,211
+78,2023-03-20T00:00:00.000,PROD_A,18.44,false,6,183,2084,188
+79,2023-03-21T00:00:00.000,PROD_A,21.04,false,8,194,1351,205
+80,2023-03-22T00:00:00.000,PROD_A,20,false,6,205,1730,235
+81,2023-03-23T00:00:00.000,PROD_A,18.97,false,7,197,1813,223
+82,2023-03-24T00:00:00.000,PROD_A,20.66,false,7,190,2723,206
+83,2023-03-25T00:00:00.000,PROD_A,21.88,true,9,225,2163,257
+84,2023-03-26T00:00:00.000,PROD_A,19.08,true,9,199,2752,214
+85,2023-03-27T00:00:00.000,PROD_A,20.06,true,7,213,1858,224
+86,2023-03-28T00:00:00.000,PROD_A,18.03,false,5,169,2771,179
+87,2023-03-29T00:00:00.000,PROD_A,19.31,false,9,194,2558,197
+88,2023-03-30T00:00:00.000,PROD_A,19.04,false,9,213,1804,250
+89,2023-03-31T00:00:00.000,PROD_A,19.03,false,6,209,2443,247
+90,2023-04-01T00:00:00.000,PROD_A,21.3,false,9,215,2053,236
+91,2023-04-02T00:00:00.000,PROD_A,21.13,false,9,214,2254,241
+92,2023-04-03T00:00:00.000,PROD_A,18.14,true,6,179,1838,197
+93,2023-04-04T00:00:00.000,PROD_A,19.4,false,8,176,2748,184
+94,2023-04-05T00:00:00.000,PROD_A,21.26,false,7,199,2137,214
+95,2023-04-06T00:00:00.000,PROD_A,19.51,false,9,200,2306,224
+96,2023-04-07T00:00:00.000,PROD_A,21.08,false,7,169,2149,176
+97,2023-04-08T00:00:00.000,PROD_A,20.95,false,5,223,2972,273
+98,2023-04-09T00:00:00.000,PROD_A,19.3,true,6,233,2504,257
+99,2023-04-10T00:00:00.000,PROD_A,20.22,false,5,200,2540,238
+100,2023-04-11T00:00:00.000,PROD_A,18.84,false,9,214,1756,242
+101,2023-04-12T00:00:00.000,PROD_A,19.34,false,7,200,2405,226
+102,2023-04-13T00:00:00.000,PROD_A,20.91,false,7,177,1928,196
+103,2023-04-14T00:00:00.000,PROD_A,20.36,false,8,198,1923,220
+104,2023-04-15T00:00:00.000,PROD_A,19.67,false,7,208,2262,226
+105,2023-04-16T00:00:00.000,PROD_A,21.42,false,6,195,3108,220
+106,2023-04-17T00:00:00.000,PROD_A,18.97,false,5,204,1667,233
+107,2023-04-18T00:00:00.000,PROD_A,21.06,false,9,205,2747,228
+108,2023-04-19T00:00:00.000,PROD_A,18.01,false,9,168,2006,183
+109,2023-04-20T00:00:00.000,PROD_A,21.46,false,9,185,2713,194
+110,2023-04-21T00:00:00.000,PROD_A,18.46,false,6,230,2735,244
+111,2023-04-22T00:00:00.000,PROD_A,19.84,false,8,237,1949,281
+112,2023-04-23T00:00:00.000,PROD_A,18.4,true,5,226,2770,252
+113,2023-04-24T00:00:00.000,PROD_A,20.46,false,7,194,1869,207
+114,2023-04-25T00:00:00.000,PROD_A,18.98,false,8,205,2346,230
+115,2023-04-26T00:00:00.000,PROD_A,18.71,false,5,190,1951,221
+116,2023-04-27T00:00:00.000,PROD_A,20.71,false,7,178,2146,199
+117,2023-04-28T00:00:00.000,PROD_A,19.53,false,5,218,1655,222
+118,2023-04-29T00:00:00.000,PROD_A,19.32,false,8,221,2460,241
+119,2023-04-30T00:00:00.000,PROD_A,21.23,false,6,191,2883,207
+120,2023-05-01T00:00:00.000,PROD_A,19.92,false,5,208,2719,230
+121,2023-05-02T00:00:00.000,PROD_A,19.84,false,7,176,1653,193
+122,2023-05-03T00:00:00.000,PROD_A,21.1,false,7,171,2633,184
+123,2023-05-04T00:00:00.000,PROD_A,19.72,false,8,214,2310,230
+124,2023-05-05T00:00:00.000,PROD_A,18.28,false,6,214,2429,210
+125,2023-05-06T00:00:00.000,PROD_A,18.1,true,9,223,2001,255
+126,2023-05-07T00:00:00.000,PROD_A,18.18,false,7,206,3028,240
+127,2023-05-08T00:00:00.000,PROD_A,21.48,false,8,145,2025,158
+128,2023-05-09T00:00:00.000,PROD_A,20.99,true,6,177,1937,193
+129,2023-05-10T00:00:00.000,PROD_A,18.8,false,6,171,2006,183
+130,2023-05-11T00:00:00.000,PROD_A,21.89,true,9,157,1666,155
+131,2023-05-12T00:00:00.000,PROD_A,20.94,false,6,169,1907,200
+132,2023-05-13T00:00:00.000,PROD_A,20.93,false,5,213,1773,226
+133,2023-05-14T00:00:00.000,PROD_A,21.53,false,9,195,1716,213
+134,2023-05-15T00:00:00.000,PROD_A,20.6,true,8,203,2753,217
+135,2023-05-16T00:00:00.000,PROD_A,21.57,false,7,184,1741,202
+136,2023-05-17T00:00:00.000,PROD_A,19.94,false,9,177,2024,193
+137,2023-05-18T00:00:00.000,PROD_A,19.84,true,5,166,2024,173
+138,2023-05-19T00:00:00.000,PROD_A,20.61,false,9,176,2100,186
+139,2023-05-20T00:00:00.000,PROD_A,18.24,true,5,186,1745,199
+140,2023-05-21T00:00:00.000,PROD_A,21.83,false,8,194,2946,215
+141,2023-05-22T00:00:00.000,PROD_A,19.87,true,7,166,2168,172
+142,2023-05-23T00:00:00.000,PROD_A,21.09,false,6,176,1962,192
+143,2023-05-24T00:00:00.000,PROD_A,21.72,false,8,163,2250,171
+144,2023-05-25T00:00:00.000,PROD_A,19.79,false,6,193,2495,228
+145,2023-05-26T00:00:00.000,PROD_A,20.09,false,7,176,3116,178
+146,2023-05-27T00:00:00.000,PROD_A,19.14,false,9,190,2291,208
+147,2023-05-28T00:00:00.000,PROD_A,20.73,true,8,240,3028,268
+148,2023-05-29T00:00:00.000,PROD_A,19.71,false,9,184,1891,202
+149,2023-05-30T00:00:00.000,PROD_A,19.63,false,9,173,2917,194
+150,2023-05-31T00:00:00.000,PROD_A,19.82,false,8,178,3117,200
+151,2023-06-01T00:00:00.000,PROD_A,18.1,false,6,293,2943,320
+152,2023-06-02T00:00:00.000,PROD_A,20.46,true,6,246,2075,272
+153,2023-06-03T00:00:00.000,PROD_A,19.46,false,8,235,2428,256
+154,2023-06-04T00:00:00.000,PROD_A,18.82,false,7,232,2373,267
+155,2023-06-05T00:00:00.000,PROD_A,21.78,true,8,319,3125,371
+156,2023-06-06T00:00:00.000,PROD_A,18.86,false,9,199,2254,224
+157,2023-06-07T00:00:00.000,PROD_A,21.7,false,9,223,2401,261
+158,2023-06-08T00:00:00.000,PROD_A,19.95,false,8,275,2697,308
+159,2023-06-09T00:00:00.000,PROD_A,20.83,false,5,216,3118,246
+160,2023-06-10T00:00:00.000,PROD_A,20.36,false,6,253,2991,260
+161,2023-06-11T00:00:00.000,PROD_A,19.8,false,5,296,2964,338
+162,2023-06-12T00:00:00.000,PROD_A,18.33,false,8,230,2878,262
+163,2023-06-13T00:00:00.000,PROD_A,19.47,true,8,251,3034,286
+164,2023-06-14T00:00:00.000,PROD_A,20.33,false,6,216,2923,240
+165,2023-06-15T00:00:00.000,PROD_A,18.01,false,6,261,2137,281
+166,2023-06-16T00:00:00.000,PROD_A,18.3,false,7,223,2805,234
+167,2023-06-17T00:00:00.000,PROD_A,18.99,false,9,219,2231,247
+168,2023-06-18T00:00:00.000,PROD_A,21.2,true,7,257,2443,278
+169,2023-06-19T00:00:00.000,PROD_A,18.85,false,7,267,1639,295
+170,2023-06-20T00:00:00.000,PROD_A,20.19,false,8,272,2568,288
+171,2023-06-21T00:00:00.000,PROD_A,20.49,false,5,307,1989,325
+172,2023-06-22T00:00:00.000,PROD_A,21.28,true,6,253,2684,260
+173,2023-06-23T00:00:00.000,PROD_A,18.12,false,9,247,2129,272
+174,2023-06-24T00:00:00.000,PROD_A,21.48,false,5,200,2451,234
+175,2023-06-25T00:00:00.000,PROD_A,20.52,true,7,251,2069,289
+176,2023-06-26T00:00:00.000,PROD_A,20.46,false,9,250,3096,278
+177,2023-06-27T00:00:00.000,PROD_A,19.33,true,6,232,2793,253
+178,2023-06-28T00:00:00.000,PROD_A,21.44,false,7,216,1846,223
+179,2023-06-29T00:00:00.000,PROD_A,18.71,false,7,194,2308,214
+180,2023-06-30T00:00:00.000,PROD_A,20.48,false,9,256,2923,288
+181,2023-07-01T00:00:00.000,PROD_A,20.41,false,5,193,3086,223
+182,2023-07-02T00:00:00.000,PROD_A,21.4,false,7,203,2139,225
+183,2023-07-03T00:00:00.000,PROD_A,21.01,false,8,108,3121,104
+184,2023-07-04T00:00:00.000,PROD_A,20.53,false,7,136,2910,140
+185,2023-07-05T00:00:00.000,PROD_A,20.12,false,7,126,3051,147
+186,2023-07-06T00:00:00.000,PROD_A,20.59,false,5,123,2562,119
+187,2023-07-07T00:00:00.000,PROD_A,18.94,false,6,166,2074,186
+188,2023-07-08T00:00:00.000,PROD_A,18.03,false,8,160,1759,182
+189,2023-07-09T00:00:00.000,PROD_A,19.79,false,9,181,1913,200
+190,2023-07-10T00:00:00.000,PROD_A,18.45,false,7,143,2381,171
+191,2023-07-11T00:00:00.000,PROD_A,20.85,false,8,148,2748,167
+192,2023-07-12T00:00:00.000,PROD_A,18.85,true,7,162,2795,177
+193,2023-07-13T00:00:00.000,PROD_A,19.31,false,5,136,1694,159
+194,2023-07-14T00:00:00.000,PROD_A,21.52,false,6,120,2251,149
+195,2023-07-15T00:00:00.000,PROD_A,18.4,false,6,168,2055,189
+196,2023-07-16T00:00:00.000,PROD_A,18,false,5,148,2891,167
+197,2023-07-17T00:00:00.000,PROD_A,21.29,false,6,133,2482,135
+198,2023-07-18T00:00:00.000,PROD_A,18.48,false,9,152,2557,178
+199,2023-07-19T00:00:00.000,PROD_A,21.32,false,9,110,3024,122
+200,2023-07-20T00:00:00.000,PROD_A,18.37,true,8,118,2753,129
+201,2023-07-21T00:00:00.000,PROD_A,19.29,false,7,179,2076,193
+202,2023-07-22T00:00:00.000,PROD_A,20.61,false,5,169,2628,176
+203,2023-07-23T00:00:00.000,PROD_A,19.15,false,7,181,2827,203
+204,2023-07-24T00:00:00.000,PROD_A,19.2,false,7,118,2834,126
+205,2023-07-25T00:00:00.000,PROD_A,19.11,false,5,162,1931,162
+206,2023-07-26T00:00:00.000,PROD_A,19.89,false,8,100,1721,114
+207,2023-07-27T00:00:00.000,PROD_A,18.59,false,6,136,2526,149
+208,2023-07-28T00:00:00.000,PROD_A,18.9,true,5,89,2624,95
+209,2023-07-29T00:00:00.000,PROD_A,21.44,false,8,166,1976,187
+210,2023-07-30T00:00:00.000,PROD_A,21.63,false,9,181,2447,212
+211,2023-07-31T00:00:00.000,PROD_A,18.5,false,7,129,2313,142
+212,2023-08-01T00:00:00.000,PROD_A,18.89,false,8,110,1656,115
+213,2023-08-02T00:00:00.000,PROD_A,19.88,false,9,96,1981,105
+214,2023-08-03T00:00:00.000,PROD_A,19.49,false,5,129,1716,123
+215,2023-08-04T00:00:00.000,PROD_A,21.26,true,8,109,2170,112
+216,2023-08-05T00:00:00.000,PROD_A,19.73,false,9,158,1670,167
+217,2023-08-06T00:00:00.000,PROD_A,19.16,false,8,136,1958,144
+218,2023-08-07T00:00:00.000,PROD_A,19.04,true,9,151,2494,166
+219,2023-08-08T00:00:00.000,PROD_A,19.94,false,7,105,2852,129
+220,2023-08-09T00:00:00.000,PROD_A,19.94,false,9,126,2302,129
+221,2023-08-10T00:00:00.000,PROD_A,20.94,true,9,126,2911,145
+222,2023-08-11T00:00:00.000,PROD_A,21.97,false,8,113,2343,120
+223,2023-08-12T00:00:00.000,PROD_A,19.74,true,7,96,2391,96
+224,2023-08-13T00:00:00.000,PROD_A,20.69,true,6,145,2111,156
+225,2023-08-14T00:00:00.000,PROD_A,20.76,false,8,128,3101,148
+226,2023-08-15T00:00:00.000,PROD_A,18.39,false,5,100,2911,120
+227,2023-08-16T00:00:00.000,PROD_A,20.94,false,5,115,2326,116
+228,2023-08-17T00:00:00.000,PROD_A,21.7,false,8,118,1922,118
+229,2023-08-18T00:00:00.000,PROD_A,18.13,true,6,133,2654,136
+230,2023-08-19T00:00:00.000,PROD_A,20.34,false,6,139,2352,176
+231,2023-08-20T00:00:00.000,PROD_A,21.25,false,7,145,3059,160
+232,2023-08-21T00:00:00.000,PROD_A,20.41,false,7,131,2088,148
+233,2023-08-22T00:00:00.000,PROD_A,19.86,false,6,103,2626,102
+234,2023-08-23T00:00:00.000,PROD_A,20.14,false,9,90,2585,97
+235,2023-08-24T00:00:00.000,PROD_A,21.77,false,7,134,2763,132
+236,2023-08-25T00:00:00.000,PROD_A,20.39,false,9,109,2541,127
+237,2023-08-26T00:00:00.000,PROD_A,18.23,true,5,124,2778,147
+238,2023-08-27T00:00:00.000,PROD_A,19.22,true,7,101,2842,109
+239,2023-08-28T00:00:00.000,PROD_A,19.59,true,7,113,1913,110
+240,2023-08-29T00:00:00.000,PROD_A,21.5,true,5,104,2705,118
+241,2023-08-30T00:00:00.000,PROD_A,19.36,false,9,109,2732,141
+242,2023-08-31T00:00:00.000,PROD_A,21.69,false,5,128,3049,129
+243,2023-09-01T00:00:00.000,PROD_A,19.06,false,8,120,2668,139
+244,2023-09-02T00:00:00.000,PROD_A,19.63,false,9,143,2300,161
+245,2023-09-03T00:00:00.000,PROD_A,20.91,false,9,114,1790,129
+246,2023-09-04T00:00:00.000,PROD_A,21.63,false,9,85,2196,88
+247,2023-09-05T00:00:00.000,PROD_A,20.74,true,7,115,2761,128
+248,2023-09-06T00:00:00.000,PROD_A,19.96,false,8,113,3111,118
+249,2023-09-07T00:00:00.000,PROD_A,19.9,false,7,86,2012,89
+250,2023-09-08T00:00:00.000,PROD_A,20.55,false,9,107,2257,119
+251,2023-09-09T00:00:00.000,PROD_A,18.05,false,6,151,2343,167
+252,2023-09-10T00:00:00.000,PROD_A,20.77,true,9,121,2251,140
+253,2023-09-11T00:00:00.000,PROD_A,18.28,false,6,125,2267,136
+254,2023-09-12T00:00:00.000,PROD_A,18.01,false,5,71,2995,80
+255,2023-09-13T00:00:00.000,PROD_A,21.47,true,6,109,3004,114
+256,2023-09-14T00:00:00.000,PROD_A,18.55,true,7,107,2596,124
+257,2023-09-15T00:00:00.000,PROD_A,21.61,true,6,112,2395,115
+258,2023-09-16T00:00:00.000,PROD_A,20.77,false,7,133,2180,139
+259,2023-09-17T00:00:00.000,PROD_A,18.65,false,8,128,2153,154
+260,2023-09-18T00:00:00.000,PROD_A,21.63,true,9,101,2104,119
+261,2023-09-19T00:00:00.000,PROD_A,18.89,false,5,138,2531,163
+262,2023-09-20T00:00:00.000,PROD_A,20.2,true,6,117,3020,149
+263,2023-09-21T00:00:00.000,PROD_A,18.82,false,6,88,2125,91
+264,2023-09-22T00:00:00.000,PROD_A,21.59,false,8,99,3058,112
+265,2023-09-23T00:00:00.000,PROD_A,21.48,false,8,118,2552,132
+266,2023-09-24T00:00:00.000,PROD_A,21.75,false,7,107,2670,132
+267,2023-09-25T00:00:00.000,PROD_A,21.53,false,6,86,2322,120
+268,2023-09-26T00:00:00.000,PROD_A,19.78,false,8,103,1940,104
+269,2023-09-27T00:00:00.000,PROD_A,20.33,false,7,107,2503,105
+270,2023-09-28T00:00:00.000,PROD_A,20.16,false,7,95,3076,102
+271,2023-09-29T00:00:00.000,PROD_A,21.27,false,9,133,2333,166
+272,2023-09-30T00:00:00.000,PROD_A,19.3,false,9,100,2855,116
+273,2023-10-01T00:00:00.000,PROD_A,19.78,false,8,114,2134,107
+274,2023-10-02T00:00:00.000,PROD_A,20.42,false,6,133,2608,141
+275,2023-10-03T00:00:00.000,PROD_A,19.23,true,5,87,2199,104
+276,2023-10-04T00:00:00.000,PROD_A,19.38,false,8,111,2073,126
+277,2023-10-05T00:00:00.000,PROD_A,19.68,false,6,162,1752,173
+278,2023-10-06T00:00:00.000,PROD_A,19.95,false,9,120,1889,142
+279,2023-10-07T00:00:00.000,PROD_A,21.63,false,8,105,2218,119
+280,2023-10-08T00:00:00.000,PROD_A,21.08,false,9,149,3016,165
+281,2023-10-09T00:00:00.000,PROD_A,20.02,false,9,122,2831,149
+282,2023-10-10T00:00:00.000,PROD_A,20.82,false,7,98,2886,125
+283,2023-10-11T00:00:00.000,PROD_A,20,false,9,54,2865,80
+284,2023-10-12T00:00:00.000,PROD_A,20.51,false,5,107,2432,120
+285,2023-10-13T00:00:00.000,PROD_A,21.78,true,6,167,1851,173
+286,2023-10-14T00:00:00.000,PROD_A,18.96,false,7,80,2141,86
+287,2023-10-15T00:00:00.000,PROD_A,21.24,false,7,89,2734,106
+288,2023-10-16T00:00:00.000,PROD_A,21.83,true,7,102,1953,114
+289,2023-10-17T00:00:00.000,PROD_A,20.22,false,6,91,2244,109
+290,2023-10-18T00:00:00.000,PROD_A,21.08,false,5,109,2712,110
+291,2023-10-19T00:00:00.000,PROD_A,21.41,false,5,124,3101,132
+292,2023-10-20T00:00:00.000,PROD_A,18.22,true,7,95,1752,113
+293,2023-10-21T00:00:00.000,PROD_A,19.78,true,7,123,3042,131
+294,2023-10-22T00:00:00.000,PROD_A,18.43,false,8,125,2905,127
+295,2023-10-23T00:00:00.000,PROD_A,19.49,true,8,129,3022,133
+296,2023-10-24T00:00:00.000,PROD_A,19.28,false,6,108,1806,122
+297,2023-10-25T00:00:00.000,PROD_A,19.63,false,8,105,2562,123
+298,2023-10-26T00:00:00.000,PROD_A,19.66,false,8,108,1914,136
+299,2023-10-27T00:00:00.000,PROD_A,20.3,false,5,103,2320,117
+300,2023-10-28T00:00:00.000,PROD_A,18.1,false,6,73,2739,80
+301,2023-10-29T00:00:00.000,PROD_A,21.96,false,6,117,2708,123
+302,2023-10-30T00:00:00.000,PROD_A,20.36,true,5,112,2876,130
+303,2023-10-31T00:00:00.000,PROD_A,18.96,false,7,66,2377,80
+304,2023-11-01T00:00:00.000,PROD_A,19.59,false,6,176,2461,205
+305,2023-11-02T00:00:00.000,PROD_A,20.13,false,7,151,2867,159
+306,2023-11-03T00:00:00.000,PROD_A,18.16,false,8,138,3015,149
+307,2023-11-04T00:00:00.000,PROD_A,20.08,false,8,142,2951,155
+308,2023-11-05T00:00:00.000,PROD_A,21.65,false,9,177,3050,192
+309,2023-11-06T00:00:00.000,PROD_A,21.7,false,6,175,1982,187
+310,2023-11-07T00:00:00.000,PROD_A,18.07,false,9,167,3105,194
+311,2023-11-08T00:00:00.000,PROD_A,19.47,false,8,167,1953,180
+312,2023-11-09T00:00:00.000,PROD_A,19.8,false,8,154,3056,180
+313,2023-11-10T00:00:00.000,PROD_A,21.67,true,8,168,1873,188
+314,2023-11-11T00:00:00.000,PROD_A,20.85,true,9,224,2323,271
+315,2023-11-12T00:00:00.000,PROD_A,21.91,true,9,221,1903,245
+316,2023-11-13T00:00:00.000,PROD_A,20.38,false,5,216,2548,234
+317,2023-11-14T00:00:00.000,PROD_A,18.48,false,5,222,2881,255
+318,2023-11-15T00:00:00.000,PROD_A,19.56,false,8,177,2169,178
+319,2023-11-16T00:00:00.000,PROD_A,18.52,false,8,144,3091,165
+320,2023-11-17T00:00:00.000,PROD_A,19.09,false,9,218,3086,238
+321,2023-11-18T00:00:00.000,PROD_A,19.38,true,6,191,1677,214
+322,2023-11-19T00:00:00.000,PROD_A,19.78,false,7,182,2682,203
+323,2023-11-20T00:00:00.000,PROD_A,20.78,false,5,212,2293,233
+324,2023-11-21T00:00:00.000,PROD_A,18.19,false,6,206,2642,234
+325,2023-11-22T00:00:00.000,PROD_A,19.52,true,6,162,2565,167
+326,2023-11-23T00:00:00.000,PROD_A,21.97,false,5,193,2817,232
+327,2023-11-24T00:00:00.000,PROD_A,21.47,false,7,138,2568,150
+328,2023-11-25T00:00:00.000,PROD_A,19.39,false,9,175,2409,205
+329,2023-11-26T00:00:00.000,PROD_A,18.24,false,6,212,2359,245
+330,2023-11-27T00:00:00.000,PROD_A,18.72,true,8,228,1812,255
+331,2023-11-28T00:00:00.000,PROD_A,20.22,false,5,132,2141,125
+332,2023-11-29T00:00:00.000,PROD_A,18.14,false,6,188,1829,231
+333,2023-11-30T00:00:00.000,PROD_A,18.77,false,6,210,2292,246
+334,2023-12-01T00:00:00.000,PROD_A,18.89,false,8,180,2198,193
+335,2023-12-02T00:00:00.000,PROD_A,21.1,true,9,291,1796,316
+336,2023-12-03T00:00:00.000,PROD_A,19.58,false,9,291,2025,313
+337,2023-12-04T00:00:00.000,PROD_A,21.23,false,6,264,2355,280
+338,2023-12-05T00:00:00.000,PROD_A,21.71,false,6,243,2948,275
+339,2023-12-06T00:00:00.000,PROD_A,20.37,false,9,221,2231,219
+340,2023-12-07T00:00:00.000,PROD_A,19.9,false,6,254,2746,296
+341,2023-12-08T00:00:00.000,PROD_A,19.79,false,7,192,1666,212
+342,2023-12-09T00:00:00.000,PROD_A,20.73,false,7,307,1887,329
+343,2023-12-10T00:00:00.000,PROD_A,18.74,false,8,267,2605,294
+344,2023-12-11T00:00:00.000,PROD_A,21.81,false,5,208,2073,211
+345,2023-12-12T00:00:00.000,PROD_A,19.85,false,6,274,3016,297
+346,2023-12-13T00:00:00.000,PROD_A,20.4,false,8,266,1687,286
+347,2023-12-14T00:00:00.000,PROD_A,18.1,false,6,195,2861,206
+348,2023-12-15T00:00:00.000,PROD_A,20.02,true,9,194,2752,211
+349,2023-12-16T00:00:00.000,PROD_A,21.06,false,5,263,2356,298
+350,2023-12-17T00:00:00.000,PROD_A,18.33,false,7,237,1786,267
+351,2023-12-18T00:00:00.000,PROD_A,19.44,false,9,271,1718,310
+352,2023-12-19T00:00:00.000,PROD_A,21.05,false,7,277,1974,289
+353,2023-12-20T00:00:00.000,PROD_A,21.26,false,9,253,1690,278
+354,2023-12-21T00:00:00.000,PROD_A,19.81,false,7,245,1665,271
+355,2023-12-22T00:00:00.000,PROD_A,19.61,false,8,217,2857,236
+356,2023-12-23T00:00:00.000,PROD_A,20.32,false,7,307,1847,342
+357,2023-12-24T00:00:00.000,PROD_A,19.46,false,8,286,2000,312
+358,2023-12-25T00:00:00.000,PROD_A,19.73,false,7,202,2886,216
+359,2023-12-26T00:00:00.000,PROD_A,21.66,false,9,247,2395,271
+360,2023-12-27T00:00:00.000,PROD_A,20.15,false,8,298,2906,312
+361,2023-12-28T00:00:00.000,PROD_A,19.72,true,5,240,2762,253
+362,2023-12-29T00:00:00.000,PROD_A,18.65,false,7,226,2174,239
+363,2023-12-30T00:00:00.000,PROD_A,19.13,false,8,278,1848,300
+364,2023-12-31T00:00:00.000,PROD_A,19,false,8,265,1971,285
+365,2024-01-01T00:00:00.000,PROD_A,21.31,false,9,160,2491,177
+366,2024-01-02T00:00:00.000,PROD_A,18.91,false,6,118,2619,145
+367,2024-01-03T00:00:00.000,PROD_A,20.99,false,9,125,2192,143
+368,2024-01-04T00:00:00.000,PROD_A,19.54,false,9,170,2990,184
+369,2024-01-05T00:00:00.000,PROD_A,19.16,false,8,141,1803,175
+370,2024-01-06T00:00:00.000,PROD_A,21.64,false,6,166,2354,178
+371,2024-01-07T00:00:00.000,PROD_A,19.36,false,5,182,1751,194
+372,2024-01-08T00:00:00.000,PROD_A,19.76,false,5,121,2020,132
+373,2024-01-09T00:00:00.000,PROD_A,19.22,false,8,169,2262,199
+374,2024-01-10T00:00:00.000,PROD_A,18.01,true,8,153,2484,182
+375,2024-01-11T00:00:00.000,PROD_A,20.54,true,7,161,2925,155
+376,2024-01-12T00:00:00.000,PROD_A,18.42,false,7,164,2002,169
+377,2024-01-13T00:00:00.000,PROD_A,20.54,false,6,215,1839,236
+378,2024-01-14T00:00:00.000,PROD_A,20.28,false,9,170,3058,175
+379,2024-01-15T00:00:00.000,PROD_A,18.05,false,9,153,2100,177
+380,2024-01-16T00:00:00.000,PROD_A,19.86,false,9,212,2224,243
+381,2024-01-17T00:00:00.000,PROD_A,21.88,false,9,170,3125,176
+382,2024-01-18T00:00:00.000,PROD_A,19.93,false,7,159,2976,183
+383,2024-01-19T00:00:00.000,PROD_A,21.62,false,9,187,3109,196
+384,2024-01-20T00:00:00.000,PROD_A,20.97,false,6,202,2004,207
+385,2024-01-21T00:00:00.000,PROD_A,21.19,false,8,187,2587,214
+386,2024-01-22T00:00:00.000,PROD_A,20.5,false,7,170,2352,178
+387,2024-01-23T00:00:00.000,PROD_A,20.79,true,8,174,2562,184
+388,2024-01-24T00:00:00.000,PROD_A,19.86,true,6,170,2294,176
+389,2024-01-25T00:00:00.000,PROD_A,18.06,true,8,197,3136,222
+390,2024-01-26T00:00:00.000,PROD_A,18.04,false,7,171,2910,190
+391,2024-01-27T00:00:00.000,PROD_A,19.86,false,9,156,2115,176
+392,2024-01-28T00:00:00.000,PROD_A,21.63,true,7,229,1785,237
+393,2024-01-29T00:00:00.000,PROD_A,19.24,false,8,183,2789,191
+394,2024-01-30T00:00:00.000,PROD_A,18.7,false,8,163,2741,189
+395,2024-01-31T00:00:00.000,PROD_A,20.86,false,8,196,2251,213
+396,2024-02-01T00:00:00.000,PROD_A,18.34,false,9,191,2897,225
+397,2024-02-02T00:00:00.000,PROD_A,19.37,false,5,173,2801,199
+398,2024-02-03T00:00:00.000,PROD_A,20.51,true,7,219,2607,235
+399,2024-02-04T00:00:00.000,PROD_A,18.36,false,5,239,2153,250
+400,2024-02-05T00:00:00.000,PROD_A,20.14,false,5,210,2801,236
+401,2024-02-06T00:00:00.000,PROD_A,19.33,false,6,177,1922,194
+402,2024-02-07T00:00:00.000,PROD_A,20.92,false,6,189,1677,197
+403,2024-02-08T00:00:00.000,PROD_A,20.55,true,6,181,2522,191
+404,2024-02-09T00:00:00.000,PROD_A,20.73,false,8,187,2551,206
+405,2024-02-10T00:00:00.000,PROD_A,20.9,false,7,197,3128,212
+406,2024-02-11T00:00:00.000,PROD_A,20.8,true,9,180,2245,196
+407,2024-02-12T00:00:00.000,PROD_A,19.24,false,6,210,2818,213
+408,2024-02-13T00:00:00.000,PROD_A,18.97,false,7,188,2790,208
+409,2024-02-14T00:00:00.000,PROD_A,21.25,false,7,134,2585,149
+410,2024-02-15T00:00:00.000,PROD_A,19.44,false,9,167,2255,186
+411,2024-02-16T00:00:00.000,PROD_A,19.42,false,5,207,1912,214
+412,2024-02-17T00:00:00.000,PROD_A,20.01,false,5,219,1911,243
+413,2024-02-18T00:00:00.000,PROD_A,19.56,true,9,216,2604,264
+414,2024-02-19T00:00:00.000,PROD_A,18.53,false,6,192,1734,224
+415,2024-02-20T00:00:00.000,PROD_A,21.66,false,8,165,2393,171
+416,2024-02-21T00:00:00.000,PROD_A,20,false,5,167,2749,180
+417,2024-02-22T00:00:00.000,PROD_A,21.22,true,5,214,2260,240
+418,2024-02-23T00:00:00.000,PROD_A,20.63,false,6,170,1786,176
+419,2024-02-24T00:00:00.000,PROD_A,20.72,false,8,200,1836,218
+420,2024-02-25T00:00:00.000,PROD_A,18.84,false,6,177,1725,189
+421,2024-02-26T00:00:00.000,PROD_A,18.42,false,9,202,1925,215
+422,2024-02-27T00:00:00.000,PROD_A,21.95,false,7,209,2701,219
+423,2024-02-28T00:00:00.000,PROD_A,18.91,true,7,208,3042,238
+424,2024-02-29T00:00:00.000,PROD_A,20.05,false,5,219,1840,217
+425,2024-03-01T00:00:00.000,PROD_A,19.18,false,9,176,1924,191
+426,2024-03-02T00:00:00.000,PROD_A,18.49,false,7,218,2018,241
+427,2024-03-03T00:00:00.000,PROD_A,19.71,false,7,194,2000,220
+428,2024-03-04T00:00:00.000,PROD_A,18.58,false,7,220,2861,251
+429,2024-03-05T00:00:00.000,PROD_A,19.56,false,8,170,2185,170
+430,2024-03-06T00:00:00.000,PROD_A,20.96,false,7,220,2310,236
+431,2024-03-07T00:00:00.000,PROD_A,21.67,false,8,183,3136,188
+432,2024-03-08T00:00:00.000,PROD_A,21.64,false,9,176,2020,191
+433,2024-03-09T00:00:00.000,PROD_A,20.49,true,5,264,2622,300
+434,2024-03-10T00:00:00.000,PROD_A,18.86,true,8,227,2056,246
+435,2024-03-11T00:00:00.000,PROD_A,18.07,false,5,169,3101,182
+436,2024-03-12T00:00:00.000,PROD_A,18.33,false,6,184,1925,206
+437,2024-03-13T00:00:00.000,PROD_A,18.49,false,9,200,3126,223
+438,2024-03-14T00:00:00.000,PROD_A,21.49,false,5,211,2398,226
+439,2024-03-15T00:00:00.000,PROD_A,19.51,false,6,203,2494,222
+440,2024-03-16T00:00:00.000,PROD_A,20.94,false,7,212,3044,220
+441,2024-03-17T00:00:00.000,PROD_A,21.98,true,6,257,2137,291
+442,2024-03-18T00:00:00.000,PROD_A,21.85,false,9,177,2604,190
+443,2024-03-19T00:00:00.000,PROD_A,21.02,false,7,191,2857,207
+444,2024-03-20T00:00:00.000,PROD_A,21.4,false,9,217,2323,246
+445,2024-03-21T00:00:00.000,PROD_A,20.65,true,7,212,2375,235
+446,2024-03-22T00:00:00.000,PROD_A,21.38,false,8,186,1919,196
+447,2024-03-23T00:00:00.000,PROD_A,18.26,false,9,213,1843,229
+448,2024-03-24T00:00:00.000,PROD_A,20.62,false,5,185,1962,215
+449,2024-03-25T00:00:00.000,PROD_A,18,false,6,217,2569,261
+450,2024-03-26T00:00:00.000,PROD_A,19.15,false,6,198,2683,214
+451,2024-03-27T00:00:00.000,PROD_A,19.33,false,8,210,1858,223
+452,2024-03-28T00:00:00.000,PROD_A,19.16,true,9,221,1860,238
+453,2024-03-29T00:00:00.000,PROD_A,20.56,false,8,210,1714,230
+454,2024-03-30T00:00:00.000,PROD_A,18.44,false,9,255,2322,275
+455,2024-03-31T00:00:00.000,PROD_A,19.71,false,7,207,2284,219
+456,2024-04-01T00:00:00.000,PROD_A,18.68,false,5,207,2915,212
+457,2024-04-02T00:00:00.000,PROD_A,21.54,false,7,197,2766,227
+458,2024-04-03T00:00:00.000,PROD_A,18.31,false,8,163,2192,167
+459,2024-04-04T00:00:00.000,PROD_A,19.53,false,7,211,2277,240
+460,2024-04-05T00:00:00.000,PROD_A,20.79,false,6,162,2943,161
+461,2024-04-06T00:00:00.000,PROD_A,18.38,false,8,223,2253,256
+462,2024-04-07T00:00:00.000,PROD_A,21.06,false,5,238,1912,263
+463,2024-04-08T00:00:00.000,PROD_A,19.53,false,7,192,1846,200
+464,2024-04-09T00:00:00.000,PROD_A,21.69,true,6,191,2512,214
+465,2024-04-10T00:00:00.000,PROD_A,18.73,false,8,196,1807,212
+466,2024-04-11T00:00:00.000,PROD_A,19.58,false,6,191,2225,215
+467,2024-04-12T00:00:00.000,PROD_A,20.09,false,6,175,2629,200
+468,2024-04-13T00:00:00.000,PROD_A,19.48,false,5,176,2740,199
+469,2024-04-14T00:00:00.000,PROD_A,21.76,false,6,201,2360,220
+470,2024-04-15T00:00:00.000,PROD_A,19.35,false,6,191,3059,202
+471,2024-04-16T00:00:00.000,PROD_A,20.71,false,8,205,3102,213
+472,2024-04-17T00:00:00.000,PROD_A,20.5,true,6,189,2268,207
+473,2024-04-18T00:00:00.000,PROD_A,20.67,false,6,204,2249,238
+474,2024-04-19T00:00:00.000,PROD_A,19.06,false,6,162,2018,176
+475,2024-04-20T00:00:00.000,PROD_A,19.41,true,6,196,1900,218
+476,2024-04-21T00:00:00.000,PROD_A,18.6,true,7,206,1827,219
+477,2024-04-22T00:00:00.000,PROD_A,21.57,false,6,212,2496,237
+478,2024-04-23T00:00:00.000,PROD_A,20.68,false,6,205,1740,205
+479,2024-04-24T00:00:00.000,PROD_A,21.72,false,5,165,2120,196
+480,2024-04-25T00:00:00.000,PROD_A,19.25,false,9,228,2970,252
+481,2024-04-26T00:00:00.000,PROD_A,21.85,true,5,227,2268,248
+482,2024-04-27T00:00:00.000,PROD_A,18.09,true,8,235,3076,266
+483,2024-04-28T00:00:00.000,PROD_A,18.66,true,5,232,2587,249
+484,2024-04-29T00:00:00.000,PROD_A,20.2,false,7,198,2638,221
+485,2024-04-30T00:00:00.000,PROD_A,21.25,true,5,222,2855,249
+486,2024-05-01T00:00:00.000,PROD_A,19.06,false,7,184,2021,199
+487,2024-05-02T00:00:00.000,PROD_A,19.53,false,9,216,2977,235
+488,2024-05-03T00:00:00.000,PROD_A,19.9,false,9,185,2770,201
+489,2024-05-04T00:00:00.000,PROD_A,19.94,false,8,233,2512,247
+490,2024-05-05T00:00:00.000,PROD_A,18.15,true,9,207,2034,255
+491,2024-05-06T00:00:00.000,PROD_A,19.91,false,5,207,2688,229
+492,2024-05-07T00:00:00.000,PROD_A,20.62,false,8,202,3105,205
+493,2024-05-08T00:00:00.000,PROD_A,20.72,false,9,224,2230,255
+494,2024-05-09T00:00:00.000,PROD_A,21.12,true,9,177,2489,202
+495,2024-05-10T00:00:00.000,PROD_A,20.67,false,8,191,2310,226
+496,2024-05-11T00:00:00.000,PROD_A,18.84,false,9,162,2045,181
+497,2024-05-12T00:00:00.000,PROD_A,21.02,false,5,209,2031,218
+498,2024-05-13T00:00:00.000,PROD_A,21.94,true,5,182,3125,209
+499,2024-05-14T00:00:00.000,PROD_A,18.24,false,9,167,2693,186
+500,2024-05-15T00:00:00.000,PROD_A,19.65,false,8,185,2017,201
+501,2024-05-16T00:00:00.000,PROD_A,21.3,false,6,209,2526,222
+502,2024-05-17T00:00:00.000,PROD_A,18.75,false,6,239,2350,282
+503,2024-05-18T00:00:00.000,PROD_A,20.74,true,5,211,2911,220
+504,2024-05-19T00:00:00.000,PROD_A,19.56,false,9,243,2041,278
+505,2024-05-20T00:00:00.000,PROD_A,18.92,false,6,177,2867,197
+506,2024-05-21T00:00:00.000,PROD_A,19.51,false,7,178,1988,183
+507,2024-05-22T00:00:00.000,PROD_A,20.63,false,7,176,3088,180
+508,2024-05-23T00:00:00.000,PROD_A,21.86,false,5,169,2109,191
+509,2024-05-24T00:00:00.000,PROD_A,20.53,false,9,169,2510,186
+510,2024-05-25T00:00:00.000,PROD_A,21.12,false,8,197,2036,216
+511,2024-05-26T00:00:00.000,PROD_A,19.85,false,7,176,2685,173
+512,2024-05-27T00:00:00.000,PROD_A,21.38,false,8,200,2140,200
+513,2024-05-28T00:00:00.000,PROD_A,20.69,false,6,164,1964,181
+514,2024-05-29T00:00:00.000,PROD_A,20.53,false,9,212,2282,230
+515,2024-05-30T00:00:00.000,PROD_A,20.27,false,5,215,1736,225
+516,2024-05-31T00:00:00.000,PROD_A,20.09,false,9,163,2084,187
+517,2024-06-01T00:00:00.000,PROD_A,19.69,false,7,240,2024,254
+518,2024-06-02T00:00:00.000,PROD_A,19.47,false,8,219,1978,228
+519,2024-06-03T00:00:00.000,PROD_A,18.56,true,7,241,2875,276
+520,2024-06-04T00:00:00.000,PROD_A,18.05,true,5,191,2410,214
+521,2024-06-05T00:00:00.000,PROD_A,18.72,false,5,245,2192,267
+522,2024-06-06T00:00:00.000,PROD_A,19.11,true,6,220,2643,239
+523,2024-06-07T00:00:00.000,PROD_A,18.62,false,7,249,1906,275
+524,2024-06-08T00:00:00.000,PROD_A,20.71,false,6,277,1886,315
+525,2024-06-09T00:00:00.000,PROD_A,19.38,false,5,212,1748,240
+526,2024-06-10T00:00:00.000,PROD_A,21.72,false,6,272,2008,280
+527,2024-06-11T00:00:00.000,PROD_A,18.24,false,7,222,2131,242
+528,2024-06-12T00:00:00.000,PROD_A,19.68,false,6,246,1797,254
+529,2024-06-13T00:00:00.000,PROD_A,20.25,true,6,174,2460,189
+530,2024-06-14T00:00:00.000,PROD_A,21.52,false,9,267,2703,294
+531,2024-06-15T00:00:00.000,PROD_A,21.55,false,7,270,2579,300
+532,2024-06-16T00:00:00.000,PROD_A,20.5,true,9,249,2881,280
+533,2024-06-17T00:00:00.000,PROD_A,21.42,true,6,223,1664,249
+534,2024-06-18T00:00:00.000,PROD_A,20.51,false,7,227,2783,245
+535,2024-06-19T00:00:00.000,PROD_A,20.72,false,5,228,2006,246
+536,2024-06-20T00:00:00.000,PROD_A,19.12,true,7,216,2524,222
+537,2024-06-21T00:00:00.000,PROD_A,20.14,true,5,218,2604,239
+538,2024-06-22T00:00:00.000,PROD_A,20.08,false,6,218,1764,235
+539,2024-06-23T00:00:00.000,PROD_A,20.35,false,8,235,2166,260
+540,2024-06-24T00:00:00.000,PROD_A,19.51,false,9,149,2327,175
+541,2024-06-25T00:00:00.000,PROD_A,20.5,false,8,206,1907,218
+542,2024-06-26T00:00:00.000,PROD_A,21.13,false,6,182,3077,205
+543,2024-06-27T00:00:00.000,PROD_A,20.18,false,7,200,1788,210
+544,2024-06-28T00:00:00.000,PROD_A,20.71,false,7,196,2820,216
+545,2024-06-29T00:00:00.000,PROD_A,18.98,false,6,282,1750,305
+546,2024-06-30T00:00:00.000,PROD_A,20.2,false,8,278,2759,291
+547,2024-07-01T00:00:00.000,PROD_A,18.35,false,6,154,2144,175
+548,2024-07-02T00:00:00.000,PROD_A,18.82,false,5,148,2622,164
+549,2024-07-03T00:00:00.000,PROD_A,18.86,false,9,145,2492,163
+550,2024-07-04T00:00:00.000,PROD_A,19.09,false,7,131,1885,147
+551,2024-07-05T00:00:00.000,PROD_A,20.1,false,6,170,1719,182
+552,2024-07-06T00:00:00.000,PROD_A,18.38,false,9,194,2012,216
+553,2024-07-07T00:00:00.000,PROD_A,20.93,true,6,151,2982,152
+554,2024-07-08T00:00:00.000,PROD_A,20.63,false,8,134,2477,144
+555,2024-07-09T00:00:00.000,PROD_A,19.8,true,9,154,1880,152
+556,2024-07-10T00:00:00.000,PROD_A,21.04,false,9,121,1960,143
+557,2024-07-11T00:00:00.000,PROD_A,18.29,false,8,127,2802,110
+558,2024-07-12T00:00:00.000,PROD_A,20.01,false,7,151,1710,152
+559,2024-07-13T00:00:00.000,PROD_A,19.2,false,9,180,2243,187
+560,2024-07-14T00:00:00.000,PROD_A,19.95,false,9,175,1874,182
+561,2024-07-15T00:00:00.000,PROD_A,21.13,true,5,102,1774,112
+562,2024-07-16T00:00:00.000,PROD_A,19.56,false,8,115,1904,139
+563,2024-07-17T00:00:00.000,PROD_A,19.32,false,8,109,2414,108
+564,2024-07-18T00:00:00.000,PROD_A,18.63,false,9,134,2006,146
+565,2024-07-19T00:00:00.000,PROD_A,20.41,true,5,118,3075,115
+566,2024-07-20T00:00:00.000,PROD_A,20.32,false,8,155,2785,182
+567,2024-07-21T00:00:00.000,PROD_A,21.4,false,7,180,1720,214
+568,2024-07-22T00:00:00.000,PROD_A,20.13,true,7,150,2458,170
+569,2024-07-23T00:00:00.000,PROD_A,20.53,false,6,147,2929,137
+570,2024-07-24T00:00:00.000,PROD_A,18.09,false,8,164,3092,169
+571,2024-07-25T00:00:00.000,PROD_A,21.31,false,5,121,1730,118
+572,2024-07-26T00:00:00.000,PROD_A,19.58,false,6,81,3113,100
+573,2024-07-27T00:00:00.000,PROD_A,20.99,false,7,142,2901,155
+574,2024-07-28T00:00:00.000,PROD_A,20.67,false,5,101,1657,108
+575,2024-07-29T00:00:00.000,PROD_A,19.83,false,9,126,2519,152
+576,2024-07-30T00:00:00.000,PROD_A,19.72,false,7,151,1691,163
+577,2024-07-31T00:00:00.000,PROD_A,19.52,false,5,132,3055,143
+578,2024-08-01T00:00:00.000,PROD_A,20.55,false,9,140,1852,154
+579,2024-08-02T00:00:00.000,PROD_A,20.08,false,8,114,1687,121
+580,2024-08-03T00:00:00.000,PROD_A,19.34,false,7,130,3051,149
+581,2024-08-04T00:00:00.000,PROD_A,18.1,true,5,161,2108,158
+582,2024-08-05T00:00:00.000,PROD_A,19.93,false,9,83,2935,94
+583,2024-08-06T00:00:00.000,PROD_A,20.71,false,6,119,3031,134
+584,2024-08-07T00:00:00.000,PROD_A,21.44,true,8,123,2986,143
+585,2024-08-08T00:00:00.000,PROD_A,19.37,false,6,134,2924,151
+586,2024-08-09T00:00:00.000,PROD_A,20.53,true,7,132,2923,126
+587,2024-08-10T00:00:00.000,PROD_A,20.05,false,8,156,1841,172
+588,2024-08-11T00:00:00.000,PROD_A,20.7,false,8,165,2369,183
+589,2024-08-12T00:00:00.000,PROD_A,21.24,false,5,134,1914,156
+590,2024-08-13T00:00:00.000,PROD_A,18.92,false,7,102,2739,125
+591,2024-08-14T00:00:00.000,PROD_A,20.46,true,6,104,1870,123
+592,2024-08-15T00:00:00.000,PROD_A,21.34,false,5,122,2408,136
+593,2024-08-16T00:00:00.000,PROD_A,21.51,false,6,103,2672,94
+594,2024-08-17T00:00:00.000,PROD_A,20.66,false,7,90,2684,83
+595,2024-08-18T00:00:00.000,PROD_A,20.37,false,5,106,2682,132
+596,2024-08-19T00:00:00.000,PROD_A,18.97,false,9,125,2255,135
+597,2024-08-20T00:00:00.000,PROD_A,18.45,false,5,101,1980,102
+598,2024-08-21T00:00:00.000,PROD_A,21.06,false,6,123,2195,142
+599,2024-08-22T00:00:00.000,PROD_A,19.85,false,8,112,3114,122
+600,2024-08-23T00:00:00.000,PROD_A,20.04,false,6,88,3054,111
+601,2024-08-24T00:00:00.000,PROD_A,18.21,false,8,142,2605,158
+602,2024-08-25T00:00:00.000,PROD_A,20.9,false,9,138,2948,150
+603,2024-08-26T00:00:00.000,PROD_A,21.57,false,8,96,2176,106
+604,2024-08-27T00:00:00.000,PROD_A,20.7,false,6,76,1995,98
+605,2024-08-28T00:00:00.000,PROD_A,20.09,false,5,88,1871,99
+606,2024-08-29T00:00:00.000,PROD_A,20.58,true,5,99,1957,114
+607,2024-08-30T00:00:00.000,PROD_A,18.38,false,6,102,2261,100
+608,2024-08-31T00:00:00.000,PROD_A,18.86,false,5,137,1745,161
+609,2024-09-01T00:00:00.000,PROD_A,19.32,true,5,102,2969,104
+610,2024-09-02T00:00:00.000,PROD_A,19.09,false,6,130,2991,122
+611,2024-09-03T00:00:00.000,PROD_A,20.72,false,9,144,2222,153
+612,2024-09-04T00:00:00.000,PROD_A,21.7,false,9,114,2625,125
+613,2024-09-05T00:00:00.000,PROD_A,21.1,false,7,114,2494,123
+614,2024-09-06T00:00:00.000,PROD_A,20.15,false,8,128,2993,149
+615,2024-09-07T00:00:00.000,PROD_A,19,false,9,120,1808,140
+616,2024-09-08T00:00:00.000,PROD_A,21.58,false,6,129,2036,128
+617,2024-09-09T00:00:00.000,PROD_A,19.8,true,7,93,2982,97
+618,2024-09-10T00:00:00.000,PROD_A,20.65,false,9,117,2284,135
+619,2024-09-11T00:00:00.000,PROD_A,19.08,false,5,128,2208,148
+620,2024-09-12T00:00:00.000,PROD_A,19.38,false,7,105,2729,120
+621,2024-09-13T00:00:00.000,PROD_A,20.63,false,5,121,2505,141
+622,2024-09-14T00:00:00.000,PROD_A,21.92,false,8,104,2336,111
+623,2024-09-15T00:00:00.000,PROD_A,21.39,false,9,116,2960,139
+624,2024-09-16T00:00:00.000,PROD_A,18.43,false,6,95,2260,89
+625,2024-09-17T00:00:00.000,PROD_A,19.71,false,7,104,2977,104
+626,2024-09-18T00:00:00.000,PROD_A,21.66,true,6,89,2028,107
+627,2024-09-19T00:00:00.000,PROD_A,18.97,false,9,66,1682,80
+628,2024-09-20T00:00:00.000,PROD_A,21.13,false,8,119,2222,123
+629,2024-09-21T00:00:00.000,PROD_A,18.45,true,9,131,2012,149
+630,2024-09-22T00:00:00.000,PROD_A,19.08,false,8,132,2397,140
+631,2024-09-23T00:00:00.000,PROD_A,18.02,false,7,91,2987,96
+632,2024-09-24T00:00:00.000,PROD_A,19.99,false,9,96,2200,96
+633,2024-09-25T00:00:00.000,PROD_A,21.53,false,6,93,2245,108
+634,2024-09-26T00:00:00.000,PROD_A,18.14,false,9,129,2303,151
+635,2024-09-27T00:00:00.000,PROD_A,19.06,false,8,73,2305,80
+636,2024-09-28T00:00:00.000,PROD_A,21.96,false,8,133,2110,150
+637,2024-09-29T00:00:00.000,PROD_A,21.35,false,8,126,2809,145
+638,2024-09-30T00:00:00.000,PROD_A,21.16,false,5,105,2931,114
+639,2024-10-01T00:00:00.000,PROD_A,20.42,false,9,112,3072,129
+640,2024-10-02T00:00:00.000,PROD_A,20.28,false,7,87,2675,88
+641,2024-10-03T00:00:00.000,PROD_A,19.88,false,8,110,3001,119
+642,2024-10-04T00:00:00.000,PROD_A,18.87,true,7,108,3067,138
+643,2024-10-05T00:00:00.000,PROD_A,19.88,false,5,111,2653,121
+644,2024-10-06T00:00:00.000,PROD_A,18.39,false,8,101,2667,96
+645,2024-10-07T00:00:00.000,PROD_A,21.07,true,9,81,2900,83
+646,2024-10-08T00:00:00.000,PROD_A,19.07,false,7,84,2150,110
+647,2024-10-09T00:00:00.000,PROD_A,21.15,false,9,72,1932,80
+648,2024-10-10T00:00:00.000,PROD_A,18.15,false,5,135,3111,148
+649,2024-10-11T00:00:00.000,PROD_A,20.84,false,8,105,2300,110
+650,2024-10-12T00:00:00.000,PROD_A,21.99,false,7,117,2014,120
+651,2024-10-13T00:00:00.000,PROD_A,18.86,true,5,118,1797,133
+652,2024-10-14T00:00:00.000,PROD_A,19.59,true,5,145,2407,144
+653,2024-10-15T00:00:00.000,PROD_A,19.28,false,8,105,2816,109
+654,2024-10-16T00:00:00.000,PROD_A,19.47,false,7,122,3077,142
+655,2024-10-17T00:00:00.000,PROD_A,20.3,false,5,87,2460,85
+656,2024-10-18T00:00:00.000,PROD_A,20.23,false,6,125,2967,139
+657,2024-10-19T00:00:00.000,PROD_A,20.56,false,8,127,2577,144
+658,2024-10-20T00:00:00.000,PROD_A,20.64,true,8,141,1829,155
+659,2024-10-21T00:00:00.000,PROD_A,19.77,false,7,144,2840,140
+660,2024-10-22T00:00:00.000,PROD_A,19.14,false,7,58,2535,80
+661,2024-10-23T00:00:00.000,PROD_A,18.83,false,7,115,2439,120
+662,2024-10-24T00:00:00.000,PROD_A,20.25,true,7,87,2107,84
+663,2024-10-25T00:00:00.000,PROD_A,19.01,false,6,96,2809,116
+664,2024-10-26T00:00:00.000,PROD_A,21.28,true,8,189,3063,191
+665,2024-10-27T00:00:00.000,PROD_A,19.98,false,5,90,2715,94
+666,2024-10-28T00:00:00.000,PROD_A,18.29,false,7,108,1641,113
+667,2024-10-29T00:00:00.000,PROD_A,20.95,false,7,168,3094,165
+668,2024-10-30T00:00:00.000,PROD_A,21.91,true,7,101,1692,106
+669,2024-10-31T00:00:00.000,PROD_A,20.57,false,6,126,1742,136
+670,2024-11-01T00:00:00.000,PROD_A,18.81,false,6,197,2857,212
+671,2024-11-02T00:00:00.000,PROD_A,21.85,true,8,171,2450,203
+672,2024-11-03T00:00:00.000,PROD_A,18.09,false,6,187,2875,217
+673,2024-11-04T00:00:00.000,PROD_A,19.74,false,8,182,2903,194
+674,2024-11-05T00:00:00.000,PROD_A,20.13,false,6,140,2806,156
+675,2024-11-06T00:00:00.000,PROD_A,20.77,false,6,226,1967,263
+676,2024-11-07T00:00:00.000,PROD_A,19.91,false,6,190,3032,218
+677,2024-11-08T00:00:00.000,PROD_A,21.82,false,5,198,1663,191
+678,2024-11-09T00:00:00.000,PROD_A,21.03,false,7,209,2689,227
+679,2024-11-10T00:00:00.000,PROD_A,21.9,true,5,158,1730,172
+680,2024-11-11T00:00:00.000,PROD_A,19.15,false,6,148,2610,172
+681,2024-11-12T00:00:00.000,PROD_A,18.66,false,8,192,2998,197
+682,2024-11-13T00:00:00.000,PROD_A,19.32,false,7,205,3115,218
+683,2024-11-14T00:00:00.000,PROD_A,20.33,true,7,155,2074,170
+684,2024-11-15T00:00:00.000,PROD_A,18.05,false,5,126,2039,137
+685,2024-11-16T00:00:00.000,PROD_A,20.27,false,8,206,2323,220
+686,2024-11-17T00:00:00.000,PROD_A,19.61,false,8,220,1670,242
+687,2024-11-18T00:00:00.000,PROD_A,21.61,false,7,147,3066,158
+688,2024-11-19T00:00:00.000,PROD_A,19.91,false,8,193,2405,201
+689,2024-11-20T00:00:00.000,PROD_A,18.57,false,7,184,2782,199
+690,2024-11-21T00:00:00.000,PROD_A,19.38,false,8,168,2809,185
+691,2024-11-22T00:00:00.000,PROD_A,19.06,false,5,196,2545,237
+692,2024-11-23T00:00:00.000,PROD_A,18.54,false,7,179,2600,206
+693,2024-11-24T00:00:00.000,PROD_A,20.28,false,5,245,2602,288
+694,2024-11-25T00:00:00.000,PROD_A,18.74,false,8,175,2328,178
+695,2024-11-26T00:00:00.000,PROD_A,19.09,true,7,233,2738,261
+696,2024-11-27T00:00:00.000,PROD_A,21.32,false,8,149,2702,168
+697,2024-11-28T00:00:00.000,PROD_A,21.57,false,9,137,2966,153
+698,2024-11-29T00:00:00.000,PROD_A,18.73,false,9,157,2576,173
+699,2024-11-30T00:00:00.000,PROD_A,20.98,false,9,238,2198,263
+700,2024-12-01T00:00:00.000,PROD_A,21.27,false,6,212,1785,221
+701,2024-12-02T00:00:00.000,PROD_A,20.97,false,6,246,2822,278
+702,2024-12-03T00:00:00.000,PROD_A,20.42,false,7,239,2763,257
+703,2024-12-04T00:00:00.000,PROD_A,18.16,false,6,225,3092,243
+704,2024-12-05T00:00:00.000,PROD_A,21.62,false,7,273,2818,285
+705,2024-12-06T00:00:00.000,PROD_A,21.9,true,8,263,2589,279
+706,2024-12-07T00:00:00.000,PROD_A,20.97,false,7,179,2044,214
+707,2024-12-08T00:00:00.000,PROD_A,18.17,false,6,225,1827,238
+708,2024-12-09T00:00:00.000,PROD_A,19.41,true,8,189,3071,211
+709,2024-12-10T00:00:00.000,PROD_A,20.43,true,5,250,1731,273
+710,2024-12-11T00:00:00.000,PROD_A,21.15,false,5,240,2118,250
+711,2024-12-12T00:00:00.000,PROD_A,21.82,false,7,255,2933,277
+712,2024-12-13T00:00:00.000,PROD_A,20.63,false,9,290,2326,317
+713,2024-12-14T00:00:00.000,PROD_A,18.94,false,8,251,2511,284
+714,2024-12-15T00:00:00.000,PROD_A,21.2,false,6,231,2268,255
+715,2024-12-16T00:00:00.000,PROD_A,20.94,false,7,276,2054,313
+716,2024-12-17T00:00:00.000,PROD_A,20.54,false,7,199,2804,230
+717,2024-12-18T00:00:00.000,PROD_A,19.98,false,6,208,2302,236
+718,2024-12-19T00:00:00.000,PROD_A,20.39,false,5,212,2297,231
+719,2024-12-20T00:00:00.000,PROD_A,21.82,false,7,282,2375,310
+720,2024-12-21T00:00:00.000,PROD_A,18.88,false,8,285,2668,315
+721,2024-12-22T00:00:00.000,PROD_A,18.98,false,7,272,2386,309
+722,2024-12-23T00:00:00.000,PROD_A,19.31,false,9,257,1796,285
+723,2024-12-24T00:00:00.000,PROD_A,21.24,false,9,261,3010,285
+724,2024-12-25T00:00:00.000,PROD_A,20.66,false,6,315,2584,346
+725,2024-12-26T00:00:00.000,PROD_A,20.77,false,7,242,1745,275
+726,2024-12-27T00:00:00.000,PROD_A,18.43,false,8,196,2762,222
+727,2024-12-28T00:00:00.000,PROD_A,19.45,true,9,263,2317,317
+728,2024-12-29T00:00:00.000,PROD_A,21.19,true,6,323,2071,356
+729,2024-12-30T00:00:00.000,PROD_A,18.36,false,5,283,3078,308
+730,2024-12-31T00:00:00.000,PROD_A,18.35,false,8,286,2438,306
+731,2025-01-01T00:00:00.000,PROD_A,20.26,false,6,124,2356,135
+732,2025-01-02T00:00:00.000,PROD_A,20.79,false,5,136,2405,151
+733,2025-01-03T00:00:00.000,PROD_A,19.07,false,9,152,2643,185
+734,2025-01-04T00:00:00.000,PROD_A,19.47,false,6,153,2215,159
+735,2025-01-05T00:00:00.000,PROD_A,18.43,false,8,177,3018,197
+736,2025-01-06T00:00:00.000,PROD_A,21.18,false,9,156,2481,175
+737,2025-01-07T00:00:00.000,PROD_A,18.56,true,6,151,2992,174
+738,2025-01-08T00:00:00.000,PROD_A,21.82,true,7,154,3093,156
+739,2025-01-09T00:00:00.000,PROD_A,21.69,false,7,158,2973,174
+740,2025-01-10T00:00:00.000,PROD_A,20.44,false,8,122,2946,148
+741,2025-01-11T00:00:00.000,PROD_A,21.68,false,5,162,2155,180
+742,2025-01-12T00:00:00.000,PROD_A,20.57,false,6,164,2761,182
+743,2025-01-13T00:00:00.000,PROD_A,21.18,false,6,159,1892,173
+744,2025-01-14T00:00:00.000,PROD_A,20.51,false,8,168,2163,175
+745,2025-01-15T00:00:00.000,PROD_A,20.63,false,5,140,1854,153
+746,2025-01-16T00:00:00.000,PROD_A,18.61,true,6,145,3069,169
+747,2025-01-17T00:00:00.000,PROD_A,19.36,false,5,166,3041,170
+748,2025-01-18T00:00:00.000,PROD_A,21.63,false,5,176,1692,192
+749,2025-01-19T00:00:00.000,PROD_A,21.54,false,9,188,2969,210
+750,2025-01-20T00:00:00.000,PROD_A,21.89,false,6,218,1766,246
+751,2025-01-21T00:00:00.000,PROD_A,19.16,false,9,180,2546,222
+752,2025-01-22T00:00:00.000,PROD_A,19.51,false,6,198,2344,212
+753,2025-01-23T00:00:00.000,PROD_A,20.12,true,6,160,2429,177
+754,2025-01-24T00:00:00.000,PROD_A,20.87,false,7,178,3013,198
+755,2025-01-25T00:00:00.000,PROD_A,19.06,false,8,219,2562,254
+756,2025-01-26T00:00:00.000,PROD_A,18.33,true,6,192,2182,199
+757,2025-01-27T00:00:00.000,PROD_A,18.63,false,8,175,2998,192
+758,2025-01-28T00:00:00.000,PROD_A,21.43,false,8,175,2396,201
+759,2025-01-29T00:00:00.000,PROD_A,20.93,false,7,189,2165,225
+760,2025-01-30T00:00:00.000,PROD_A,18.14,false,8,149,3002,166
+761,2025-01-31T00:00:00.000,PROD_A,18.22,false,6,180,2405,200
+762,2025-02-01T00:00:00.000,PROD_A,18.95,false,6,224,2458,256
+763,2025-02-02T00:00:00.000,PROD_A,19.63,false,6,218,2707,259
+764,2025-02-03T00:00:00.000,PROD_A,20.23,false,8,169,2804,197
+765,2025-02-04T00:00:00.000,PROD_A,21.94,false,6,228,3124,270
+766,2025-02-05T00:00:00.000,PROD_A,19.79,false,5,172,2710,193
+767,2025-02-06T00:00:00.000,PROD_A,21.44,false,5,172,3109,171
+768,2025-02-07T00:00:00.000,PROD_A,20.03,false,8,167,2996,185
+769,2025-02-08T00:00:00.000,PROD_A,19.92,true,8,210,3043,221
+770,2025-02-09T00:00:00.000,PROD_A,21.58,true,8,203,2164,214
+771,2025-02-10T00:00:00.000,PROD_A,18.4,false,5,170,1925,184
+772,2025-02-11T00:00:00.000,PROD_A,19.76,false,6,183,2019,192
+773,2025-02-12T00:00:00.000,PROD_A,19.51,false,8,216,2494,234
+774,2025-02-13T00:00:00.000,PROD_A,18.85,false,9,166,1918,175
+775,2025-02-14T00:00:00.000,PROD_A,18.91,false,8,184,2488,198
+776,2025-02-15T00:00:00.000,PROD_A,20.89,false,7,192,2426,222
+777,2025-02-16T00:00:00.000,PROD_A,19.74,false,9,207,2960,227
+778,2025-02-17T00:00:00.000,PROD_A,18.6,false,5,184,2133,187
+779,2025-02-18T00:00:00.000,PROD_A,20.45,true,9,187,1782,210
+780,2025-02-19T00:00:00.000,PROD_A,18.39,false,9,178,1794,190
+781,2025-02-20T00:00:00.000,PROD_A,18.4,false,6,192,1673,218
+782,2025-02-21T00:00:00.000,PROD_A,20.47,false,7,184,2260,206
+783,2025-02-22T00:00:00.000,PROD_A,19.97,false,7,212,3041,239
+784,2025-02-23T00:00:00.000,PROD_A,20.31,false,8,190,2004,211
+785,2025-02-24T00:00:00.000,PROD_A,21.98,false,9,186,2489,207
+786,2025-02-25T00:00:00.000,PROD_A,20.87,false,8,176,2197,212
+787,2025-02-26T00:00:00.000,PROD_A,19.6,true,8,193,2447,219
+788,2025-02-27T00:00:00.000,PROD_A,18.48,false,7,165,2752,168
+789,2025-02-28T00:00:00.000,PROD_A,18.9,false,7,203,1833,227
+790,2025-03-01T00:00:00.000,PROD_A,19.41,true,6,235,2805,255
+791,2025-03-02T00:00:00.000,PROD_A,20.19,true,6,224,3087,245
+792,2025-03-03T00:00:00.000,PROD_A,18.07,false,9,186,2572,200
+793,2025-03-04T00:00:00.000,PROD_A,19.5,false,9,219,2863,249
+794,2025-03-05T00:00:00.000,PROD_A,21.44,false,8,212,2189,245
+795,2025-03-06T00:00:00.000,PROD_A,21.89,false,8,181,1915,213
+796,2025-03-07T00:00:00.000,PROD_A,19.64,false,7,209,2515,243
+797,2025-03-08T00:00:00.000,PROD_A,21.19,false,7,201,2552,231
+798,2025-03-09T00:00:00.000,PROD_A,21.72,false,8,218,1652,230
+799,2025-03-10T00:00:00.000,PROD_A,19.79,false,8,205,3121,233
+800,2025-03-11T00:00:00.000,PROD_A,18.73,true,6,224,2863,243
+801,2025-03-12T00:00:00.000,PROD_A,20.37,false,8,168,1748,184
+802,2025-03-13T00:00:00.000,PROD_A,18.47,false,5,229,2707,260
+803,2025-03-14T00:00:00.000,PROD_A,18.8,false,9,200,2051,206
+804,2025-03-15T00:00:00.000,PROD_A,19.16,false,7,229,1731,257
+805,2025-03-16T00:00:00.000,PROD_A,19,true,9,239,3040,262
+806,2025-03-17T00:00:00.000,PROD_A,21.79,false,8,183,2774,205
+807,2025-03-18T00:00:00.000,PROD_A,18.26,true,8,204,2062,220
+808,2025-03-19T00:00:00.000,PROD_A,20.81,false,6,218,2128,255
+809,2025-03-20T00:00:00.000,PROD_A,21.44,false,7,215,2661,237
+810,2025-03-21T00:00:00.000,PROD_A,20.08,true,7,213,2437,217
+811,2025-03-22T00:00:00.000,PROD_A,21.65,false,8,228,2094,233
+812,2025-03-23T00:00:00.000,PROD_A,20.83,true,5,206,2283,235
+813,2025-03-24T00:00:00.000,PROD_A,19.5,false,8,198,1755,218
+814,2025-03-25T00:00:00.000,PROD_A,20.2,true,6,208,2244,227
+815,2025-03-26T00:00:00.000,PROD_A,20.83,true,7,194,2712,194
+816,2025-03-27T00:00:00.000,PROD_A,18.05,false,9,183,2215,190
+817,2025-03-28T00:00:00.000,PROD_A,19.17,false,8,193,1730,220
+818,2025-03-29T00:00:00.000,PROD_A,21.68,false,5,203,3038,224
+819,2025-03-30T00:00:00.000,PROD_A,19.89,false,8,214,3053,244
+820,2025-03-31T00:00:00.000,PROD_A,20.56,true,8,177,2114,191
+821,2025-04-01T00:00:00.000,PROD_A,19.3,false,5,204,2967,211
+822,2025-04-02T00:00:00.000,PROD_A,19.14,false,7,178,2785,205
+823,2025-04-03T00:00:00.000,PROD_A,18.44,true,9,166,2380,189
+824,2025-04-04T00:00:00.000,PROD_A,18.81,false,6,171,1761,184
+825,2025-04-05T00:00:00.000,PROD_A,20.75,true,7,237,3058,263
+826,2025-04-06T00:00:00.000,PROD_A,20.83,false,9,217,1706,222
+827,2025-04-07T00:00:00.000,PROD_A,20.98,true,7,191,2132,207
+828,2025-04-08T00:00:00.000,PROD_A,21.84,false,5,162,2119,139
+829,2025-04-09T00:00:00.000,PROD_A,20.64,false,9,195,1899,204
+830,2025-04-10T00:00:00.000,PROD_A,20.31,false,9,181,2260,216
+831,2025-04-11T00:00:00.000,PROD_A,19.65,false,5,152,2736,151
+832,2025-04-12T00:00:00.000,PROD_A,19.08,true,6,225,2420,249
+833,2025-04-13T00:00:00.000,PROD_A,19.02,false,9,241,2187,254
+834,2025-04-14T00:00:00.000,PROD_A,18.96,false,7,185,1716,198
+835,2025-04-15T00:00:00.000,PROD_A,19.75,false,6,177,2191,201
+836,2025-04-16T00:00:00.000,PROD_A,20.75,false,8,203,1771,219
+837,2025-04-17T00:00:00.000,PROD_A,18.83,false,6,211,2035,220
+838,2025-04-18T00:00:00.000,PROD_A,20.61,false,9,208,2731,234
+839,2025-04-19T00:00:00.000,PROD_A,20.23,false,6,237,2105,264
+840,2025-04-20T00:00:00.000,PROD_A,21.85,false,9,208,1779,221
+841,2025-04-21T00:00:00.000,PROD_A,18.15,false,8,205,1840,236
+842,2025-04-22T00:00:00.000,PROD_A,19.76,false,6,200,2155,229
+843,2025-04-23T00:00:00.000,PROD_A,18.9,false,7,176,1787,185
+844,2025-04-24T00:00:00.000,PROD_A,20.36,false,8,196,3118,209
+845,2025-04-25T00:00:00.000,PROD_A,21.05,false,8,160,2208,189
+846,2025-04-26T00:00:00.000,PROD_A,19.73,false,5,201,2329,219
+847,2025-04-27T00:00:00.000,PROD_A,19.4,true,5,176,2771,188
+848,2025-04-28T00:00:00.000,PROD_A,20.04,true,9,227,1745,258
+849,2025-04-29T00:00:00.000,PROD_A,20.91,false,9,205,2886,224
+850,2025-04-30T00:00:00.000,PROD_A,19.8,true,5,239,1769,247
+851,2025-05-01T00:00:00.000,PROD_A,18.32,false,6,218,2823,241
+852,2025-05-02T00:00:00.000,PROD_A,20.31,false,7,208,2842,233
+853,2025-05-03T00:00:00.000,PROD_A,20.77,false,6,185,2768,203
+854,2025-05-04T00:00:00.000,PROD_A,21.9,false,5,178,2499,201
+855,2025-05-05T00:00:00.000,PROD_A,18.56,false,8,172,2360,183
+856,2025-05-06T00:00:00.000,PROD_A,19.09,true,8,161,2849,169
+857,2025-05-07T00:00:00.000,PROD_A,21.65,true,9,167,2700,181
+858,2025-05-08T00:00:00.000,PROD_A,19.56,false,5,237,1717,257
+859,2025-05-09T00:00:00.000,PROD_A,21.93,false,7,204,2647,214
+860,2025-05-10T00:00:00.000,PROD_A,18.28,false,9,200,1865,219
+861,2025-05-11T00:00:00.000,PROD_A,19.46,false,6,185,1760,186
+862,2025-05-12T00:00:00.000,PROD_A,21.88,true,7,211,2471,225
+863,2025-05-13T00:00:00.000,PROD_A,21.09,false,6,196,1842,227
+864,2025-05-14T00:00:00.000,PROD_A,21.92,false,6,201,1905,241
+865,2025-05-15T00:00:00.000,PROD_A,20.63,false,8,140,2941,160
+866,2025-05-16T00:00:00.000,PROD_A,20.49,false,9,158,1884,168
+867,2025-05-17T00:00:00.000,PROD_A,19.33,false,8,179,1754,198
+868,2025-05-18T00:00:00.000,PROD_A,20.52,false,6,208,2617,245
+869,2025-05-19T00:00:00.000,PROD_A,21.11,false,8,215,1650,234
+870,2025-05-20T00:00:00.000,PROD_A,21.63,false,5,218,1974,247
+871,2025-05-21T00:00:00.000,PROD_A,19.26,false,5,172,2056,173
+872,2025-05-22T00:00:00.000,PROD_A,18.52,false,6,180,2555,195
+873,2025-05-23T00:00:00.000,PROD_A,19.62,true,7,155,2268,165
+874,2025-05-24T00:00:00.000,PROD_A,19.94,false,6,206,2910,222
+875,2025-05-25T00:00:00.000,PROD_A,21.94,true,8,172,1993,179
+876,2025-05-26T00:00:00.000,PROD_A,18.29,false,7,214,2643,228
+877,2025-05-27T00:00:00.000,PROD_A,19.08,false,5,167,3017,199
+878,2025-05-28T00:00:00.000,PROD_A,18.4,false,9,140,1686,149
+879,2025-05-29T00:00:00.000,PROD_A,20.82,true,5,146,1687,155
+880,2025-05-30T00:00:00.000,PROD_A,18.81,false,7,196,2669,228
+881,2025-05-31T00:00:00.000,PROD_A,18.08,true,8,223,2492,237
+882,2025-06-01T00:00:00.000,PROD_A,19.5,true,5,214,2228,231
+883,2025-06-02T00:00:00.000,PROD_A,19.68,false,8,313,2738,348
+884,2025-06-03T00:00:00.000,PROD_A,20.23,false,9,218,2325,244
+885,2025-06-04T00:00:00.000,PROD_A,20.1,false,5,214,2820,225
+886,2025-06-05T00:00:00.000,PROD_A,21.3,false,5,217,2454,224
+887,2025-06-06T00:00:00.000,PROD_A,21.14,false,7,201,2983,210
+888,2025-06-07T00:00:00.000,PROD_A,19.67,true,7,265,3058,294
+889,2025-06-08T00:00:00.000,PROD_A,19.1,true,6,237,2798,266
+890,2025-06-09T00:00:00.000,PROD_A,20.55,true,6,238,2779,258
+891,2025-06-10T00:00:00.000,PROD_A,18.49,false,8,308,2233,326
+892,2025-06-11T00:00:00.000,PROD_A,19.06,false,6,238,2346,265
+893,2025-06-12T00:00:00.000,PROD_A,20.72,false,6,263,1734,284
+894,2025-06-13T00:00:00.000,PROD_A,21.05,false,7,185,2928,204
+895,2025-06-14T00:00:00.000,PROD_A,20.44,true,7,291,1906,321
+896,2025-06-15T00:00:00.000,PROD_A,18.24,true,7,257,1840,283
+897,2025-06-16T00:00:00.000,PROD_A,21.3,false,8,209,2495,217
+898,2025-06-17T00:00:00.000,PROD_A,19.74,false,9,225,3072,245
+899,2025-06-18T00:00:00.000,PROD_A,20.6,false,9,239,2040,267
+900,2025-06-19T00:00:00.000,PROD_A,19.28,false,6,195,2025,205
+901,2025-06-20T00:00:00.000,PROD_A,21.68,false,7,223,1710,250
+902,2025-06-21T00:00:00.000,PROD_A,18.31,false,5,235,2837,264
+903,2025-06-22T00:00:00.000,PROD_A,21.74,false,8,239,2309,259
+904,2025-06-23T00:00:00.000,PROD_A,19.09,false,5,193,1778,210
+905,2025-06-24T00:00:00.000,PROD_A,21.79,true,8,223,2362,255
+906,2025-06-25T00:00:00.000,PROD_A,18.91,false,9,191,2077,209
+907,2025-06-26T00:00:00.000,PROD_A,20.84,false,6,224,2400,246
+908,2025-06-27T00:00:00.000,PROD_A,20.67,false,8,228,2032,236
+909,2025-06-28T00:00:00.000,PROD_A,20.32,false,8,218,2907,240
+910,2025-06-29T00:00:00.000,PROD_A,19.11,false,9,273,1955,290
+911,2025-06-30T00:00:00.000,PROD_A,18.74,false,5,221,2895,234
+912,2025-07-01T00:00:00.000,PROD_A,19.94,true,6,185,2473,192
+913,2025-07-02T00:00:00.000,PROD_A,19.25,false,6,159,2017,165
+914,2025-07-03T00:00:00.000,PROD_A,19.11,false,6,144,3082,152
+915,2025-07-04T00:00:00.000,PROD_A,21.59,false,6,131,1731,146
+916,2025-07-05T00:00:00.000,PROD_A,19.06,false,5,158,1664,156
+917,2025-07-06T00:00:00.000,PROD_A,20.51,true,5,153,1679,177
+918,2025-07-07T00:00:00.000,PROD_A,18.07,false,7,172,2811,183
+919,2025-07-08T00:00:00.000,PROD_A,20.33,false,7,139,2414,170
+920,2025-07-09T00:00:00.000,PROD_A,21.31,false,5,163,2877,172
+921,2025-07-10T00:00:00.000,PROD_A,18.46,false,7,164,1918,181
+922,2025-07-11T00:00:00.000,PROD_A,21.1,false,9,130,2225,148
+923,2025-07-12T00:00:00.000,PROD_A,19.92,false,6,177,2266,210
+924,2025-07-13T00:00:00.000,PROD_A,18.43,true,7,153,2549,171
+925,2025-07-14T00:00:00.000,PROD_A,20.49,true,8,150,2818,157
+926,2025-07-15T00:00:00.000,PROD_A,19.6,false,5,140,2079,152
+927,2025-07-16T00:00:00.000,PROD_A,19.04,false,8,172,1761,184
+928,2025-07-17T00:00:00.000,PROD_A,18.24,false,6,150,1721,163
+929,2025-07-18T00:00:00.000,PROD_A,19.97,false,5,138,3061,165
+930,2025-07-19T00:00:00.000,PROD_A,18.29,false,5,167,2326,163
+931,2025-07-20T00:00:00.000,PROD_A,19.01,false,8,147,1855,165
+932,2025-07-21T00:00:00.000,PROD_A,19.63,false,7,150,2601,155
+933,2025-07-22T00:00:00.000,PROD_A,20.91,false,5,111,1663,127
+934,2025-07-23T00:00:00.000,PROD_A,18.03,false,7,105,1859,114
+935,2025-07-24T00:00:00.000,PROD_A,19.62,false,6,114,2206,140
+936,2025-07-25T00:00:00.000,PROD_A,19.23,false,8,125,2270,120
+937,2025-07-26T00:00:00.000,PROD_A,20.21,false,5,177,2888,190
+938,2025-07-27T00:00:00.000,PROD_A,19.44,false,9,136,3116,148
+939,2025-07-28T00:00:00.000,PROD_A,21.54,true,7,129,3078,135
+940,2025-07-29T00:00:00.000,PROD_A,19.94,false,8,118,2951,131
+941,2025-07-30T00:00:00.000,PROD_A,18.24,false,5,121,1757,113
+942,2025-07-31T00:00:00.000,PROD_A,19.23,false,8,100,2243,100
+943,2025-08-01T00:00:00.000,PROD_A,20.41,false,9,143,2955,142
+944,2025-08-02T00:00:00.000,PROD_A,19.15,false,8,157,2692,168
+945,2025-08-03T00:00:00.000,PROD_A,20.66,true,7,120,2026,124
+946,2025-08-04T00:00:00.000,PROD_A,18.91,false,6,117,2637,133
+947,2025-08-05T00:00:00.000,PROD_A,20.87,false,8,142,2130,175
+948,2025-08-06T00:00:00.000,PROD_A,18.16,false,5,137,2469,170
+949,2025-08-07T00:00:00.000,PROD_A,20.46,false,9,124,2902,129
+950,2025-08-08T00:00:00.000,PROD_A,20.95,false,6,114,2021,127
+951,2025-08-09T00:00:00.000,PROD_A,19.51,true,8,90,2893,104
+952,2025-08-10T00:00:00.000,PROD_A,18.41,false,6,132,2146,143
+953,2025-08-11T00:00:00.000,PROD_A,20.42,false,6,119,1641,130
+954,2025-08-12T00:00:00.000,PROD_A,18.09,true,9,106,2415,116
+955,2025-08-13T00:00:00.000,PROD_A,19.92,false,6,109,3134,103
+956,2025-08-14T00:00:00.000,PROD_A,20.5,false,9,115,2595,124
+957,2025-08-15T00:00:00.000,PROD_A,21.24,true,9,87,2447,86
+958,2025-08-16T00:00:00.000,PROD_A,19.97,false,5,62,2073,80
+959,2025-08-17T00:00:00.000,PROD_A,19.78,true,7,120,2128,133
+960,2025-08-18T00:00:00.000,PROD_A,18.65,false,5,84,2293,104
+961,2025-08-19T00:00:00.000,PROD_A,19.14,false,9,120,2448,128
+962,2025-08-20T00:00:00.000,PROD_A,18.32,true,5,97,2651,113
+963,2025-08-21T00:00:00.000,PROD_A,21.25,false,5,93,1959,110
+964,2025-08-22T00:00:00.000,PROD_A,19.71,true,8,120,2856,130
+965,2025-08-23T00:00:00.000,PROD_A,18.24,false,5,129,2962,154
+966,2025-08-24T00:00:00.000,PROD_A,19.49,false,7,118,2294,135
+967,2025-08-25T00:00:00.000,PROD_A,21.39,true,5,110,3039,117
+968,2025-08-26T00:00:00.000,PROD_A,19.09,false,7,80,2684,84
+969,2025-08-27T00:00:00.000,PROD_A,18.37,false,6,99,2456,104
+970,2025-08-28T00:00:00.000,PROD_A,20.61,false,8,99,1995,126
+971,2025-08-29T00:00:00.000,PROD_A,18.43,true,6,59,3034,80
+972,2025-08-30T00:00:00.000,PROD_A,19.31,false,8,141,2815,137
+973,2025-08-31T00:00:00.000,PROD_A,19.9,false,7,115,2475,129
+974,2025-09-01T00:00:00.000,PROD_A,18.68,false,5,111,2289,114
+975,2025-09-02T00:00:00.000,PROD_A,19.94,true,7,134,1734,144
+976,2025-09-03T00:00:00.000,PROD_A,21.45,false,6,107,2364,110
+977,2025-09-04T00:00:00.000,PROD_A,19.17,false,5,89,1803,121
+978,2025-09-05T00:00:00.000,PROD_A,20.07,false,9,107,2873,124
+979,2025-09-06T00:00:00.000,PROD_A,19.5,false,7,117,2653,123
+980,2025-09-07T00:00:00.000,PROD_A,19.81,true,6,135,2828,152
+981,2025-09-08T00:00:00.000,PROD_A,19.91,false,9,107,1752,124
+982,2025-09-09T00:00:00.000,PROD_A,20.92,false,8,93,1702,99
+983,2025-09-10T00:00:00.000,PROD_A,20.59,false,9,130,2448,137
+984,2025-09-11T00:00:00.000,PROD_A,18.5,false,7,120,2754,141
+985,2025-09-12T00:00:00.000,PROD_A,18.44,false,5,81,1851,105
+986,2025-09-13T00:00:00.000,PROD_A,19.4,false,9,158,1951,197
+987,2025-09-14T00:00:00.000,PROD_A,20.29,false,8,147,2067,147
+988,2025-09-15T00:00:00.000,PROD_A,20.76,false,6,80,2721,88
+989,2025-09-16T00:00:00.000,PROD_A,19.99,false,6,122,2837,123
+990,2025-09-17T00:00:00.000,PROD_A,21.93,false,9,76,1814,85
+991,2025-09-18T00:00:00.000,PROD_A,21,false,8,134,2530,150
+992,2025-09-19T00:00:00.000,PROD_A,20.17,false,5,90,1993,94
+993,2025-09-20T00:00:00.000,PROD_A,21.45,false,5,93,2146,80
+994,2025-09-21T00:00:00.000,PROD_A,21.31,true,8,85,2132,84
+995,2025-09-22T00:00:00.000,PROD_A,18.06,false,8,125,3090,123
+996,2025-09-23T00:00:00.000,PROD_A,19.44,false,6,122,2692,139
+997,2025-09-24T00:00:00.000,PROD_A,20.28,true,7,93,2986,102
+998,2025-09-25T00:00:00.000,PROD_A,18.5,false,6,136,2934,130
+999,2025-09-26T00:00:00.000,PROD_A,19.94,true,8,114,3012,136
+1000,2025-09-27T00:00:00.000,PROD_A,21.52,false,9,139,2356,153
+1001,2025-09-28T00:00:00.000,PROD_A,18.67,true,5,116,2425,131
+1002,2025-09-29T00:00:00.000,PROD_A,18.36,true,8,75,2202,88
+1003,2025-09-30T00:00:00.000,PROD_A,18.94,false,9,96,1883,135
+1004,2025-10-01T00:00:00.000,PROD_A,18.43,false,5,90,2905,109
+1005,2025-10-02T00:00:00.000,PROD_A,21.49,false,9,101,2975,114
+1006,2025-10-03T00:00:00.000,PROD_A,20.44,false,6,147,2596,160
+1007,2025-10-04T00:00:00.000,PROD_A,20.5,false,7,126,2313,160
+1008,2025-10-05T00:00:00.000,PROD_A,20.02,false,7,120,1731,128
+1009,2025-10-06T00:00:00.000,PROD_A,21.74,false,8,92,2066,89
+1010,2025-10-07T00:00:00.000,PROD_A,19.51,false,5,105,1715,113
+1011,2025-10-08T00:00:00.000,PROD_A,21.31,false,5,128,2513,161
+1012,2025-10-09T00:00:00.000,PROD_A,18.51,false,5,81,2044,88
+1013,2025-10-10T00:00:00.000,PROD_A,18.79,false,9,111,2446,116
+1014,2025-10-11T00:00:00.000,PROD_A,18.54,true,7,104,2638,100
+1015,2025-10-12T00:00:00.000,PROD_A,19.59,false,7,108,2941,114
+1016,2025-10-13T00:00:00.000,PROD_A,19.81,false,6,106,2347,115
+1017,2025-10-14T00:00:00.000,PROD_A,21.61,false,5,82,1821,99
+1018,2025-10-15T00:00:00.000,PROD_A,21.24,false,8,122,2548,129
+1019,2025-10-16T00:00:00.000,PROD_A,18.29,false,7,111,2187,118
+1020,2025-10-17T00:00:00.000,PROD_A,21.56,false,7,122,2723,135
+1021,2025-10-18T00:00:00.000,PROD_A,20.36,false,5,111,3110,120
+1022,2025-10-19T00:00:00.000,PROD_A,21.36,false,5,116,2716,132
+1023,2025-10-20T00:00:00.000,PROD_A,21.64,false,8,140,3005,145
+1024,2025-10-21T00:00:00.000,PROD_A,21.9,false,6,111,3049,99
+1025,2025-10-22T00:00:00.000,PROD_A,19.7,false,8,108,2076,121
+1026,2025-10-23T00:00:00.000,PROD_A,20.43,false,7,113,3106,125
+1027,2025-10-24T00:00:00.000,PROD_A,20.84,false,5,102,2990,103
+1028,2025-10-25T00:00:00.000,PROD_A,19.8,false,6,148,1836,171
+1029,2025-10-26T00:00:00.000,PROD_A,19.17,false,5,134,2792,136
+1030,2025-10-27T00:00:00.000,PROD_A,20.02,false,7,113,1898,125
+1031,2025-10-28T00:00:00.000,PROD_A,18.51,false,6,107,1810,118
+1032,2025-10-29T00:00:00.000,PROD_A,19.03,false,6,70,2101,86
+1033,2025-10-30T00:00:00.000,PROD_A,20.83,true,6,99,2335,105
+1034,2025-10-31T00:00:00.000,PROD_A,20.04,false,5,122,2550,128
+1035,2025-11-01T00:00:00.000,PROD_A,21.29,true,9,216,1867,220
+1036,2025-11-02T00:00:00.000,PROD_A,20.47,false,5,240,2512,269
+1037,2025-11-03T00:00:00.000,PROD_A,19.95,true,9,197,1843,204
+1038,2025-11-04T00:00:00.000,PROD_A,19.7,true,9,178,3116,194
+1039,2025-11-05T00:00:00.000,PROD_A,18.16,false,6,224,2742,240
+1040,2025-11-06T00:00:00.000,PROD_A,21.53,false,7,147,1988,144
+1041,2025-11-07T00:00:00.000,PROD_A,19.87,false,5,195,2107,214
+1042,2025-11-08T00:00:00.000,PROD_A,20.92,false,6,157,1981,178
+1043,2025-11-09T00:00:00.000,PROD_A,19.61,false,6,158,2005,182
+1044,2025-11-10T00:00:00.000,PROD_A,21.54,false,9,193,2153,231
+1045,2025-11-11T00:00:00.000,PROD_A,19.78,true,6,153,2680,153
+1046,2025-11-12T00:00:00.000,PROD_A,19.06,false,5,144,3136,174
+1047,2025-11-13T00:00:00.000,PROD_A,19.51,false,7,217,2312,226
+1048,2025-11-14T00:00:00.000,PROD_A,19.18,false,6,190,1873,209
+1049,2025-11-15T00:00:00.000,PROD_A,21.18,false,5,223,2782,235
+1050,2025-11-16T00:00:00.000,PROD_A,21.23,true,9,232,2064,254
+1051,2025-11-17T00:00:00.000,PROD_A,19.46,false,8,143,1919,152
+1052,2025-11-18T00:00:00.000,PROD_A,19.42,true,6,140,1709,144
+1053,2025-11-19T00:00:00.000,PROD_A,19.71,false,9,161,2378,183
+1054,2025-11-20T00:00:00.000,PROD_A,21.41,false,8,243,2169,270
+1055,2025-11-21T00:00:00.000,PROD_A,18.93,false,6,201,1669,215
+1056,2025-11-22T00:00:00.000,PROD_A,18.76,false,5,242,3044,266
+1057,2025-11-23T00:00:00.000,PROD_A,18.66,false,8,195,2186,220
+1058,2025-11-24T00:00:00.000,PROD_A,19.71,true,7,189,1910,186
+1059,2025-11-25T00:00:00.000,PROD_A,18.78,true,9,171,2480,178
+1060,2025-11-26T00:00:00.000,PROD_A,19.68,false,5,201,3109,223
+1061,2025-11-27T00:00:00.000,PROD_A,21.01,false,5,143,2253,160
+1062,2025-11-28T00:00:00.000,PROD_A,18.37,false,8,182,2622,201
+1063,2025-11-29T00:00:00.000,PROD_A,20.57,true,5,198,1664,207
+1064,2025-11-30T00:00:00.000,PROD_A,20.05,false,5,188,2448,216
+1065,2025-12-01T00:00:00.000,PROD_A,21.77,false,7,259,2926,268
+1066,2025-12-02T00:00:00.000,PROD_A,18.22,false,6,247,2791,270
+1067,2025-12-03T00:00:00.000,PROD_A,20.21,false,5,213,1637,241
+1068,2025-12-04T00:00:00.000,PROD_A,18.76,true,9,262,2727,280
+1069,2025-12-05T00:00:00.000,PROD_A,21.52,false,5,216,1821,241
+1070,2025-12-06T00:00:00.000,PROD_A,19.03,false,9,221,2024,264
+1071,2025-12-07T00:00:00.000,PROD_A,21.6,true,8,206,1773,212
+1072,2025-12-08T00:00:00.000,PROD_A,18.01,true,7,237,2610,263
+1073,2025-12-09T00:00:00.000,PROD_A,19.93,false,6,185,2170,211
+1074,2025-12-10T00:00:00.000,PROD_A,19.63,false,9,247,2280,252
+1075,2025-12-11T00:00:00.000,PROD_A,19.33,false,5,268,2914,301
+1076,2025-12-12T00:00:00.000,PROD_A,21.22,false,8,288,2759,322
+1077,2025-12-13T00:00:00.000,PROD_A,20.37,false,7,248,2745,280
+1078,2025-12-14T00:00:00.000,PROD_A,20.55,false,7,268,1904,299
+1079,2025-12-15T00:00:00.000,PROD_A,20.69,false,7,257,1969,264
+1080,2025-12-16T00:00:00.000,PROD_A,20.74,false,6,226,2871,253
+1081,2025-12-17T00:00:00.000,PROD_A,18.53,false,5,196,2804,226
+1082,2025-12-18T00:00:00.000,PROD_A,21.36,false,8,290,1957,330
+1083,2025-12-19T00:00:00.000,PROD_A,18.62,true,8,273,2895,267
+1084,2025-12-20T00:00:00.000,PROD_A,20.38,false,8,228,1800,248
+1085,2025-12-21T00:00:00.000,PROD_A,21.69,false,5,278,2541,325
+1086,2025-12-22T00:00:00.000,PROD_A,18.61,true,6,169,2026,186
+1087,2025-12-23T00:00:00.000,PROD_A,18.07,false,7,287,3005,320
+1088,2025-12-24T00:00:00.000,PROD_A,18.96,false,6,287,3046,333
+1089,2025-12-25T00:00:00.000,PROD_A,20.09,false,8,267,1979,298
+1090,2025-12-26T00:00:00.000,PROD_A,20.72,false,9,275,2717,310
+1091,2025-12-27T00:00:00.000,PROD_A,20.8,false,6,285,1978,337
+1092,2025-12-28T00:00:00.000,PROD_A,20.21,false,7,268,2011,281
+1093,2025-12-29T00:00:00.000,PROD_A,18.83,true,5,288,1793,298
+1094,2025-12-30T00:00:00.000,PROD_A,20.03,false,5,277,1705,311 
+
+
+
+
+
+
+
+
+
+
+docs/imagens/Comparacao_Cenarios.png
+
+
+docs/imagens/Estoque_Atual_vs_Previsao.png
+
+
+
+
+docs/imagens/Importancia_Variaveis_Modelo.png
+
+
+
+
+docs/imagens/Importancia_Variaveis_no_Modelo.png
+
+
+
+
+
+
+
+
+
+outputs/previsoes_estoque.csv
+
+TEM ESSE CONTEÚDO 
+
+data,produto_id,categoria,estoque_inicial,vendas_dia,preco_unitario,promocao,estoque_final_previsto,intervalo_min,intervalo_max
+2025-01-01,P001,Eletrônicos,180,9,2550,0,168,160,175
+2025-01-02,P001,Eletrônicos,171,14,2550,1,154,145,165
+2025-01-03,P001,Eletrônicos,157,8,2550,0,149,140,158
+2025-01-04,P001,Eletrônicos,149,7,2550,0,142,133,150
+2025-01-05,P001,Eletrônicos,142,12,2550,1,130,120,140
+2025-01-01,P002,Alimentos,420,18,16,0,402,390,415
+2025-01-02,P002,Alimentos,402,24,16,1,378,365,390
+2025-01-03,P002,Alimentos,378,20,16,0,358,345,370
+2025-01-04,P002,Alimentos,358,22,16,0,336,320,350
+2025-01-05,P002,Alimentos,336,27,16,1,309,295,325
+2025-01-01,P003,Vestuário,260,7,130,0,253,245,260
+2025-01-02,P003,Vestuário,253,12,130,1,241,230,252
+2025-01-03,P003,Vestuário,241,8,130,0,233,225,242
+2025-01-04,P003,Vestuário,233,9,130,0,224,215,232
+2025-01-05,P003,Vestuário,224,14,130,1,210,200,220 
+
+
+
+
+
+
+
+
+
+
+notebooks/01_data_generation.ipynb
+
+TEM ESSE CONTEÚDO 
+
+
+
+Open In Colab
+
+
+
+     
+Geração do Dataset Sintético de Previsão de Estoque
+Este notebook é responsável por criar o arquivo de dados estoque_historico_sazonal.csv para ser utilizado no treinamento do modelo de Machine Learning no Amazon SageMaker Canvas. O dataset simula 3 anos de vendas diárias e inclui componentes de sazonalidade e ruído, cruciais para um modelo de previsão robusto.
+
+
+
+# Importação das bibliotecas necessárias
+import pandas as pd
+import numpy as np
+from datetime import timedelta
+
+# Define a estrutura de pastas para salvar o arquivo (garantindo que existe)
+CAMINHO_PASTA = 'datasets/raw/'
+NOME_ARQUIVO = 'estoque_historico_sazonal.csv'
+
+import os
+# A linha abaixo é importante se você estiver executando o notebook no Colab ou localmente
+os.makedirs(CAMINHO_PASTA, exist_ok=True)
+
+print(f"Pasta de destino criada: {CAMINHO_PASTA}")
+     
+Pasta de destino criada: datasets/raw/
+
+
+import pandas as pd
+import numpy as np
+from datetime import timedelta
+
+# Configurações do Dataset
+N_DIAS = 1095  # 3 anos de dados (365 * 3)
+DATA_INICIO = pd.to_datetime('2023-01-01')
+ID_PRODUTO = 'PROD_A'
+
+# 1. Criação do Index de Datas
+datas = [DATA_INICIO + timedelta(days=i) for i in range(N_DIAS)]
+
+# 2. Geração da Base de Vendas (Vendas_Historicas_Unidades)
+vendas_base = 150 + (np.sin(np.linspace(0, 6 * np.pi, N_DIAS)) * 50) # Tendência sinusoidal (sazonalidade)
+ruido_aleatorio = np.random.normal(0, 20, N_DIAS)
+vendas_historicas = (vendas_base + ruido_aleatorio).astype(int)
+vendas_historicas = np.maximum(50, vendas_historicas) # Garante que as vendas sejam positivas
+
+# 3. Adição de Picos Sazonais (Natal e Black Friday/Meio do Ano)
+for i, data in enumerate(datas):
+    mes = data.month
+    dia = data.day
+    # Pico de Natal (Dezembro)
+    if mes == 12:
+        vendas_historicas[i] += np.random.randint(50, 150)
+    # Pico de Black Friday/Meio do Ano (Junho e Novembro)
+    if mes in [6, 11]:
+        vendas_historicas[i] += np.random.randint(30, 100)
+    # Finais de semana (vendas maiores)
+    if data.weekday() >= 5: # Sábado (5) ou Domingo (6)
+        vendas_historicas[i] += np.random.randint(10, 30)
+
+# 4. Geração de Outras Colunas
+promocao_ativa = np.random.choice([True, False], size=N_DIAS, p=[0.20, 0.80])
+preco_unitario = np.random.uniform(18.0, 22.0, N_DIAS).round(2)
+lead_time = np.random.randint(5, 10, N_DIAS)
+estoque_atual = np.cumsum(-vendas_historicas) + 15000 # Estoque baseado na venda acumulada e reabastecimentos simulados
+estoque_atual[estoque_atual < 0] = np.random.randint(500, 1000) # Simula um reabastecimento antes de zerar
+estoque_atual = estoque_atual + np.random.randint(500, 2000, N_DIAS) # Reabastecimento aleatório
+estoque_atual = estoque_atual % 5000 + 500 # Mantém o estoque em uma faixa razoável
+
+# Previsão de Demanda (Target: Vendas dos próximos 30 dias)
+# Simplificamos o alvo como sendo as vendas históricas do dia com um pequeno offset e ruído
+previsao_demanda_30d = (vendas_historicas * 1.1 + np.random.normal(0, 10, N_DIAS)).astype(int)
+previsao_demanda_30d = np.maximum(80, previsao_demanda_30d)
+
+# 5. Criação do DataFrame
+df = pd.DataFrame({
+    'Data': datas,
+    'ID_Produto': ID_PRODUTO,
+    'Preco_Unitario': preco_unitario,
+    'Promocao_Ativa': promocao_ativa,
+    'Lead_Time_Dias': lead_time,
+    'Vendas_Historicas_Unidades': vendas_historicas,
+    'Estoque_Atual': estoque_atual.astype(int),
+    'Previsao_Demanda_30D': previsao_demanda_30d
+})
+
+# 6. Exportação do Arquivo CSV
+NOME_ARQUIVO = 'estoque_historico_sazonal.csv'
+CAMINHO_PASTA = 'datasets/raw/'
+
+# Cria o diretório se não existir
+import os
+os.makedirs(CAMINHO_PASTA, exist_ok=True)
+
+df.to_csv(CAMINHO_PASTA + NOME_ARQUIVO, index=False)
+
+print(f"Dataset criado com sucesso!")
+print(f"Total de Linhas: {len(df)}")
+print(f"Caminho no GitHub: {CAMINHO_PASTA}{NOME_ARQUIVO}")
+print("\nPrimeiras 5 linhas:")
+print(df.head())
+     
+Dataset criado com sucesso!
+Total de Linhas: 1095
+Caminho no GitHub: datasets/raw/estoque_historico_sazonal.csv
+
+Primeiras 5 linhas:
+        Data ID_Produto  Preco_Unitario  Promocao_Ativa  Lead_Time_Dias  \
+0 2023-01-01     PROD_A           20.27           False               7   
+1 2023-01-02     PROD_A           21.58           False               9   
+2 2023-01-03     PROD_A           19.45           False               6   
+3 2023-01-04     PROD_A           19.88           False               9   
+4 2023-01-05     PROD_A           19.76           False               6   
+
+   Vendas_Historicas_Unidades  Estoque_Atual  Previsao_Demanda_30D  
+0                         140           1989                   169  
+1                         131           1302                   130  
+2                         143           1760                   151  
+3                         153           1466                   152  
+4                         138            527                   170  
+
+
+# Exportação do Arquivo CSV
+df.to_csv(CAMINHO_PASTA + NOME_ARQUIVO, index=False)
+
+print(f"Dataset '{NOME_ARQUIVO}' criado com sucesso!")
+print(f"Total de Linhas: {len(df)}")
+
+# Verificação das primeiras linhas
+print("\nVerificação das Primeiras 5 Linhas do CSV Final:")
+print(df.head())
+     
+Dataset 'estoque_historico_sazonal.csv' criado com sucesso!
+Total de Linhas: 1095
+
+Verificação das Primeiras 5 Linhas do CSV Final:
+        Data ID_Produto  Preco_Unitario  Promocao_Ativa  Lead_Time_Dias  \
+0 2023-01-01     PROD_A           20.27           False               7   
+1 2023-01-02     PROD_A           21.58           False               9   
+2 2023-01-03     PROD_A           19.45           False               6   
+3 2023-01-04     PROD_A           19.88           False               9   
+4 2023-01-05     PROD_A           19.76           False               6   
+
+   Vendas_Historicas_Unidades  Estoque_Atual  Previsao_Demanda_30D  
+0                         140           1989                   169  
+1                         131           1302                   130  
+2                         143           1760                   151  
+3                         153           1466                   152  
+4                         138            527                   170  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A REGRAS DE MEIGAROM LOPES E LUIZ CAFÉ:
+
+
+
+
+ Luiz Café Tech Recruiter 
+
+
+Como escrever um README que torna seu Portfólio Legível para Recrutadores
+
+
+
+Olá, comunidade da DIO!
+
+Ao longo da minha carreira como Tech Recruiter, já avaliei centenas de repositórios no GitHub de desenvolvedores em diferentes níveis: júnior, pleno e sênior. E há algo que percebo com muita frequência ao longo desses anos, uma verdade que pode doer um pouco:
+
+Na maioria dos casos, o README decide se eu continuo analisando o repositório ou se sigo para o próximo candidato.
+E isso não acontece porque o código seja irrelevante, muito pelo contrário. Já encontrei projetos tecnicamente brilhantes que, infelizmente, passam despercebidos por muitos recrutadores que não possuem conhecimento técnico aprofundado para avaliá-los.
+
+Além disso, o tempo é escasso. São várias vagas para preencher em um curto período. É exatamente nesse cenário que o README ganha importância: ele é o primeiro sinal de que você sabe explicar o que construiu e por quê.
+
+Este artigo tem um objetivo simples: mostrar como tornar seu portfólio legível para recrutadores, sem truques, exageros ou promessas mágicas. Tudo o que compartilho aqui vem da prática real de quem avalia repositórios diariamente.
+
+Vamos lá?
+
+O erro mais comum que vejo em READMEs de portfólio
+Na maioria das vezes, o problema não é falta de código, e sim, falta de contexto.
+
+O que vejo com frequência em READMEs:
+
+Apenas dizem “Projeto feito em X tecnologia”, sem explicar o objetivo, a motivação ou as decisões envolvidas;
+READMEs claramente copiados de templates genéricos, o que demonstra falta de curiosidade e cuidado;
+Não explicam qual problema o projeto resolve.
+No dia a dia, o trabalho de um desenvolvedor é resolver problemas complexos. Se um profissional não consegue demonstrar isso no próprio repositório, ele tende a ir para o final da fila, quando não é descartado logo de início.
+
+Quando isso acontece, a sensação para quem avalia é simples:
+
+Não fica claro o que essa pessoa realmente sabe fazer;
+Parece que não há responsabilidade sobre o que foi produzido;
+Transmite desleixo e falta de profissionalismo.
+O que um recrutador quer encontrar em um repositório?
+Quando um recrutador técnico abre seu repositório, ele tenta responder rapidamente perguntas como:
+
+Que problema esse projeto resolve?
+Esse dev entende o que construiu ou apenas seguiu um tutorial?
+Ele sabe justificar suas escolhas técnicas?
+Qual o nível de complexidade do projeto?
+Como esse dev trabalha em equipe?
+Ele demonstra atualização constante?
+Aqui vale um ponto importante:
+
+Legibilidade não tem a ver com simplicidade.
+Você pode, e deve, criar projetos complexos, desde que haja intencionalidade clara. Um bom README não tenta impressionar; ele explica. E explicar bem é uma habilidade extremamente valorizada.
+
+A estrutura de README que funciona na prática
+Após analisar muitos repositórios, esta é a estrutura que mais facilita minha avaliação como recrutador. Você não precisa usar todas as seções, mas quanto mais contexto fornecer, melhor.
+
+Visão geral
+Explique em poucas linhas:
+
+O que é o projeto
+Qual problema ele resolve
+Exemplo:
+
+Aplicação web para gerenciamento de tarefas, voltada para usuários que precisam organizar demandas recorrentes de forma simples e eficiente.
+
+Objetivo do projeto
+Aqui você demonstra intencionalidade.
+
+Responda:
+
+Por que você criou esse projeto?
+Era para aprender algo específico?
+Resolver um problema real?
+Exemplo:
+
+Criei este projeto para aprofundar meus conhecimentos em autenticação JWT e na organização de uma API REST escalável.
+
+Decisões técnicas
+Essa é uma das seções mais importantes, e também uma das mais ignoradas.
+
+Explique:
+
+Por que escolheu essa stack;
+Quais alternativas considerou;
+Quais trade-offs aceitou.
+Exemplo:
+
+Optei por Node.js com Express pela simplicidade e maturidade do ecossistema. Avaliei utilizar NestJS, mas para o escopo do projeto preferi uma abordagem mais direta e com menor curva de aprendizado.
+Isso demonstra pensamento crítico, algo extremamente valorizado em processos seletivos.
+
+Tecnologias utilizadas
+Seja objetivo e evite listas infladas sem propósito.
+
+Exemplo:
+
+Node.js
+Express
+PostgreSQL
+JWT para autenticação
+Docker para ambiente de desenvolvimento
+
+Como executar o projeto
+Simples, mas faz muita diferença.
+
+Inclua:
+
+Pré-requisitos;
+Passos claros para rodar o projeto localmente.
+Isso demonstra cuidado, organização e respeito por quem está avaliando.
+
+Aprendizados
+Essa seção costuma ser decisiva.
+
+Aqui você pode responder:
+
+O que foi mais difícil e como pretende superar essas adversidades?
+Quais foram seus principais aprendizados?
+O que faria diferente hoje?
+Quem te ajudou ou inspirou durante o desenvolvimento?
+Exemplo:
+
+Aprendi a importância de separar regras de negócio da camada de controllers, o que facilitou a escrita de testes e a manutenção do código.
+
+Próximos passos
+Mostrar que o projeto não está “fechado” é um ponto positivo.
+
+Exemplo:
+
+Melhorar a cobertura de testes
+Implementar cache
+Refatorar parte da arquitetura
+Isso demonstra visão de evolução e maturidade técnica.
+
+
+O README como narrativa técnica
+O README não é apenas documentação. Ele é a sua narrativa técnica.
+
+Para nós, recrutadores, o README funciona melhor quando conta uma história clara:
+
+Qual era o problema;
+Quais decisões você tomou;
+Quais foram seus aprendizados, erros e acertos;
+Como foi sua jornada de desenvolvimento.
+Mesmo um projeto simples pode se tornar relevante quando bem explicado. É por isso que alguns candidatos conseguem oportunidades mesmo com poucos projetos, porque sabem comunicar bem seu raciocínio.
+
+Para quem esse modelo de README funciona melhor?
+Com base na minha experiência, esse modelo é especialmente útil para:
+
+Desenvolvedores júnior e pleno;
+Pessoas em transição de carreira;
+Profissionais sênior que contribuem com projetos open source.
+O segredo é facilitar a vida de quem avalia. Se o recrutador entende rapidamente seu raciocínio, suas chances de avançar aumentam.
+
+Considerações finais
+Espero sinceramente que, após este artigo, você tenha entendido a importância de dedicar tempo à escrita de um bom README. Ele não garante uma vaga, mas evita que você seja eliminado logo de cara. Minha dica final é: invista tempo, revise, peça para amigos e colegas lerem o que você escreveu. Feedback externo ajuda a identificar falhas e melhorar a clareza.
+
+Inspire-se em outros READMEs, mas evite copiar e colar. Seja autoral. É assim que você se destaca.
+
+Bons estudos e projetos!
+
+
+
+
+Let´s code! 
+
+
+
+
+
+
+
+
+Código de conduta
+
+Luiz Café - 16/12/2025 11:50
+Olá, Alex! Obrigado pelo seu comentário. A área de dados está com muitas oportunidades abertas, capriche nos seus projetos e no Readme que as portas irão se abrir. Não deixe também de participar das competições no Kaggle para ganhar destaque e experiência. Muito sucesso!
+
+
+
+Brasil
+Luiz Café - 16/12/2025 11:48
+Olá, Nubia. Muito obrigado pelo seu feedback, ele é muito importante para que eu continue escrevendo artigos como esse. Desejo muito sucesso na sua carreira.
+
+
+
+Brasil
+Alex Almeida - 16/12/2025 09:25
+Muito Bacana.
+
+Já venho melhorando os meu reddits em busca de uma oportunidade na área de dados
+
+
+
+Brasil
+Nubia Alves - 15/12/2025 22:16
+Olá, Luiz,
+
+Que riqueza de material que você se dispôs a compartilhar!
+
+Já estou salvando esse material no meu notebookLM porque ele merece ser lido mais de uma vez e ser seguido como roteiro para o meu próximo README de projetos.
+
+
+
+Brasil
+Luiz Café - 15/12/2025 21:06
+Muito obrigado Manuel. Seu comentário me motiva a continuar compartilhando conteúdos como esse para toda comunidade. Fico feliz em ajudar.
+
+
+
+MN
+Manuel Nvula - 15/12/2025 17:45
+Muito bom e útil o artigo, Luiz Café. Obrigado por compartilhar.
+
+Aprendi bastante com ele.
+
+
+
+
+
+REGRAS DE MEIGAROM DA CDS PARA DOCUMENTAÇÃO DE PROJETOS COMO CIENTISTA DE DADOS PROFISSIONAL 
+
+
+
+
+MEIGAROM DA CDS
+
+
+
+
+Análise de Atrasos de Entregas da Amazon
+
+1. Problema de Negócio
+
+A empresa enfrenta um aumento no número de entregas realizadas fora do prazo, o que tem
+gerado insatisfação dos clientes, aumento de reclamações e risco de perda de confiança na
+marca.
+O principal desafio do negócio é entender por que os atrasos acontecem, identificar onde
+eles se concentram e gerar informações claras que apoiem decisões operacionais para
+reduzir a taxa de atraso e melhorar a previsibilidade das entregas.
+
+2. Contexto
+
+A operação de entregas envolve diferentes variáveis que impactam diretamente o prazo, como:
+● condições climáticas,
+● tráfego,
+● tipo de veículo utilizado,
+● área de entrega,
+● perfil do entregador,
+● categoria do produto.
+A empresa já possui os dados operacionais registrados em uma base histórica, mas não utiliza
+essas informações de forma analítica para apoiar decisões estratégicas.
+O objetivo deste projeto é transformar dados brutos de entregas em insights acionáveis,
+utilizando análises descritivas e visualizações simples, capazes de serem compreendidas por
+áreas como Operações, Logística e Gestão.
+
+
+3. Premissas da análise
+
+Para a realização da análise, foram adotadas as seguintes premissas:
+
+
+
+● O status de entrega (Delivery_Status) é considerado a fonte oficial para identificar
+atrasos (delay) e entregas no prazo (ontime).
+● O tempo de entrega (Delivery_Time) está representado em minutos.
+● Registros com valores ausentes em colunas como tráfego ou clima foram tratados como
+“informação desconhecida” ou excluídos quando necessário.
+● As análises foram feitas com foco em identificação de padrões, não em causalidade
+estatística.
+● O período analisado representa uma amostra válida do comportamento operacional
+recente da empresa.
+
+4. Estratégia da solução
+
+A estratégia adotada seguiu uma abordagem estruturada de análise de dados:
+
+1. Entendimento do problema de negócio
+Identificar claramente o que significa atraso e por que ele é prejudicial para a empresa.
+
+2. Exploração e organização dos dados
+Compreensão das colunas, tipos de dados e possíveis inconsistências.
+
+3. Análise descritiva
+Cálculo de métricas como quantidade de entregas, taxa de atraso e estatísticas de
+tempo de entrega.
+
+4. Segmentação dos atrasos
+Avaliação dos atrasos por diferentes dimensões:
+○ tempo,
+○ área,
+○ clima,
+○ tráfego,
+○ veículo,
+○ categoria de produtos
+
+5. Visualização dos dados
+Criação de gráficos claros para facilitar a interpretação dos resultados e comunicação
+com o negócio.
+
+
+5. Insights da Análise
+
+A análise dos dados permitiu identificar padrões relevantes, como:
+● O tempo médio de entrega é de 125 min (2h) com desvio-padrão de 52 min (2h). A
+entrega mais rápida aconteceu em 10 min e a mais lenta em 270 min (4,5h).
+
+
+
+A área “Semi-Urban” é a única área que apresenta mais atrasos do que entregas sem
+atraso.
+● Os atrasos aumentam em dias nublados e com neblina, e diminuem em dias de sol.
+● Veículos como motocicletas apresentam maior taxa de entrega atrasada em relação aos
+outros meios de transporte.
+● O nível de tráfego forte ( Jam ), apresenta mais atrasos.
+● Os maiores atrasos aconteceram com entregas para a área “Semi-Urban” realizadas por
+motocicletas como veículo.
+● Entregadores com idade acima dos 30 anos tendem a atrasar mais as entregas do que
+entregadores abaixo dos 30.
+● As entregas estão distribuídas uniformemente entre as categorias, exceto a categoria
+outros que representa 43% das entregas.
+● A menor avaliação acontece com entregas na área “Semi-Urbam” com o veículo
+motocicleta que também apresenta maior volume de atrasos.
+Esses insights mostram que o atraso não é aleatório, mas resultado de fatores operacionais
+como área e tipo de veículos para entrega.
+
+
+6. Resultados
+
+
+Como resultado do projeto, as iniciativas são:
+● Aprofundar o entendimento do motivo pelo qual a área “Semi-Urban” tem os maiores
+volumes de atraso.
+● Mudar o tipo de veículo de entrega para a área “Semi-Urban”
+● Diagnóstico visual dos pontos mais críticos da operação.
+● Base analítica para priorizar ações corretivas.
+● Relatórios e gráficos que podem ser utilizados por áreas não técnicas.
+Além disso, o projeto demonstra como a análise de dados pode transformar dados
+operacionais em decisões práticas, mesmo utilizando técnicas simples.
+
+
+7. Próximos passos
+
+
+Com base nos resultados obtidos, os próximos passos recomendados são:
+● Criar planos de ação específicos para áreas, veículos e condições mais críticas.
+● Monitorar a taxa de atraso de forma contínua por meio de dashboards.
+● Avaliar treinamentos ou ajustes operacionais para entregadores e rotas.
+● Integrar análises preditivas para antecipar riscos de atraso.
+
+
+Aprofundar a análise com dados adicionais, como distância percorrida ou horário de
+pico.
+Este projeto serve como primeiro passo para uma cultura orientada a dados, onde decisões
+operacionais passam a ser guiadas por evidências e não apenas por percepção. 
+
+
+
+
+Estrutura de um Projeto de Dados de Sucesso:
+
+​O MEIGAROM destaca que um projeto não deve ser apenas um "gráfico bonito", mas deve seguir 7 passos:
+
+​1- Problema de Negócio: O que motivou a análise?
+
+​2- Contexto: O cenário da empresa.
+
+​3- Premissas: O que foi considerado verdade nos dados.
+
+​4- Estratégia da Solução: O passo a passo técnico.
+
+​5- Insights: A interpretação dos dados (o que os gráficos dizem).
+
+​6- Resultados: Conclusão e recomendação para a empresa.
+
+​7- Próximos Passos: O que seria feito com mais tempo.
+
+
+
+
+
+Implementação dos 11 Passos Profissionais (Framework CDS) DE MEIGAROM LOPES 
+
+​Para o seu README refletir esse novo nível, você deve reorganizar as seções seguindo fielmente a metodologia do vídeo:
+
+​Problema de Negócio: (Você já tem - Redução de multas na MRV).
+​Baseline: Novo! Como a MRV prevê atrasos hoje? (Ex: "Hoje a empresa usa apenas a média histórica de 10 dias"). O seu modelo precisa bater essa média.
+​Planejamento da Solução: Liste as ferramentas (Python, Scikit-Learn, Telegram API, Render Cloud).
+​Limpeza de Dados: Detalhe como tratou inconsistências de clima e solo.
+​EDA (Exploratória): Foque em validar hipóteses (Ex: "Obras em solo arenoso atrasam 20% mais?").
+​Preparação de Dados: Explique o One-Hot Encoding e Scaler.
+​Treinamento: Justifique a escolha do algoritmo (Random Forest).
+​Performance: Apresente o MAE e RMSE.
+​Business Performance: O Pulo do Gato! Converta o erro do modelo em Reais (R$). "Cada dia de atraso custa R$ X. Com erro de 5 dias, o risco financeiro residual é de R$ Y."
+​Modelo em Produção: Explique como a API Flask/FastAPI serve o modelo.
+​Storytelling: A apresentação final (O Bot do Telegram).
+
+
+
+  Pontos importantes: 
+
+Para virar um resolvedor de problemas, 
+você tem que mostrar que resolve problemas com a ferramenta, e não que apenas usa a ferramenta. 
+
+Você tem que se posicionar como um resolvedor de problemas.
+
+O mercado de trabalho não contrata ferramenta, o mercado de trabalho contrata quem resolve problemas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
